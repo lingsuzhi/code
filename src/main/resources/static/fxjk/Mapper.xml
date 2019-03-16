@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jjkj.aj.business.mapper.monitor.【Uname】Mapper">
+    <sql id="select_column">
+        【select_column】
+    </sql>
+
+    <!--插入-->
+    <insert id="add【Uname】" parameterType="com.jjkj.aj.business.entity.pojo.【Uname】">
+        INSERT INTO 【tableName】
+        (
+        【base_column】
+        )
+        VALUES
+        (
+        【value_column】
+        )
+    </insert>
+
+    <!--删除-->
+    <delete id="del【Uname】" parameterType="java.util.Map">
+        DELETE FROM 【tableName】
+        WHERE
+        1=1
+        <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
+            ${id}
+        </foreach>
+    </delete>
+
+    <!--查询列表-->
+    <select id="get【Uname】List" parameterType="java.util.Map"
+            resultType="com.jjkj.aj.business.entity.pojo.【Uname】">
+        select
+        <include refid="select_column"/>
+        FROM 【tableName】 tar
+        WHERE 1=1
+        【selectWhere】
+    </select>
+
+    <!--查询单个-->
+    <select id="findById" parameterType="java.lang.String"
+            resultType="com.jjkj.aj.business.entity.pojo.【Uname】">
+        select
+        <include refid="select_column"/>
+        from 【tableName】
+        where id = #{id}
+    </select>
+
+    <!--修改-->
+    <update id="upd【Uname】" parameterType="com.jjkj.aj.business.entity.pojo.【Uname】">
+        update 【tableName】
+        <set>
+            【updateSet】
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>
