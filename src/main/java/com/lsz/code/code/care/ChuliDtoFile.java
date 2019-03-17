@@ -65,7 +65,7 @@ public class ChuliDtoFile {
                     int kgPos = tmpStr.indexOf(" ");
                     if (kgPos != -1) {
                         String typeStr = tmpStr.substring(0, kgPos);
-                        String nameStr = tmpStr.substring(kgPos + 1);
+                        String nameStr = tmpStr.substring(kgPos + 1).trim();
                         String remStr = getRemStr(fileStr, mapPos, tmpMapPos);
 
                         DtoAttrBO dtoAttrBO = new DtoAttrBO();

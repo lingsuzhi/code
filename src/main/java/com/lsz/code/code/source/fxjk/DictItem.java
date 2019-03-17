@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * 字典定义
  */
-public class Dict {
+public class DictItem {
 
     //UUID   <param>
     private String id;
@@ -31,9 +31,15 @@ public class Dict {
     //备注说明 <param>
     private String bak;
 
-    //字典名称 <param>
-    private String dictName;
-
-    //字典标识 <param>
+    //字典标识 <param> <addnotnull>
     private String dictLabel;
+
+    //字典名称 <param> <addnotnull>
+    private String itemName;
+
+    //元素值 <param>
+    private String itemValue;
+
+    //排序 <param>
+    private Integer itemSort;
 }

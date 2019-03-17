@@ -8,10 +8,7 @@ import javax.validation.constraints.NotNull;
 public class 【Uname】Param {
 
     【attribute】
-
-    @NotBlank
     private String token;
-
 
     public String getToken() {
         return token;

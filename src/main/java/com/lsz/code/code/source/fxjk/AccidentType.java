@@ -3,9 +3,9 @@ package com.lsz.code.code.source.fxjk;
 import java.util.Date;
 
 /**
- * 字典定义
+ * 危险源事故类型
  */
-public class Dict {
+public class AccidentType {
 
     //UUID   <param>
     private String id;
@@ -31,9 +31,10 @@ public class Dict {
     //备注说明 <param>
     private String bak;
 
-    //字典名称 <param>
-    private String dictName;
-
-    //字典标识 <param>
-    private String dictLabel;
+    //对应危险源表ID <addnotnull> <param>
+    private String dangerId;
+    //事故类型 <addnotnull> <param>
+    private String accidentType;
+    //类型名称 <param>
+    private String accidentName;
 }

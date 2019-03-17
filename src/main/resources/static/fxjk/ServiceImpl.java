@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -28,10 +30,11 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     private 【Uname】Mapper 【Lname】Mapper;
 
     @Override
+    @Transactional
     public ResultVO<【Uname】> add【Uname】(【Uname】Param param) {
         【Uname】 【Lname】 = 【Uname】.getInitObj();
         BeanUtils.copyProperties(param, 【Lname】);
-
+【addnotnull】
         【Lname】.setId(UUIDUtil.getUUID());
         【Lname】.setCreateId(param.getToken());
         【Lname】.setUpdateId(param.getToken());
@@ -61,10 +64,14 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     }
 
     @Override
+    @Transactional
     public ResultVO<【Uname】> upd【Uname】(【Uname】Param param) {
         【Uname】 【Lname】 = new 【Uname】();
 
         BeanUtils.copyProperties(param, 【Lname】);
+        if (StringUtils.isEmpty(【Lname】.getId())){
+            return ResultVOUtil.error(4070,"修改操作失败 id不能为空！");
+        }
 
         【Lname】.setUpdateId(param.getToken());
         【Lname】.setUpdateTime(new Date());

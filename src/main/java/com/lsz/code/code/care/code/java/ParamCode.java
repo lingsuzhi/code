@@ -20,10 +20,10 @@ public class ParamCode implements JavaCode {
 
     public final static String ApiOldFile = "Param.java";
     public final static String DoFilePath = "D:\\fy\\projectCode-安监局\\projectCode\\aj-provider-business-8003\\src\\main\\java\\com\\jjkj\\aj\\business\\entity\\param" + "\\";
-    private CodeStringBuilder sb = new CodeStringBuilder();
 
     @Override
     public String apply(DtoBO dtoBO) {
+        CodeStringBuilder sb = new CodeStringBuilder();
         String fileStr = FileUtil.readFileStr(new File(DtoToCode.OldFilePath + ApiOldFile));
         String upperCase = StrUtil.oneUpperCase(dtoBO.getName());
         sb.put("Uname", upperCase);

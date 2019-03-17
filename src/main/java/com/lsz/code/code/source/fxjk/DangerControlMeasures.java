@@ -3,9 +3,9 @@ package com.lsz.code.code.source.fxjk;
 import java.util.Date;
 
 /**
- * 字典定义
+ * 危险源事故原因
  */
-public class Dict {
+public class DangerControlMeasures {
 
     //UUID   <param>
     private String id;
@@ -31,9 +31,12 @@ public class Dict {
     //备注说明 <param>
     private String bak;
 
-    //字典名称 <param>
-    private String dictName;
-
-    //字典标识 <param>
-    private String dictLabel;
+    //对应危险源表ID <addnotnull> <param>
+    private String dangerId;
+    //对应危险源事故原因表ID <addnotnull> <param>
+    private String accidentCauseId;
+    //管控类别 取字典表数据，如：工程技术、人员培训等 <param>
+    private String involvedType;
+    //管制措施说明 <param>
+    private String controlMeasures;
 }

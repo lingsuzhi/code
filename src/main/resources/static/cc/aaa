@@ -1,0 +1,45 @@
+{
+    "id":"15ba17485d6944cf8fd0fcfa60ce8d17",                //类型：String  必有字段  备注：危险源ID
+    "controlId":"15ba17485d6944cf8fd0fcfa60ce8d17",                //类型：String  必有字段  备注：管控ID
+    "dangerUnitId":"15ba17485d6944cf8fd0fcfa60ce8d17",                //类型：String  必有字段  备注：危险单元ID
+    "dangerUnitName":"风险单元名称",                //类型：String  必有字段  备注：危险单元名称
+    "dangerName":"危险源名称",                //类型：String  必有字段  备注：危险源名称
+    "dangerPosition":"卸车区",                //类型：String  必有字段  备注：危险源位置
+    "importantFlag":1,                //类型：Number  必有字段  备注：是否重大危险源
+    "importantLevel":15,                //类型：Number  必有字段  备注：重大危险源等级
+    "sameFlag":1,                //类型：Number  必有字段  备注：是否有多个同类危险源
+    "sameCount":3,                //类型：Number  必有字段  备注：同类危险源数量
+    "positionX":"1111",                //类型：String  必有字段  备注：危险源坐标X
+    "positionY":"222",                //类型：String  必有字段  备注：危险源坐标Y
+    "positionZ":"333",                //类型：String  必有字段  备注：危险源坐标Z
+    "responsibilityDepartment":"15ba17485d6944cf8fd0fcfa60ce8d17",                //类型：String  必有字段  备注：负责部门
+    "responsibilityUser":"15ba17485d6944cf8fd0fcfa60ce8d17",                //类型：String  必有字段  备注：负责人
+    "dangerSameList": - [                //类型：Array  必有字段  备注：同类危险源集合
+         - {                //类型：Object  必有字段  备注：同类危险源对象
+            "dangerId":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：危险源ID
+            "dangerUnitId":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：危险单元ID
+            "regionalPosition":"装车区",                //类型：String  必有字段  备注：位置描述
+            "positionX":"123",                //类型：String  必有字段  备注：危险源坐标X
+            "positionY":"456",                //类型：String  必有字段  备注：危险源坐标Y
+            "positionZ":"789",                //类型：String  必有字段  备注：危险源坐标Z
+            "responsibilityDepartment":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：负责部门
+            "responsibilityUser":"5c88ab670e83b1001a10d040"                //类型：String  必有字段  备注：负责人
+        }
+    ],
+    "accidentTypeList": - [                //类型：Array  必有字段  备注：事故类型集合
+         - {                //类型：Object  必有字段  备注：事故类型对象
+            "dangerId":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：危险源ID，初始时存在
+            "accidentType":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：事故类型
+            "accidentName":"触电"                //类型：String  必有字段  备注：事故类型名称
+        }
+    ],
+    "accidentCauseList": - [                //类型：Array  必有字段  备注：事故原因集合
+         - {                //类型：Object  必有字段  备注：事故原因对象
+            "dangerId":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：危险源ID
+            "accidentType":"5c88ab670e83b1001a10d040",                //类型：String  必有字段  备注：事故类型
+            "causeType":"1",                //类型：String  必有字段  备注：原因类型，引用字典数据，如：人的、物的、环境的等
+            "accidentCause":"电线裸露",                //类型：String  必有字段  备注：事故原因
+            "causeExplain":"电线老化"                //类型：String  必有字段  备注：事故原因说明
+        }
+    ]
+}
