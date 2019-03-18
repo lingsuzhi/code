@@ -59,7 +59,7 @@ public class ServiceImplCode implements JavaCode {
             }
 
             stringBuilder.appendln("if (null == 【】.get【】()){", StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
-            stringBuilder.appendln("    return ResultVOUtil.error(4071,\"新增操作失败,【】不能为空！\");", dtoAttrBO.getNameStr());
+            stringBuilder.appendln("    return ResultVOUtil.error(1,\"新增操作失败,【】不能为空！\");", dtoAttrBO.getNameStr());
             stringBuilder.appendln("}");
         }
         return stringBuilder.toString();

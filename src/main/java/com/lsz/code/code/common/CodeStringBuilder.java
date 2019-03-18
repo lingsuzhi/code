@@ -33,7 +33,7 @@ public class CodeStringBuilder {
         String rStr = str;
         for (String s : map.keySet()) {
             String val = map.get(s);
-            if (!StringUtils.isEmpty(val)) {
+            if (val != null) {
                 rStr = rStr.replace(s, map.get(s));
             }
         }

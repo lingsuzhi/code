@@ -1,27 +1,21 @@
 package com.jjkj.aj.business.service.monitor.impl;
 
-import com.jjkj.aj.business.entity.param.【Uname】Param;
-import com.jjkj.aj.business.entity.pojo.【Uname】;
 import com.jjkj.aj.business.mapper.monitor.【Uname】Mapper;
 import com.jjkj.aj.business.service.monitor.【Uname】Service;
 import com.jjkj.aj.util.CommonUtils;
-import com.jjkj.aj.util.ResultVOUtil;
 import com.jjkj.aj.util.UUIDUtil;
-import com.jjkj.aj.vo.ResultVO;
+import com.jjkj.aj.util.ValidateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 /**
  * 【describe】
  */
-@Service
+@Service("【Lname】ServiceImpl")
 public class 【Uname】ServiceImpl implements 【Uname】Service {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,25 +24,26 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     private 【Uname】Mapper 【Lname】Mapper;
 
     @Override
-    @Transactional
-    public ResultVO<【Uname】> add【Uname】(【Uname】Param param) {
-        【Uname】 【Lname】 = 【Uname】.getInitObj();
-        BeanUtils.copyProperties(param, 【Lname】);
+    public Map<String, Object> add【Uname】(Map<String, Object> parameterMap) {
+        String token = ValidateUtil.validateParamContainKey("token", parameterMap);//token
+        String id = UUIDUtil.getUUID();
 【addnotnull】
-        【Lname】.setId(UUIDUtil.getUUID());
-        【Lname】.setCreateId(param.getToken());
-        【Lname】.setUpdateId(param.getToken());
-        【Lname】.setCreateTime(new Date());
-        【Lname】.setUpdateTime(new Date());
+        parameterMap.put("id", id);
+        parameterMap.putIfAbsent("status", 1);
+        parameterMap.putIfAbsent("delFlag", 1);
+        parameterMap.put("createId", token);
+        parameterMap.put("updateId", token);
+        parameterMap.put("createTime", new Date());
+        parameterMap.put("updateTime", new Date());
 
-        Integer count = 【Lname】Mapper.add【Uname】(【Lname】);
-        logger.info("upd【Uname】 完成:{} {}", count, 【Lname】.getId());
-        return ResultVOUtil.success(【Lname】);
+        Integer count = 【Lname】Mapper.add【Uname】(parameterMap);
+        logger.info("add【Uname】 完成:{} {}", count, id);
+        return parameterMap;
     }
 
     @Override
-    public ResultVO del【Uname】(String id) {
-
+    public Map<String, Object> del【Uname】(Map<String, Object> parameterMap) {
+        String id = ValidateUtil.paramIsEmpty("id", parameterMap);
         Map<String, Object> paramMap = new HashMap<>();
         String[] produceIdList = id.split(",");
         List<String> produceIds = new ArrayList<>();
@@ -56,50 +51,48 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
             String produce_id = "'" + produceId + "'";
             produceIds.add(produce_id);
         }
-        paramMap.put("idList", produceIds);
 
+        paramMap.put("idList", produceIds);
         Integer count = 【Lname】Mapper.del【Uname】(paramMap);
         logger.info("del【Uname】 完成:{} {}", count, id);
-        return CommonUtils.successByMsg("删除成功");
+        return CommonUtils.mapByMsg("删除完成！");
     }
 
     @Override
-    @Transactional
-    public ResultVO<【Uname】> upd【Uname】(【Uname】Param param) {
-        【Uname】 【Lname】 = new 【Uname】();
+    public Map<String, Object> upd【Uname】(Map<String, Object> parameterMap) {
 
-        BeanUtils.copyProperties(param, 【Lname】);
-        if (StringUtils.isEmpty(【Lname】.getId())){
-            return ResultVOUtil.error(4070,"修改操作失败 id不能为空！");
-        }
+        String token = ValidateUtil.validateParamContainKey("token", parameterMap);//token
+        String id = ValidateUtil.validateParamContainKey("id", parameterMap);//token
 
-        【Lname】.setUpdateId(param.getToken());
-        【Lname】.setUpdateTime(new Date());
+        parameterMap.put("updateId", token);
+        parameterMap.put("updateTime", new Date());
 
-        Integer count = 【Lname】Mapper.upd【Uname】(【Lname】);
-        logger.info("upd【Uname】 完成:{} {}", count, 【Lname】.getId());
-        return ResultVOUtil.success(【Lname】);
+        Integer count = 【Lname】Mapper.upd【Uname】(parameterMap);
+        logger.info("upd【Uname】 完成:{} {}", count, id);
+        return parameterMap;
     }
 
     @Override
-    public ResultVO<Map<String, Object>> get【Uname】List(Map<String, Object> map) {
-        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(map);
+    public Map<String, Object> get【Uname】List(Map<String, Object> map) {
+        CommonUtils.spliceMap(map);
+        List<Map<String, Object>> list = 【Lname】Mapper.get【Uname】List(map);
+        Map<String, Object> returnMap = new HashMap<>();
+
         if (list != null && list.size() > 0) {
-            //处理
+            Map<String, Object> 【Lname】Count = 【Lname】Mapper.get【Uname】Count(map);//处理
+            returnMap.put("total", 【Lname】Count.get("total"));
         } else {
+            returnMap.put("total", 0);
             list = new ArrayList<>();
         }
 
-        Map<String, Object> returnMap = new HashMap<String, Object>();
         returnMap.put("resultList", list);
-        returnMap.put("total", list.size());
-        return ResultVOUtil.success(returnMap);
+        return returnMap;
     }
 
     @Override
-    public ResultVO<【Uname】> findById(String id) {
-        【Uname】 【Lname】 = 【Lname】Mapper.findById(id);
-        return ResultVOUtil.success(【Lname】);
+    public Map<String, Object> findById(Map<String, Object> parameterMap) {
+        return 【Lname】Mapper.findById(parameterMap);
     }
 
 }

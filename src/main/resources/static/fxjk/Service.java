@@ -1,9 +1,5 @@
 package com.jjkj.aj.business.service.monitor;
 
-import com.jjkj.aj.business.entity.param.【Uname】Param;
-import com.jjkj.aj.business.entity.pojo.【Uname】;
-import com.jjkj.aj.vo.ResultVO;
-
 import java.util.Map;
 
 /**
@@ -11,13 +7,13 @@ import java.util.Map;
  */
 public interface 【Uname】Service {
 
-    ResultVO add【Uname】(【Uname】Param param);
+    Map<String, Object> add【Uname】(Map<String, Object> parameterMap);
 
-    ResultVO del【Uname】(String id);
+    Map<String, Object> del【Uname】(Map<String, Object> parameterMap);
 
-    ResultVO<【Uname】> upd【Uname】(【Uname】Param param);
+    Map<String, Object> upd【Uname】(Map<String, Object> parameterMap);
 
-    ResultVO<Map<String, Object>> get【Uname】List(Map<String, Object> map);
+    Map<String, Object> get【Uname】List(Map<String, Object> parameterMap);
 
-    ResultVO<【Uname】> findById(String id);
+    Map<String, Object> findById(Map<String, Object> parameterMap);
 }
