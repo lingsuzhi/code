@@ -14,7 +14,7 @@ public interface 【Uname】Mapper {
 
     Integer del【Uname】(Map<String, Object> paramMap);
 
-    Map<String, Object> findById(Map<String, Object> paramMap);
+    Map<String, Object> get【Uname】(Map<String, Object> paramMap);
 
     Integer upd【Uname】(Map<String, Object> paramMap);
 

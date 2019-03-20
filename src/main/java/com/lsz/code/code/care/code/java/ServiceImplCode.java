@@ -30,7 +30,9 @@ public class ServiceImplCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
 
         sb.put("addnotnull", addnotnull(dtoBO));
+        sb.put("formatDo", formatDo(dtoBO));
 
+        sb.put("defaultValue", defaultValue(dtoBO));
         sb.appendln(fileStr);
 
         File doFile = new File(DoFilePath + upperCase + ApiOldFile);
@@ -42,6 +44,48 @@ public class ServiceImplCode implements JavaCode {
         FileUtil.doFileStr(doFile, sb.toString());
         log.info("{} 执行完成", ApiOldFile);
         return sb.toString();
+    }
+
+    private String defaultValue(DtoBO dtoBO) {
+
+
+        CodeStringBuilder stringBuilder = new CodeStringBuilder();
+        stringBuilder.addTab();
+        stringBuilder.addTab();
+        List<DtoAttrBO> attrList = dtoBO.getAttrList();
+        if (CollectionUtils.isEmpty(attrList)) {
+            return null;
+        }
+
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            String key = "<def=";
+            if (dtoAttrBO.getRemStr().contains(key)) {
+                String val = StrUtil.kuohaoStr(dtoAttrBO.getRemStr(), key, ">");
+                stringBuilder.appendln("parameterMap.putIfAbsent(\"【】\", 【】);", StrUtil.oneLoweCase(dtoAttrBO.getNameStr()), val);
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    private String formatDo(DtoBO dtoBO) {
+        CodeStringBuilder stringBuilder = new CodeStringBuilder();
+        stringBuilder.addTab();
+        stringBuilder.addTab();
+        List<DtoAttrBO> attrList = dtoBO.getAttrList();
+        if (CollectionUtils.isEmpty(attrList)) {
+            return null;
+        }
+
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            if (dtoAttrBO.getRemStr().contains("<Date>")) {
+
+                stringBuilder.appendln("CommonUtils.timestampToStr(map, \"【】\", false);", StrUtil.oneLoweCase(dtoAttrBO.getNameStr()));
+            } else if (dtoAttrBO.getRemStr().contains("<DateDay>")) {
+
+                stringBuilder.appendln("CommonUtils.timestampToStr(map, \"【】\", true);", StrUtil.oneLoweCase(dtoAttrBO.getNameStr()));
+            }
+        }
+        return stringBuilder.toString();
     }
 
     private String addnotnull(DtoBO dtoBO) {
@@ -57,9 +101,10 @@ public class ServiceImplCode implements JavaCode {
             if (!dtoAttrBO.getRemStr().contains("<addnotnull>")) {
                 continue;
             }
+            String rem = StrUtil.getRemName(dtoAttrBO.getRemStr());
+            stringBuilder.appendln("if (StringUtils.isEmpty(ValidateUtil.paramIsEmpty(\"【】\", parameterMap))) {", StrUtil.oneLoweCase(dtoAttrBO.getNameStr()));
 
-            stringBuilder.appendln("if (null == 【】.get【】()){", StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
-            stringBuilder.appendln("    return ResultVOUtil.error(1,\"新增操作失败,【】不能为空！\");", dtoAttrBO.getNameStr());
+            stringBuilder.appendln("    throw new RuntimeException(\"新增操作失败,【】 不能为空！\");", rem);
             stringBuilder.appendln("}");
         }
         return stringBuilder.toString();

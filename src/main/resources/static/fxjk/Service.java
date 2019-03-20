@@ -15,5 +15,5 @@ public interface 【Uname】Service {
 
     Map<String, Object> get【Uname】List(Map<String, Object> parameterMap);
 
-    Map<String, Object> findById(Map<String, Object> parameterMap);
+    Map<String, Object> get【Uname】(Map<String, Object> parameterMap);
 }

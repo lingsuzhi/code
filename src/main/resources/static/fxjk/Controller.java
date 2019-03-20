@@ -72,10 +72,10 @@ public class 【Uname】Controller {
     /**
      * 查询单个
      */
-    @RequestMapping(value = "/findById")
-    public ResultVO<Map<String, Object>> findById(@RequestBody Map<String, Object> param) {
+    @RequestMapping(value = "/get【Uname】")
+    public ResultVO<Map<String, Object>> get【Uname】(@RequestBody Map<String, Object> param) {
         try {
-            Map<String, Object> resultMap = serviceImpl.findById(param);
+            Map<String, Object> resultMap = serviceImpl.get【Uname】(param);
             return ResultVOUtil.success(resultMap);
         } catch (RuntimeException e) {
             logger.error(e.getMessage(), e);

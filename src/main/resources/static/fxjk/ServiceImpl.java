@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -24,10 +26,12 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     private 【Uname】Mapper 【Lname】Mapper;
 
     @Override
+    @Transactional
     public Map<String, Object> add【Uname】(Map<String, Object> parameterMap) {
         String token = ValidateUtil.validateParamContainKey("token", parameterMap);//token
         String id = UUIDUtil.getUUID();
 【addnotnull】
+【defaultValue】
         parameterMap.put("id", id);
         parameterMap.putIfAbsent("status", 1);
         parameterMap.putIfAbsent("delFlag", 1);
@@ -42,6 +46,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     }
 
     @Override
+    @Transactional
     public Map<String, Object> del【Uname】(Map<String, Object> parameterMap) {
         String id = ValidateUtil.paramIsEmpty("id", parameterMap);
         Map<String, Object> paramMap = new HashMap<>();
@@ -59,6 +64,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     }
 
     @Override
+    @Transactional
     public Map<String, Object> upd【Uname】(Map<String, Object> parameterMap) {
 
         String token = ValidateUtil.validateParamContainKey("token", parameterMap);//token
@@ -79,7 +85,11 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
         Map<String, Object> returnMap = new HashMap<>();
 
         if (list != null && list.size() > 0) {
-            Map<String, Object> 【Lname】Count = 【Lname】Mapper.get【Uname】Count(map);//处理
+            //处理
+            for (Map<String, Object> objectMap : list) {
+                manage【Uname】(objectMap);
+            }
+            Map<String, Object> 【Lname】Count = 【Lname】Mapper.get【Uname】Count(map);
             returnMap.put("total", 【Lname】Count.get("total"));
         } else {
             returnMap.put("total", 0);
@@ -89,10 +99,16 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
         returnMap.put("resultList", list);
         return returnMap;
     }
-
-    @Override
-    public Map<String, Object> findById(Map<String, Object> parameterMap) {
-        return 【Lname】Mapper.findById(parameterMap);
+    
+    private Map<String, Object> manage【Uname】(Map<String, Object> map) {
+        CommonUtils.timestampToStr(map, "createTime", true);
+        CommonUtils.timestampToStr(map, "updateTime", true);
+【formatDo】
+        return map;
     }
 
+    @Override
+    public Map<String, Object> get【Uname】(Map<String, Object> parameterMap) {
+        return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
+    }
 }

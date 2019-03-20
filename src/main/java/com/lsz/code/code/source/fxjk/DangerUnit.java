@@ -44,10 +44,10 @@ public class DangerUnit {
     private String unitName;
     //上级单元ID <param>
     private String parentUnitId;
-    //行业类型，引用行业分类表ID <param> <addnotnull>
+    //行业类型 引用行业分类表ID <param> <addnotnull>
     private String industryType;
     //单元级别 1:一级（主单元）；2：二级；3：三级；4：四级；5：五级 <param>
-    private String unitLevel;
+    private Integer unitLevel;
 
     //区域位置 <param>
     private String regionalPosition;
