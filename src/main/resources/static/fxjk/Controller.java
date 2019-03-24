@@ -72,7 +72,7 @@ public class 【Uname】Controller {
     /**
      * 查询单个
      */
-    @RequestMapping(value = "/get【Uname】")
+    @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> get【Uname】(@RequestBody Map<String, Object> param) {
         try {
             Map<String, Object> resultMap = serviceImpl.get【Uname】(param);

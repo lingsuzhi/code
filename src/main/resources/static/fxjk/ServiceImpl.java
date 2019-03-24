@@ -32,7 +32,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
         String id = UUIDUtil.getUUID();
 【addnotnull】
 【defaultValue】
-        parameterMap.put("id", id);
+        parameterMap.putIfAbsent("id", id);
         parameterMap.putIfAbsent("status", 1);
         parameterMap.putIfAbsent("delFlag", 1);
         parameterMap.put("createId", token);
