@@ -1,8 +1,9 @@
-package com.lsz.code.code.care.code.java;
+package com.lsz.code.code.care.code.java.old;
 
 import com.lsz.code.code.bo.DtoAttrBO;
 import com.lsz.code.code.bo.DtoBO;
 import com.lsz.code.code.care.DtoToCode;
+import com.lsz.code.code.care.code.java.JavaCode;
 import com.lsz.code.code.common.CodeStringBuilder;
 import com.lsz.code.code.common.StrUtil;
 import com.lsz.code.code.utils.FileUtil;
@@ -14,12 +15,12 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.util.List;
 
-@Component
+//@Component
 @Slf4j
-public class PojoCode implements JavaCode {
+public class ParamCode implements JavaCode {
 
-    public final static String ApiOldFile = "Pojo.java";
-    public final static String DoFilePath = "D:\\fy\\projectCode-安监局\\projectCode\\aj-provider-business-8003\\src\\main\\java\\com\\jjkj\\aj\\business\\entity\\pojo" + "\\";
+    public final static String ApiOldFile = "Param.java";
+    public final static String DoFilePath = "D:\\fy\\projectCode-安监局\\projectCode\\aj-provider-business-8003\\src\\main\\java\\com\\jjkj\\aj\\business\\entity\\param" + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {
@@ -34,7 +35,7 @@ public class PojoCode implements JavaCode {
         sb.put("getset", getset(dtoBO));
         sb.appendln(fileStr);
 
-        File doFile = new File(DoFilePath + upperCase + ".java");
+        File doFile = new File(DoFilePath + upperCase + ApiOldFile);
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);
             return null;
@@ -53,7 +54,7 @@ public class PojoCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+            if (!dtoAttrBO.getRemStr().contains("<param>")) {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
@@ -79,7 +80,7 @@ public class PojoCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+            if (!dtoAttrBO.getRemStr().contains("<param>")) {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();

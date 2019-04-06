@@ -18,7 +18,7 @@ import java.util.List;
 public class MapperXmlCode implements JavaCode {
 
     public final static String ApiOldFile = "Mapper.xml";
-    public final static String DoFilePath = "D:\\fy\\projectCode-安监局\\projectCode\\aj-provider-business-8003\\src\\main\\resources\\mapper\\monitor" + "\\";
+    public final static String DoFilePath = "D:\\fy\\需求2\\20190328给外包 - 复件\\20190328给外包\\业务源码\\aj_server\\aj-provider-business-8003\\src\\main\\resources\\mapper\\superviseV2" + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

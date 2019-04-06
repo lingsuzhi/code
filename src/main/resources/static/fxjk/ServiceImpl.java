@@ -1,7 +1,7 @@
-package com.jjkj.aj.business.service.monitor.impl;
+package com.jjkj.aj.business.service.superviseV2.impl;
 
-import com.jjkj.aj.business.mapper.monitor.【Uname】Mapper;
-import com.jjkj.aj.business.service.monitor.【Uname】Service;
+import com.jjkj.aj.business.mapper.superviseV2.【Uname】Mapper;
+import com.jjkj.aj.business.service.superviseV2.【Uname】Service;
 import com.jjkj.aj.util.CommonUtils;
 import com.jjkj.aj.util.UUIDUtil;
 import com.jjkj.aj.util.ValidateUtil;
@@ -28,15 +28,13 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     @Override
     @Transactional
     public Map<String, Object> add【Uname】(Map<String, Object> parameterMap) {
-        String token = ValidateUtil.validateParamContainKey("token", parameterMap);//token
+        String token = ValidateUtil.validateParamContainKey("tokenId", parameterMap);//token
         String id = UUIDUtil.getUUID();
 【addnotnull】
 【defaultValue】
         parameterMap.putIfAbsent("id", id);
-        parameterMap.putIfAbsent("status", 1);
-        parameterMap.putIfAbsent("delFlag", 1);
-        parameterMap.put("createId", token);
-        parameterMap.put("updateId", token);
+        parameterMap.put("createUser", token);
+        parameterMap.put("updateUser", token);
         parameterMap.put("createTime", new Date());
         parameterMap.put("updateTime", new Date());
 
@@ -67,7 +65,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     @Transactional
     public Map<String, Object> upd【Uname】(Map<String, Object> parameterMap) {
 
-        String token = ValidateUtil.validateParamContainKey("token", parameterMap);//token
+        String token = ValidateUtil.validateParamContainKey("tokenId", parameterMap);//token
         String id = ValidateUtil.validateParamContainKey("id", parameterMap);//token
 
         parameterMap.put("updateId", token);
@@ -96,7 +94,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
             list = new ArrayList<>();
         }
 
-        returnMap.put("resultList", list);
+        returnMap.put("rows", list);
         return returnMap;
     }
     

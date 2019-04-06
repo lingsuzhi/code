@@ -15,7 +15,7 @@ import java.util.Map;
 @Service
 public class FxjkService {
 
-    public static final String DirPath = "D:\\fy\\code\\src\\main\\java\\com\\lsz\\code\\code\\source\\fxjk\\";
+    public static final String DirPath = "D:\\fy\\code\\src\\main\\java\\com\\lsz\\code\\code\\source\\qyjg\\";
 
     @Autowired
     private DtoToCode dtoToCode;

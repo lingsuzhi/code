@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jjkj.aj.business.mapper.monitor.【Uname】Mapper">
+<mapper namespace="com.jjkj.aj.business.mapper.superviseV2.【Uname】Mapper">
     <sql id="select_column">
         【select_column】
     </sql>

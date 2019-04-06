@@ -1,4 +1,4 @@
-package com.jjkj.aj.business.mapper.monitor;
+package com.jjkj.aj.business.mapper.superviseV2;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

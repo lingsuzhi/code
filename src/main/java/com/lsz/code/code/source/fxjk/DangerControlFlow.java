@@ -3,7 +3,7 @@ package com.lsz.code.code.source.fxjk;
 import java.util.Date;
 
 /**
- * 危险源事故原因
+ * 记录管控流程
  */
 public class DangerControlFlow {
 
@@ -35,6 +35,10 @@ public class DangerControlFlow {
     private String cityId;
     //企业ID <param>
     private String companyId;
+    //管控ID
+    private String controlId;
+    //风险单元ID <param>
+    private String dangerUnitId;
     //组织机构ID <param>
     private String orgId;
 
@@ -54,5 +58,6 @@ public class DangerControlFlow {
     private String taskId;
     //流程ID
     private String instanceId;
-
+    //签名文件ID
+    private String signId;
 }

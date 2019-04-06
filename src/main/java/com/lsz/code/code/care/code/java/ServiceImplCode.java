@@ -18,7 +18,7 @@ import java.util.List;
 public class ServiceImplCode implements JavaCode {
 
     public final static String ApiOldFile = "ServiceImpl.java";
-    public final static String DoFilePath = "D:\\fy\\projectCode-安监局\\projectCode\\aj-provider-business-8003\\src\\main\\java\\com\\jjkj\\aj\\business\\service\\monitor\\impl" + "\\";
+    public final static String DoFilePath =  ServiceCode.DoFilePath +  "impl" + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

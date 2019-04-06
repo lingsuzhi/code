@@ -3,7 +3,7 @@ package com.lsz.code.code.source.fxjk;
 import java.util.Date;
 
 /**
- * 危险源事故原因
+ * 风险管控定义
  */
 public class DangerControl {
 
@@ -63,5 +63,6 @@ public class DangerControl {
     private Integer publishLevel;
     //流程ID
     private String instanceId;
-
+    //发下文件ID 多个文件ID用分号;分隔
+    private String publishFile;
 }

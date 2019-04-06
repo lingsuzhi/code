@@ -3,7 +3,7 @@ package com.lsz.code.code.source.fxjk;
 import java.util.Date;
 
 /**
- * 危险源事故原因
+ * 危险源辨识
  */
 public class DangerControlMeasures {
 

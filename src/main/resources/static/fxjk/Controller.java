@@ -1,6 +1,6 @@
-package com.jjkj.aj.business.controller.monitor;
+package com.jjkj.aj.business.controller.superviseV2;
 
-import com.jjkj.aj.business.service.monitor.【Uname】Service;
+import com.jjkj.aj.business.service.superviseV2.【Uname】Service;
 import com.jjkj.aj.util.CommonUtils;
 import com.jjkj.aj.util.ResultVOUtil;
 import com.jjkj.aj.vo.ResultVO;
@@ -19,7 +19,7 @@ import java.util.Map;
  * 【describe】
  */
 @RestController
-@RequestMapping("/【Lname】")
+@RequestMapping("/【Lname】Controller")
 public class 【Uname】Controller {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -30,7 +30,7 @@ public class 【Uname】Controller {
     /**
      * 添加单个
      */
-    @RequestMapping(value = "/add【Uname】", method = RequestMethod.POST)
+    @RequestMapping(value = "/save【Uname】", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> add【Uname】(@RequestBody Map<String, Object> param) {
         try {
             Map<String, Object> resultMap = serviceImpl.add【Uname】(param);
@@ -44,7 +44,7 @@ public class 【Uname】Controller {
     /**
      * 删除
      */
-    @RequestMapping(value = "/del【Uname】", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete【Uname】", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> del【Uname】(@RequestBody Map<String, Object> param) {
         try {
             Map<String, Object> resultMap = serviceImpl.del【Uname】(param);
@@ -58,7 +58,7 @@ public class 【Uname】Controller {
     /**
      * 修改
      */
-    @RequestMapping(value = "/upd【Uname】", method = RequestMethod.POST)
+    @RequestMapping(value = "/update【Uname】", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> upd【Uname】(@RequestBody Map<String, Object> param) {
         try {
             Map<String, Object> resultMap = serviceImpl.upd【Uname】(param);

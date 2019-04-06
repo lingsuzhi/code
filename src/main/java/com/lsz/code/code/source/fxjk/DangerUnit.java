@@ -3,7 +3,7 @@ package com.lsz.code.code.source.fxjk;
 import java.util.Date;
 
 /**
- * 危险源事故原因
+ * 风险单元
  */
 public class DangerUnit {
 
