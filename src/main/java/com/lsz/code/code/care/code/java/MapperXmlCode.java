@@ -112,8 +112,8 @@ public class MapperXmlCode implements JavaCode {
 //            }
             String lowDo = StrUtil.strLowDo(nameStr);
 
-            String str = "<if test=\"【】 != null\">【】=#{【】},</if>";
-            stringBuilder.appendln(str, nameStr, lowDo, nameStr);
+            String str = "<if test=\"【】 != '' and 【】 != null\">【】=#{【】},</if>";
+            stringBuilder.appendln(str, nameStr,nameStr, lowDo, nameStr);
         }
         return stringBuilder.toString();
     }

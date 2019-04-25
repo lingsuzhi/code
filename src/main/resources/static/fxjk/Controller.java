@@ -35,7 +35,7 @@ public class 【Uname】Controller {
         try {
             Map<String, Object> resultMap = serviceImpl.add【Uname】(param);
             return ResultVOUtil.success(resultMap);
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return CommonUtils.errorByMsg(e.getMessage());
         }
