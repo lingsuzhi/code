@@ -15,7 +15,7 @@ import java.io.File;
 public class ApiCode implements JavaCode {
 
     public final static String ApiOldFile = "Controller.java";
-    public final static String DoFilePath = "D:\\code\\xjjd_lease\\lease-apply\\src\\main\\java\\com\\xjjd\\lease\\apply\\api\\base\\controller\\";
+    public final static String DoFilePath = JavaCode.BasePath + "\\controller\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

@@ -1,7 +1,9 @@
 package com.xjjd.lease.apply.api.base.controller;
 
 
+import com.xjjd.lease.apply.api.base.pojo.【Uname】;
 import com.xjjd.lease.apply.api.base.service.【Uname】Service;
+import com.xjjd.lease.apply.api.base.util.BasePage;
 import com.xjjd.lease.apply.api.base.util.CommonUtils;
 import com.xjjd.lease.apply.api.base.util.ResultVO;
 import com.xjjd.lease.apply.api.base.util.ResultVOUtil;
@@ -20,7 +22,7 @@ import java.util.Map;
  * 【describe】
  */
 @RestController
-@RequestMapping("/【Lname】Controller")
+@RequestMapping("/base【Uname】")
 public class 【Uname】Controller {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,7 +33,7 @@ public class 【Uname】Controller {
     /**
      * 添加单个
      */
-    @RequestMapping(value = "/save【Uname】", method = RequestMethod.POST)
+    @RequestMapping(value = "/add【Uname】", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> add【Uname】(@RequestBody Map<String, Object> param) {
         try {
             Map<String, Object> resultMap = serviceImpl.add【Uname】(param);
@@ -75,9 +77,9 @@ public class 【Uname】Controller {
      * 查询单个
      */
     @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
-    public ResultVO<Map<String, Object>> get【Uname】(@RequestBody Map<String, Object> param) {
+    public ResultVO<【Uname】> get【Uname】(@RequestBody Map<String, Object> param) {
         try {
-            Map<String, Object> resultMap = serviceImpl.get【Uname】(param);
+            【Uname】 resultMap = serviceImpl.get【Uname】(param);
             return ResultVOUtil.success(resultMap);
         } catch (RuntimeException e) {
             logger.error(e.getMessage(), e);
@@ -89,9 +91,9 @@ public class 【Uname】Controller {
      * 查询列表
      */
     @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
-    public ResultVO<Map<String, Object>> get【Uname】List(@RequestBody Map<String, Object> param) {
+    public ResultVO<BasePage<【Uname】>> get【Uname】List(@RequestBody Map<String, Object> param) {
         try {
-            Map<String, Object> resultMap = serviceImpl.get【Uname】List(param);
+            BasePage<【Uname】> resultMap = serviceImpl.get【Uname】List(param);
             return ResultVOUtil.success(resultMap);
         } catch (RuntimeException e) {
             logger.error(e.getMessage(), e);
@@ -100,4 +102,5 @@ public class 【Uname】Controller {
     }
 
 }
+
 

@@ -15,7 +15,7 @@ import java.io.File;
 public class ServiceCode implements JavaCode {
 
     public final static String ApiOldFile = "Service.java";
-    public final static String DoFilePath = "D:\\code\\xjjd_lease\\lease-apply\\src\\main\\java\\com\\xjjd\\lease\\apply\\api\\base\\service" + "\\";
+    public final static String DoFilePath = JavaCode.BasePath + "\\service\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

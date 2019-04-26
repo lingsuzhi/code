@@ -1,5 +1,7 @@
 package com.xjjd.lease.apply.api.base.mapper;
 
+import com.xjjd.lease.apply.api.base.pojo.【Uname】;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +18,13 @@ public interface 【Uname】Mapper {
 
     Integer kill【Uname】(Map<String, Object> paramMap);
 
-    Map<String, Object> get【Uname】(Map<String, Object> paramMap);
+    【Uname】 get【Uname】(Map<String, Object> paramMap);
 
     Integer upd【Uname】(Map<String, Object> paramMap);
 
-    List<Map<String, Object>> get【Uname】List(Map<String, Object> paramMap);
+    List<【Uname】> get【Uname】List(Map<String, Object> paramMap);
 
-    Map<String, Object> get【Uname】Count(Map<String, Object> paramMap);
+    Integer get【Uname】Count(Map<String, Object> paramMap);
 }
+
 

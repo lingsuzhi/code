@@ -1,4 +1,4 @@
-package com.lsz.code.code.care.code.java.old;
+package com.lsz.code.code.care.code.java;
 
 import com.lsz.code.code.bo.DtoAttrBO;
 import com.lsz.code.code.bo.DtoBO;
@@ -15,12 +15,12 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.util.List;
 
-//@Component
+@Component
 @Slf4j
 public class PojoCode implements JavaCode {
 
     public final static String ApiOldFile = "Pojo.java";
-    public final static String DoFilePath = "D:\\fy\\projectCode-安监局\\projectCode\\aj-provider-business-8003\\src\\main\\java\\com\\jjkj\\aj\\business\\entity\\pojo" + "\\";
+    public final static String DoFilePath = JavaCode.BasePath + "\\pojo\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

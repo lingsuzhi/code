@@ -2,7 +2,9 @@ package com.xjjd.lease.apply.api.base.service.impl;
 
 
 import com.xjjd.lease.apply.api.base.mapper.【Uname】Mapper;
+import com.xjjd.lease.apply.api.base.pojo.【Uname】;
 import com.xjjd.lease.apply.api.base.service.【Uname】Service;
+import com.xjjd.lease.apply.api.base.util.BasePage;
 import com.xjjd.lease.apply.api.base.util.CommonUtils;
 import com.xjjd.lease.apply.api.base.util.ValidateUtil;
 import org.slf4j.Logger;
@@ -10,12 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 
 /**
- * 【describe】
+ *
  */
 @Service("【Lname】ServiceImpl")
 public class 【Uname】ServiceImpl implements 【Uname】Service {
@@ -30,8 +31,9 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     public Map<String, Object> add【Uname】(Map<String, Object> parameterMap) {
         parameterMap.put("createTime", new Date());
         parameterMap.put("updateTime", new Date());
-        【addnotnull】
-        【defaultValue】
+        parameterMap.put("isDelete", 0);
+【addnotnull】
+【defaultValue】
         Integer count = 【Lname】Mapper.add【Uname】(parameterMap);
         logger.info("add【Uname】 完成:{} {}", count);
         return parameterMap;
@@ -69,37 +71,37 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     }
 
     @Override
-    public Map<String, Object> get【Uname】List(Map<String, Object> map) {
+    public BasePage<【Uname】> get【Uname】List(Map<String, Object> map) {
         CommonUtils.spliceMap(map);
-        List<Map<String, Object>> list = 【Lname】Mapper.get【Uname】List(map);
-        Map<String, Object> returnMap = new HashMap<>();
+        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(map);
+        BasePage<【Uname】>  returnMap = new BasePage<>();
 
         if (list != null && list.size() > 0) {
             //处理
-            for (Map<String, Object> objectMap : list) {
+            for (【Uname】 objectMap : list) {
                 manage【Uname】(objectMap);
             }
-            Map<String, Object> 【Lname】Count = 【Lname】Mapper.get【Uname】Count(map);
-            returnMap.put("total", 【Lname】Count.get("total"));
+            Integer 【Lname】Count = 【Lname】Mapper.get【Uname】Count(map);
+            returnMap.setTotal(【Lname】Count);
         } else {
-            returnMap.put("total", 0);
+            returnMap.setTotal(0);
             list = new ArrayList<>();
         }
 
-        returnMap.put("rows", list);
+        returnMap.setContent(list);
         return returnMap;
     }
 
-    private Map<String, Object> manage【Uname】(Map<String, Object> map) {
-        CommonUtils.timestampToStr(map, "createTime", true);
-        CommonUtils.timestampToStr(map, "updateTime", true);
+    //处理对象
+    private 【Uname】 manage【Uname】(【Uname】 【Lname】) {
 【formatDo】
-        return map;
+        return 【Lname】;
     }
 
     @Override
-    public Map<String, Object> get【Uname】(Map<String, Object> parameterMap) {
+    public 【Uname】 get【Uname】(Map<String, Object> parameterMap) {
         return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
     }
 }
+
 
