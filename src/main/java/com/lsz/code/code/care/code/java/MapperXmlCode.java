@@ -18,7 +18,7 @@ import java.util.List;
 public class MapperXmlCode implements JavaCode {
 
     public final static String ApiOldFile = "Mapper.xml";
-    public final static String DoFilePath = "D:\\fy\\需求2\\20190328给外包 - 复件\\20190328给外包\\业务源码\\aj_server\\aj-provider-business-8003\\src\\main\\resources\\mapper\\superviseV2" + "\\";
+    public final static String DoFilePath = "D:\\code\\xjjd_lease\\lease-apply\\src\\main\\resources\\mapper\\base" + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {
@@ -30,7 +30,7 @@ public class MapperXmlCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
 
         sb.put("select_column", select_column(dtoBO));
-        sb.put("tableName", "t_" + StrUtil.strLowDo(dtoBO.getName()));
+        sb.put("tableName", "" + StrUtil.strLowDo(dtoBO.getName()));
 
         sb.put("base_column", base_column(dtoBO));
         sb.put("updateSet", updateSet(dtoBO));
@@ -112,7 +112,7 @@ public class MapperXmlCode implements JavaCode {
 //            }
             String lowDo = StrUtil.strLowDo(nameStr);
 
-            String str = "<if test=\"【】 != '' and 【】 != null\">【】=#{【】},</if>";
+            String str = "<if test=\"【】 != null\">【】=#{【】},</if>";
             stringBuilder.appendln(str, nameStr,nameStr, lowDo, nameStr);
         }
         return stringBuilder.toString();

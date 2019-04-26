@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjjd.lease.apply.api.base.mapper.【Uname】Mapper">
+    <sql id="select_column">
+        【select_column】
+    </sql>
+
+    <!--插入-->
+    <insert id="add【Uname】" parameterType="java.util.Map">
+        INSERT INTO 【tableName】
+        (
+        【base_column】
+        )
+        VALUES
+        (
+        【value_column】
+        )
+    </insert>
+
+
+    <!--真删除-->
+    <delete id="kill【Uname】" parameterType="java.util.Map">
+        DELETE FROM 【tableName】
+        WHERE
+        1=1
+        <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
+            ${id}
+        </foreach>
+    </delete>
+    <!--查询列表-->
+    <select id="get【Uname】List" parameterType="java.util.Map"
+            resultType="java.util.Map">
+        select
+        <include refid="select_column"/>
+        FROM 【tableName】 tar
+        WHERE  tar.is_delete =0
+        【selectWhere】
+        <if test="pageSize != null">
+            LIMIT #{pageNum},#{pageSize}
+        </if>
+    </select>
+    <!--汇总-->
+    <select id="get【Uname】Count" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+        SELECT
+        IFNULL(COUNT(tar.id),0) total
+        FROM 【tableName】 tar
+        WHERE  tar.is_delete =0
+        【selectWhere】
+    </select>
+    <!--查询单个-->
+    <select id="get【Uname】" parameterType="java.util.Map"
+            resultType="java.util.Map">
+        select
+        <include refid="select_column"/>
+        from 【tableName】 tar
+        WHERE  tar.is_delete =0
+        【selectWhere】
+    </select>
+
+    <!--修改-->
+    <update id="upd【Uname】" parameterType="java.util.Map">
+        update 【tableName】
+        <set>
+            【updateSet】
+        </set>
+        where id=#{id}
+    </update>
+    <!--软删除-->
+    <update id="del【Uname】" parameterType="java.util.Map">
+        update 【tableName】
+        <set>
+            is_delete=1
+        </set>
+        WHERE
+        1=1
+        <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
+            ${id}
+        </foreach>
+    </update>
+</mapper>

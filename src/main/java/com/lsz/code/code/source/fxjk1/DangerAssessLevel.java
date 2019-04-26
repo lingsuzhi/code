@@ -1,11 +1,11 @@
-package com.lsz.code.code.source.fxjk;
+package com.lsz.code.code.source.fxjk1;
 
 import java.util.Date;
 
 /**
- * 风险评估
+ * 风险等级评估
  */
-public class DangerAssess {
+public class DangerAssessLevel {
 
     //UUID   <param>
     private String id;
@@ -32,26 +32,18 @@ public class DangerAssess {
     private String bak;
     //对应危险源表ID <param> <addnotnull>
     private String dangerId;
-    //取事故类型表ID <param> <addnotnull>
-    private String accidentType;
 
-    // lecL值 <param>
-    private Integer  lecL;
-    // lecE值 <param>
-    private Integer  lecE;
-    // lecC值 <param>
-    private Integer  lecC;
-    // lecD值 <param>
-    private Integer  lecD;
-    //LS_L值 <param>
-    private Integer lsL;
-    //LS_S值 <param>
-    private Integer lsS;
-    //LS_R值 <param>
-    private Integer lsR;
-    //风险等级 取字曲表数据 <param>
+
+    //风险等级 <param> <addnotnull>
     private String dangerLevel;
-    //评估类型 1：固有风险；2：残余风险 <def=1> <param>
+    //管控层级 <param> <addnotnull>
+    private String controlLevel;
+    //辩识部门ID <param>
+    private String identifyDeptment;
+    //辨识人ID 取人员表ID <param>
+    private String identifyUser;
+
+    //评估类型 1：固有风险；2：残余风险 <def=1> <param>  <addnotnull>
     private Integer assessType;
 
 }

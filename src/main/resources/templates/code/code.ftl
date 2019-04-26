@@ -84,7 +84,7 @@
             if (item.trim().startsWith("`")) {
                 let attr = {}
                 attr.name = javaName(findKuohao(item, "`"));
-                attr.rem = findKuohao(item, "'")
+                attr.rem = findKuohaoLast(item, "'")
                 if (item.includes("INT")) {
                     attr.type = "Integer";
                 } else if (item.includes("DATETIME") || item.includes("DATE")) {
@@ -112,7 +112,7 @@
             }
             arr.rem = "    //" + attr.rem;
             if (attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
-                    && attr.name != "updateUser" && attr.name != "createUser") {
+                    && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
                 arr.rem += " <param>"
             }
             strArr.push(arr.rem)
@@ -169,7 +169,21 @@
         }
         return txt.substring(index + 1, index2);
     }
+    function findKuohaoLast(txt, kuohao, kuohao2) {
 
+        if (!kuohao2) {
+            kuohao2 = kuohao;
+        }
+        let index = txt.lastIndexOf(kuohao);
+        if (index == -1) {
+            return "";
+        }
+        let index2 = txt.lastIndexOf(kuohao2, index - 1);
+        if (index2 == -1) {
+            return "";
+        }
+        return txt.substring(index2 + 1, index);
+    }
     function copyToClipboard(Url2) {
         var oInput = document.createElement('textarea');
         oInput.value = Url2;

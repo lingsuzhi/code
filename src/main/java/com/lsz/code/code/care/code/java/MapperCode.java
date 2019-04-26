@@ -19,7 +19,7 @@ import java.util.List;
 public class MapperCode implements JavaCode {
 
     public final static String ApiOldFile = "Mapper.java";
-    public final static String DoFilePath = "D:\\fy\\需求2\\20190328给外包 - 复件\\20190328给外包\\业务源码\\aj_server\\aj-provider-business-8003\\src\\main\\java\\com\\jjkj\\aj\\business\\mapper\\superviseV2" + "\\";
+    public final static String DoFilePath = "D:\\code\\xjjd_lease\\lease-apply\\src\\main\\java\\com\\xjjd\\lease\\apply\\api\\base\\mapper" + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

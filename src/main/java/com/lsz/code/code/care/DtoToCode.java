@@ -14,7 +14,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DtoToCode {
-    public static final String OldFilePath = "D:\\fy\\code\\src\\main\\resources\\static\\fxjk\\";
+    public static final String OldFilePath = "D:\\home\\代码\\code\\src\\main\\resources\\static\\xjjd\\";
 
     public static final String ProjectName = "depot";
 
