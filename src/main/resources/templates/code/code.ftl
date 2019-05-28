@@ -19,7 +19,7 @@
 <div>
     <div style="float:left"
     <ul id="list">
-    ${(code.fileList)!}
+        ${(code.fileList)!}
 
     </ul>
 </div>
@@ -74,7 +74,7 @@
         for (let item of arr) {
             if (item.startsWith("CREATE TABLE")) {
                 cls.name = findKuohao(item, "`");
-                if(cls.name.startsWith("t_")){
+                if (cls.name.startsWith("t_")) {
                     cls.name = cls.name.substring(2)
                 }
             }
@@ -85,8 +85,12 @@
                 let attr = {}
                 attr.name = javaName(findKuohao(item, "`"));
                 attr.rem = findKuohaoLast(item, "'")
-                if (item.includes("INT")) {
+                if (item.includes("BIGINT")) {
+                    attr.type = "Long";
+                } else if (item.includes("INT")) {
                     attr.type = "Integer";
+                } else if (item.includes("DECIMAL")) {
+                    attr.type = "BigDecimal";
                 } else if (item.includes("DATETIME") || item.includes("DATE")) {
                     attr.type = "Date";
                 } else {
@@ -112,7 +116,7 @@
             }
             arr.rem = "    //" + attr.rem;
             if (attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
-                    && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
+                && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
                 arr.rem += " <param>"
             }
             strArr.push(arr.rem)
@@ -136,7 +140,7 @@
             }
             if (tmpB) {
                 tmpStr = tmpStr.toLocaleUpperCase();
-                tmpB =false;
+                tmpB = false;
             }
             result += tmpStr;
         }
@@ -169,6 +173,7 @@
         }
         return txt.substring(index + 1, index2);
     }
+
     function findKuohaoLast(txt, kuohao, kuohao2) {
 
         if (!kuohao2) {
@@ -184,6 +189,7 @@
         }
         return txt.substring(index2 + 1, index);
     }
+
     function copyToClipboard(Url2) {
         var oInput = document.createElement('textarea');
         oInput.value = Url2;

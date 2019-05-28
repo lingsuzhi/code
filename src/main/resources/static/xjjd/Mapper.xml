@@ -6,7 +6,7 @@
     </sql>
 
     <!--插入-->
-    <insert id="add【Uname】" parameterType="java.util.Map">
+    <insert id="add【Uname】" useGeneratedKeys="true" keyProperty="id" keyColumn="id"  parameterType="java.util.Map">
         INSERT INTO 【tableName】
         (
         【base_column】
@@ -35,9 +35,6 @@
         FROM 【tableName】 tar
         WHERE  tar.is_delete =0
         【selectWhere】
-        <if test="pageSize != null">
-            LIMIT #{pageNum},#{pageSize}
-        </if>
     </select>
     <!--汇总-->
     <select id="get【Uname】Count" parameterType="java.util.HashMap" resultType="java.lang.Integer">

@@ -2,6 +2,7 @@ package com.lsz.code.code.care;
 
 import com.lsz.code.code.bo.DtoAttrBO;
 import com.lsz.code.code.bo.DtoBO;
+import com.lsz.code.code.common.StrUtil;
 import com.lsz.code.code.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -16,6 +17,7 @@ public class ChuliDtoFile {
      * @return
      */
     public static DtoBO chuli (File file){
+        DtoBO dtoBO = new DtoBO();
         if(file == null || !file.exists()){
             log.error("文件不存在啊，请检查");
             return null;
@@ -24,6 +26,12 @@ public class ChuliDtoFile {
         String fileStr = FileUtils.FileUTF8ToStr(file);
         if (StringUtils.isEmpty(fileStr)) return null;
 
+
+        int tableNamePos = fileStr.indexOf("@Table(");
+        if (tableNamePos != -1){
+            String tableName = StrUtil.kuohaoStr(fileStr.substring(tableNamePos), "\"", "\"");
+            dtoBO.setTableName(tableName);
+        }
         final String classStr = " class ";
         int classPos = fileStr.indexOf(classStr);
         if (classPos == -1) return null;
@@ -32,7 +40,7 @@ public class ChuliDtoFile {
         //private
         int mapPos = classdkhPos;
         String keyVal = "private ";
-        DtoBO dtoBO = new DtoBO();
+
 
         final String packStr ="package ";
         int packPos = fileStr.indexOf(packStr);

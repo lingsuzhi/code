@@ -1,22 +1,24 @@
 package com.xjjd.lease.apply.api.base.service.impl;
 
-
+import com.github.pagehelper.PageInfo;
 import com.xjjd.lease.apply.api.base.mapper.【Uname】Mapper;
 import com.xjjd.lease.apply.api.base.pojo.【Uname】;
 import com.xjjd.lease.apply.api.base.service.【Uname】Service;
 import com.xjjd.lease.apply.api.base.util.BasePage;
 import com.xjjd.lease.apply.api.base.util.CommonUtils;
+import com.xjjd.lease.apply.api.base.util.PagesParam;
 import com.xjjd.lease.apply.api.base.util.ValidateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
 
 /**
- *
+ *【describe】
  */
 @Service("【Lname】ServiceImpl")
 public class 【Uname】ServiceImpl implements 【Uname】Service {
@@ -34,6 +36,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
         parameterMap.put("isDelete", 0);
 【addnotnull】
 【defaultValue】
+        parameterMap.put("id", null);
         Integer count = 【Lname】Mapper.add【Uname】(parameterMap);
         logger.info("add【Uname】 完成:{} {}", count);
         return parameterMap;
@@ -64,27 +67,27 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
         String id = ValidateUtil.validateParamContainKey("id", parameterMap);
 
         parameterMap.put("updateTime", new Date());
-
         Integer count = 【Lname】Mapper.upd【Uname】(parameterMap);
         logger.info("upd【Uname】 完成:{} {}", count, id);
         return parameterMap;
     }
 
     @Override
-    public BasePage<【Uname】> get【Uname】List(Map<String, Object> map) {
-        CommonUtils.spliceMap(map);
-        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(map);
-        BasePage<【Uname】>  returnMap = new BasePage<>();
+    public BasePage<【Uname】> get【Uname】List(PagesParam pageParam) {
+        PagesParam.startPage(pageParam);
+        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(pageParam.getQuery());
+        PageInfo<【Uname】> pageInfo = new PageInfo<>(list);
+        BasePage<【Uname】> returnMap = new BasePage<>();
 
         if (list != null && list.size() > 0) {
             //处理
             for (【Uname】 objectMap : list) {
                 manage【Uname】(objectMap);
             }
-            Integer 【Lname】Count = 【Lname】Mapper.get【Uname】Count(map);
-            returnMap.setTotal(【Lname】Count);
+
+            returnMap.setTotal(pageInfo.getTotal());
         } else {
-            returnMap.setTotal(0);
+            returnMap.setTotal(0L);
             list = new ArrayList<>();
         }
 
@@ -94,6 +97,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
 
     //处理对象
     private 【Uname】 manage【Uname】(【Uname】 【Lname】) {
+        if (【Lname】 == null) return 【Lname】;
 【formatDo】
         return 【Lname】;
     }
@@ -103,5 +107,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
         return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
     }
 }
+
+
 
 

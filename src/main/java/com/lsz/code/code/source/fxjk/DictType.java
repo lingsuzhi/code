@@ -2,13 +2,16 @@ package com.lsz.code.code.source.fxjk;
 
  import java.util.Date;
 
+/**
+ * 字典配置
+ */
 public class DictType {
 
     //ID <param>
     private Integer id;
     //类型名称 <param>
     private String typeName;
-    //是否删除 <param>
+    //是否删除
     private Integer isDelete;
     //创建时间
     private Date createTime;

@@ -9,6 +9,7 @@ import com.lsz.code.code.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.util.List;
@@ -19,6 +20,7 @@ public class MapperXmlCode implements JavaCode {
 
     public final static String ApiOldFile = "Mapper.xml";
     public final static String DoFilePath = JavaCode.BaseXmlPath;
+
     @Override
     public String apply(DtoBO dtoBO) {
         CodeStringBuilder sb = new CodeStringBuilder();
@@ -29,7 +31,7 @@ public class MapperXmlCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
 
         sb.put("select_column", select_column(dtoBO));
-        sb.put("tableName", "" + StrUtil.strLowDo(dtoBO.getName()));
+        sb.put("tableName", StringUtils.isEmpty(dtoBO.getTableName()) ? StrUtil.strLowDo(dtoBO.getName()) : dtoBO.getTableName());
 
         sb.put("base_column", base_column(dtoBO));
         sb.put("updateSet", updateSet(dtoBO));
@@ -82,7 +84,7 @@ public class MapperXmlCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (!dtoAttrBO.getRemStr().contains("<param>")) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
@@ -102,7 +104,8 @@ public class MapperXmlCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equals(dtoAttrBO.getNameStr())
+                    || "createTime".equals(dtoAttrBO.getNameStr())) {
                 continue;
             }
             String nameStr = dtoAttrBO.getNameStr();
@@ -112,7 +115,7 @@ public class MapperXmlCode implements JavaCode {
             String lowDo = StrUtil.strLowDo(nameStr);
 
             String str = "<if test=\"【】 != null\">【】=#{【】},</if>";
-            stringBuilder.appendln(str, nameStr,nameStr, lowDo, nameStr);
+            stringBuilder.appendln(str, nameStr, lowDo, nameStr);
         }
         return stringBuilder.toString();
     }
@@ -157,9 +160,9 @@ public class MapperXmlCode implements JavaCode {
             }
             String lowDo = StrUtil.strLowDo(nameStr);
             if (!lowDo.equals(nameStr)) {
-                stringBuilder.appendln("【】 as 【】", lowDo, nameStr);
+                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
             } else {
-                stringBuilder.appendNoTab(nameStr);
+                stringBuilder.appendln("tar.【】", lowDo);
             }
         }
         return stringBuilder.toString();

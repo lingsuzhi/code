@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-@Component("【Lname】Dao")
+@Component("base【Uname】Mapper")
 public interface 【Uname】Mapper {
 
     Integer add【Uname】(Map<String, Object> paramMap);

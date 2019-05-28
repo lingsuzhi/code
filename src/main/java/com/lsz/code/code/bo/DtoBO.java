@@ -16,7 +16,7 @@ public class DtoBO {
     private String projectName;
     private String describe;
     private String name;
-
+    private String tableName;
     public DtoBO() {
 
     }
