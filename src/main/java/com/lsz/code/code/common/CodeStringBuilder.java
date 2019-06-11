@@ -1,7 +1,9 @@
 package com.lsz.code.code.common;
 
-import org.springframework.util.StringUtils;
+import freemarker.template.utility.DateUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +12,11 @@ public class CodeStringBuilder {
     private String leftStr = "";
 
     private Map<String, String> map = new HashMap<>();
+
+    public CodeStringBuilder() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.put("日期", simpleDateFormat.format(new Date()));
+    }
 
     public void clean() {
         sb = new StringBuilder();
