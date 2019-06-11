@@ -4,11 +4,9 @@ import com.lsz.code.code.service.FxjkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -26,9 +24,16 @@ public class FxjkApi {
 
     @GetMapping("/fileDo")
     @ResponseBody
-    public Map<String, String> fileDo(@RequestParam String fileName ,Boolean killold) {
+    public Map<String, String> fileDo(@RequestParam String fileName, Boolean killold) {
 
-        Map map = fxjkService.fileDo(fileName,killold);
+        Map map = fxjkService.fileDo(fileName, killold);
+        return map;
+    }
+
+    @PostMapping("/sql2Java")
+    @ResponseBody
+    public Map<String, String> sql2Java(@RequestBody HashMap<String, Object> param) {
+        Map map = fxjkService.sql2Java(param);
         return map;
     }
 }

@@ -3,6 +3,7 @@ package com.lsz.code.code.service;
 import com.lsz.code.code.bo.DtoBO;
 import com.lsz.code.code.care.ChuliDtoFile;
 import com.lsz.code.code.care.DtoToCode;
+import com.lsz.code.code.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Service
 public class FxjkService {
 
-    public static final String DirPath = "D:\\home\\代码\\code\\src\\main\\java\\com\\lsz\\code\\code\\source\\fxjk\\";
+    public static final String DirPath = "D:\\home\\code\\src\\main\\java\\com\\lsz\\code\\code\\source\\fxjk\\";
 //    public static final String DirPath = "D:\\fy\\code\\src\\main\\java\\com\\lsz\\code\\code\\source\\fxjk\\";
 
     @Autowired
@@ -38,7 +39,7 @@ public class FxjkService {
         return map;
     }
 
-    public Map<String, String> fileDo(String fileName,Boolean killold) {
+    public Map<String, String> fileDo(String fileName, Boolean killold) {
         File file = new File(DirPath + fileName);
         DtoBO dtoBO = ChuliDtoFile.chuli(file);
         if (dtoBO == null) {
@@ -46,6 +47,19 @@ public class FxjkService {
             return null;
         }
 
-        return dtoToCode.chuli(dtoBO,killold);
+        return dtoToCode.chuli(dtoBO, killold);
+    }
+
+    public Map sql2Java(HashMap<String, Object> param) {
+        String fileName = param.get("fileName").toString();
+        File file = new File(DirPath + fileName);
+        StringBuffer sb = new StringBuffer();
+        sb.append("package com.lsz.code.code.source.fxjk;\n\n");
+        sb.append(param.get("javaCode"));
+        if (file.exists()) {
+            file.delete();
+        }
+        FileUtil.doFileStr(file, sb.toString());
+        return new HashMap();
     }
 }

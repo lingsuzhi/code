@@ -110,14 +110,19 @@
         }
         strArr.push("public class " + cName(cls.name) + " {");
         strArr.push("");
+        let i = 0;
         for (let attr of cls.attr) {
+            i++;
             if (!attr.rem) {
                 arr.rem = "";
             }
             arr.rem = "    //" + attr.rem;
             if (attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
                 && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
-                arr.rem += " <param>"
+                if ( cls.attr.length > 10 && i > 1 && i < cls.attr.length - 9){
+                    arr.rem += " <param>"
+
+                }
             }
             strArr.push(arr.rem)
             strArr.push("    private " + attr.type + " " + attr.name + ";");
@@ -127,6 +132,26 @@
         let tmp = strArr.join("\n");
         copyToClipboard(tmp);
         console.log(tmp)
+
+
+        $.ajax({
+            url:"./sql2Java",    //请求的url地址
+            contentType: "application/json",
+            data:JSON.stringify({fileName: cName(cls.name) + ".java", javaCode:tmp}),    //参数值
+            type:"POST",   //请求方式
+            beforeSend:function(){
+                //请求前的处理
+            },
+            success:function(req){
+                //请求成功时处理
+            },
+            complete:function(){
+                //请求完成的处理
+            },
+            error:function(){
+                //请求出错处理
+            }
+        });
     });
 
     function javaName(name) {
