@@ -31,6 +31,8 @@ public class MapperXmlCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
 
         sb.put("select_column", select_column(dtoBO));
+        sb.put("resultMap", resultMap(dtoBO));
+
         sb.put("tableName", StringUtils.isEmpty(dtoBO.getTableName()) ? StrUtil.strLowDo(dtoBO.getName()) : dtoBO.getTableName());
 
         sb.put("base_column", base_column(dtoBO));
@@ -113,9 +115,16 @@ public class MapperXmlCode implements JavaCode {
 //                stringBuilder.appendNoTab(",");
 //            }
             String lowDo = StrUtil.strLowDo(nameStr);
+            if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())){
+                String str = "<if test=\"dto.【】 != null and dto.【】 != ''\">";
+                stringBuilder.appendln(str, nameStr,nameStr);
+            }else{
+                String str = "<if test=\"dto.【】 != null \">";
+                stringBuilder.appendln(str, nameStr);
 
-            String str = "<if test=\"【】 != null\">【】=#{【】},</if>";
-            stringBuilder.appendln(str, nameStr, lowDo, nameStr);
+            }
+            stringBuilder.appendln("and 【】 = #{dto.【】}", lowDo, nameStr);
+            stringBuilder.appendln("</if>");
         }
         return stringBuilder.toString();
     }
@@ -143,6 +152,31 @@ public class MapperXmlCode implements JavaCode {
     }
 
 
+    private String resultMap(DtoBO dtoBO) {
+        CodeStringBuilder stringBuilder = new CodeStringBuilder();
+//        stringBuilder.addTab();
+        List<DtoAttrBO> attrList = dtoBO.getAttrList();
+        if (CollectionUtils.isEmpty(attrList)) {
+            return null;
+        }
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+                continue;
+            }
+            String nameStr = dtoAttrBO.getNameStr();
+            if (stringBuilder.toString().length() > 0) {
+                stringBuilder.appendNoTab(",");
+            }
+            String lowDo = StrUtil.strLowDo(nameStr);
+//            if (!lowDo.equals(nameStr)) {
+//                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
+//            } else {
+            stringBuilder.appendln("<id column=\"【】\" property=\"【】\"/>", lowDo, nameStr);
+//            }
+        }
+        return stringBuilder.toString();
+    }
+
     private String select_column(DtoBO dtoBO) {
         CodeStringBuilder stringBuilder = new CodeStringBuilder();
 //        stringBuilder.addTab();
@@ -159,11 +193,11 @@ public class MapperXmlCode implements JavaCode {
                 stringBuilder.appendNoTab(",");
             }
             String lowDo = StrUtil.strLowDo(nameStr);
-            if (!lowDo.equals(nameStr)) {
-                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
-            } else {
-                stringBuilder.appendln("tar.【】", lowDo);
-            }
+//            if (!lowDo.equals(nameStr)) {
+//                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
+//            } else {
+            stringBuilder.appendln("t.【】", lowDo);
+//            }
         }
         return stringBuilder.toString();
     }

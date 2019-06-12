@@ -16,10 +16,10 @@ import java.util.List;
 
 @Component
 @Slf4j
-public class PojoCode implements JavaCode {
+public class DtoCode implements JavaCode {
 
-    public final static String ApiOldFile = "Pojo.java";
-    public final static String DoFilePath = JavaCode.BasePath + "\\entity\\";
+    public final static String ApiOldFile = "DTO.java";
+    public final static String DoFilePath = JavaCode.CommonPath + "\\dto\\";
 
     @Override
     public String apply(DtoBO dtoBO) {
@@ -33,7 +33,7 @@ public class PojoCode implements JavaCode {
         sb.put("attribute", attribute(dtoBO));
         sb.put("getset", getset(dtoBO));
         sb.appendln(fileStr);
-        sb.put("attribute空行NoId", attribute2(dtoBO));
+        sb.put("attributeDTO", attribute(dtoBO));
         File doFile = new File(DoFilePath + upperCase + ".java");
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);
@@ -71,6 +71,7 @@ public class PojoCode implements JavaCode {
         return stringBuilder.toString();
     }
 
+    //attributeDTO
     public String attribute(DtoBO dtoBO) {
         CodeStringBuilder stringBuilder = new CodeStringBuilder();
         stringBuilder.addTab();
@@ -84,39 +85,10 @@ public class PojoCode implements JavaCode {
             }
             String rem = dtoAttrBO.getRemStr();
             stringBuilder.newLine();
-            if (!StringUtils.isEmpty(rem)) {
-                stringBuilder.appendln("//" + StrUtil.getRemName(rem));
-            }
-
-            if ("LocalDateTime".endsWith(dtoAttrBO.getTypeStr())) {
-                stringBuilder.appendln("@JSONField(format = \"yyyy-MM-dd HH:mm:ss\")");
-            }
-            String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";
-            stringBuilder.appendln(str);
-        }
-        return stringBuilder.toString();
-    }
-
-    //attribute空行NoId
-    public String attribute2(DtoBO dtoBO) {
-        CodeStringBuilder stringBuilder = new CodeStringBuilder();
-        stringBuilder.addTab();
-        List<DtoAttrBO> attrList = dtoBO.getAttrList();
-        if (CollectionUtils.isEmpty(attrList)) {
-            return null;
-        }
-        for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equalsIgnoreCase(dtoAttrBO.getNameStr())) {
-                continue;
-            }
-            String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
-//                stringBuilder.appendln("//" + StrUtil.getRemName(rem));
-                stringBuilder.appendln("/**");
-                stringBuilder.appendln(" * " + StrUtil.getRemName(rem));
-                stringBuilder.appendln(" */");
+                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
+                        , StrUtil.getRemName(rem), dtoAttrBO.getNameStr(), StrUtil.getRemName(rem, true));
             }
             String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";
             stringBuilder.appendln(str);

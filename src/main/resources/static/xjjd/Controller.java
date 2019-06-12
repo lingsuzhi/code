@@ -1,102 +1,71 @@
-package com.xjjd.lease.apply.api.base.controller;
+package com.yl.lmdm.controller;
 
 
-import com.xjjd.lease.apply.api.base.pojo.【Uname】;
-import com.xjjd.lease.apply.api.base.service.【Uname】Service;
-import com.xjjd.lease.apply.api.base.util.BasePage;
-import com.xjjd.lease.apply.api.base.util.PagesParam;
-import com.xjjd.lease.common.ResponseInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yl.common.base.controller.BaseController;
+import com.yl.common.base.model.vo.Result;
+import com.yl.lmdm.service.I【Uname】Service;
+import com.yl.model.lmdm.dto.【Uname】DTO;
+import com.yl.model.lmdm.dto.【Uname】QueryDTO;
+import com.yl.model.lmdm.vo.【Uname】VO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
+import javax.validation.Valid;
 
 /**
+ * <p>
  * 【describe】
+ * </p>
+ *
+ * @author lingsuzhi
+ * @since 【日期】
  */
-@RestController("base【Uname】Controller")
-@RequestMapping("/【Lname】Controller")
-public class 【Uname】Controller {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+@Slf4j
+@RestController
+@RequestMapping("/【Lname】")
+@Api(value = "【describe】", tags = {"【describe】接口"})
+public class 【Uname】Controller extends BaseController {
 
     @Autowired
-    private 【Uname】Service serviceImpl;
+    private I【Uname】Service 【Lname】Service;
 
-    /**
-     * 添加单个
-     */
-    @RequestMapping(value = "/add【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> add【Uname】(@RequestBody Map<String, Object> param) {
-        try {
-            Map<String, Object> resultMap = serviceImpl.add【Uname】(param);
-
-            return ResponseInfo.success(resultMap);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return ResponseInfo.error(e.getMessage());
-        }
+    @RequestMapping(value = "/getPages", method = RequestMethod.GET)
+    @ApiOperation(value = "分页查询", notes = "根据条件分页查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "当前页", dataType = "int"),
+            @ApiImplicitParam(name = "size", value = "页条数", dataType = "int")
+    })
+    public Result<IPage<【Uname】VO>> page【Uname】(【Uname】QueryDTO dto) {
+        return Result.success(【Lname】Service.page【Uname】(dto, getPage()));
     }
 
-    /**
-     * 删除
-     */
-    @RequestMapping(value = "/delete【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> del【Uname】(@RequestBody Map<String, Object> param) {
-        try {
-            Map<String, Object> resultMap = serviceImpl.del【Uname】(param);
-            return ResponseInfo.success(resultMap);
-        } catch (RuntimeException e) {
-            logger.error(e.getMessage(), e);
-            return ResponseInfo.error(e.getMessage());
-        }
+    @GetMapping("/delete")
+    @ApiOperation(value = "删除【describe】", notes = "逻辑删除")
+    public Result<Boolean> removeById(@RequestParam("id") Integer id) {
+        return Result.success(【Lname】Service.removeById(id));
     }
 
-    /**
-     * 修改
-     */
-    @RequestMapping(value = "/update【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> upd【Uname】(@RequestBody Map<String, Object> param) {
-        try {
-            Map<String, Object> resultMap = serviceImpl.upd【Uname】(param);
-            return ResponseInfo.success(resultMap);
-        } catch (RuntimeException e) {
-            logger.error(e.getMessage(), e);
-            return ResponseInfo.error(e.getMessage());
-        }
+    @PostMapping("/add")
+    @ApiOperation(value = "新增【describe】", notes = "新增【describe】")
+    public Result<Boolean> save(@Valid @RequestBody 【Uname】DTO area) {
+        return Result.success(【Lname】Service.save(area));
     }
 
-    /**
-     * 查询单个
-     */
-    @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<【Uname】> get【Uname】(@RequestBody Map<String, Object> param) {
-        try {
-            【Uname】 resultMap = serviceImpl.get【Uname】(param);
-            return ResponseInfo.success(resultMap);
-        } catch (RuntimeException e) {
-            logger.error(e.getMessage(), e);
-            return ResponseInfo.error(e.getMessage());
-        }
+    @PostMapping("/update")
+    @ApiOperation(value = "修改【describe】", notes = "通过id修改指定【describe】")
+    public Result<Boolean> updateById(@RequestBody 【Uname】DTO area) {
+        return Result.success(【Lname】Service.updateById(area));
     }
 
-    /**
-     * 查询列表
-     */
-    @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
-    public ResponseInfo<BasePage<【Uname】>> get【Uname】List(@RequestBody PagesParam param) {
-        try {
-            BasePage<【Uname】> resultMap = serviceImpl.get【Uname】List(param);
-            return ResponseInfo.success(resultMap);
-        } catch (RuntimeException e) {
-            logger.error(e.getMessage(), e);
-            return ResponseInfo.error(e.getMessage());
-        }
+    @GetMapping("/{id}")
+    @ApiOperation(value = "查询【describe】", notes = "查询指定【describe】")
+    public Result<【Uname】VO> getById(@PathVariable("id") Integer id) {
+        return Result.success(【Lname】Service.getDetailById(id));
     }
 }

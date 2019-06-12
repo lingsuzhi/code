@@ -6,4 +6,6 @@ public interface JavaCode {
     String apply(DtoBO dtoBO);
     String BasePath ="D:\\code\\yl_jms_platform\\yl_oauth\\src\\main\\java\\com\\yl\\oauth";
     String BaseXmlPath ="D:\\code\\yl_jms_platform\\yl_oauth\\src\\main\\resources\\mapper\\";
+
+    String CommonPath ="D:\\code\\yl_jms_platform\\yl_common\\module\\src\\main\\java\\com\\yl\\model\\lmdm";
 }

@@ -1,7 +1,9 @@
-package com.xjjd.lease.apply.api.base.pojo;
+package com.yl.model.lmdm.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 import java.math.BigDecimal;
@@ -13,14 +15,12 @@ import java.math.BigDecimal;
  */
 @Data
 @Accessors(chain = true)
-public class 【Uname】  implements Serializable {
+@ApiModel(value="【Uname】DTO", description="【describe】")
+public class 【Uname】DTO  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-    【attribute空行NoId】
+    【attributeDTO】
 
 
 }
