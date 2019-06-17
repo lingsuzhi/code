@@ -53,10 +53,10 @@ public class SqlCode {
             }
         }
         sqlStr += "\n" +
-                "  `create_by` varchar(45) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建人',\n" +
-                "  `create_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
-                "  `update_by` varchar(45) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '修改人',\n" +
-                "  `update_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',\n" +
+//                "  `create_by` varchar(45) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建人',\n" +
+//                "  `create_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',\n" +
+//                "  `update_by` varchar(45) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '修改人',\n" +
+//                "  `update_date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',\n" +
                 "  PRIMARY KEY (`id`),\n" +
                 "  KEY `uuid` (`uuid`)\n";
         if (!StringUtils.isEmpty(UNIQUE_key)) {

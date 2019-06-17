@@ -91,8 +91,8 @@
                     attr.type = "Integer";
                 } else if (item.includes("DECIMAL")) {
                     attr.type = "BigDecimal";
-                } else if (item.includes("DATETIME") || item.includes("DATE")) {
-                    attr.type = "Date";
+                } else if (item.includes("DATETIME") || item.includes("DATE") ||  item.includes("TIMESTAMP")) {
+                    attr.type = "LocalDateTime";
                 } else {
                     attr.type = "String"
                 }
@@ -101,7 +101,9 @@
 
         }
         let strArr = [];
-        strArr.push("import java.util.Date;")
+        // strArr.push("import java.util.Date;")
+        strArr.push("import java.time.LocalDateTime;")
+
         strArr.push("");
         if (cls.rem) {
             strArr.push("/**");

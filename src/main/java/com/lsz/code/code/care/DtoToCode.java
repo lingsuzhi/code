@@ -22,15 +22,16 @@ import java.util.Map;
 @Service
 public class DtoToCode {
     public static final String ProjectName = "depot";
-    public static String OldFilePath = "D:\\home\\代码\\code\\src\\main\\resources\\static\\xjjd\\";
-    public static String BaseVuePath = "D:\\home\\代码\\code\\src\\main\\resources\\static\\fxjk\\vue";
-public static String vuePath = "D:\\code\\leasing_system_web\\src\\view\\base";
+    public static String OldFilePath = "";
+    public static String BaseVuePath = "";
+    public static String vuePath = "D:\\code\\leasing_system_web\\src\\view\\base";
 
     public static boolean isDelete = true;
 
     static {
         try {
             OldFilePath = ResourceUtils.getFile("classpath:static/xjjd").getPath() + "\\";
+            BaseVuePath = OldFilePath + "vue\\";
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

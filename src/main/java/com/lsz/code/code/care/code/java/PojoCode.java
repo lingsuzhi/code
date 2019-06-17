@@ -31,9 +31,9 @@ public class PojoCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
 
         sb.put("attribute", attribute(dtoBO));
+        sb.put("attribute空行NoId", attribute2(dtoBO));
         sb.put("getset", getset(dtoBO));
         sb.appendln(fileStr);
-        sb.put("attribute空行NoId", attribute2(dtoBO));
         File doFile = new File(DoFilePath + upperCase + ".java");
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);

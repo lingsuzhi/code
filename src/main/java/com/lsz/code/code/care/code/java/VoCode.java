@@ -31,9 +31,10 @@ public class VoCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
 
         sb.put("attribute", attribute(dtoBO));
-        sb.appendln(fileStr);
         sb.put("attributeDTO", attribute(dtoBO));
-        File doFile = new File(DoFilePath + upperCase + ".java");
+        sb.appendln(fileStr);
+
+        File doFile = new File(DoFilePath + upperCase + ApiOldFile);
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);
             return null;
@@ -65,7 +66,7 @@ public class VoCode implements JavaCode {
             }
 
             String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
+//            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
                 stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"

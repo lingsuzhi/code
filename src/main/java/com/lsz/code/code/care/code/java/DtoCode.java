@@ -21,6 +21,20 @@ public class DtoCode implements JavaCode {
     public final static String ApiOldFile = "DTO.java";
     public final static String DoFilePath = JavaCode.CommonPath + "\\dto\\";
 
+    public static boolean isBase(String str) {
+        if ("isDelete".equalsIgnoreCase(str)) return true;
+        if ("createBy".equalsIgnoreCase(str)) return true;
+        if ("updateBy".equalsIgnoreCase(str)) return true;
+        if ("createByName".equalsIgnoreCase(str)) return true;
+        if ("updateByName".equalsIgnoreCase(str)) return true;
+        if ("createTime".equalsIgnoreCase(str)) return true;
+        if ("updateTime".equalsIgnoreCase(str)) return true;
+        if ("version".equalsIgnoreCase(str)) return true;
+
+        if ("sort".equalsIgnoreCase(str)) return true;
+        return false;
+    }
+
     @Override
     public String apply(DtoBO dtoBO) {
         CodeStringBuilder sb = new CodeStringBuilder();
@@ -29,12 +43,10 @@ public class DtoCode implements JavaCode {
         sb.put("Uname", upperCase);
         sb.put("Lname", StrUtil.oneLoweCase(dtoBO.getName()));
         sb.put("describe", dtoBO.getDescribe());
-
-        sb.put("attribute", attribute(dtoBO));
-        sb.put("getset", getset(dtoBO));
-        sb.appendln(fileStr);
         sb.put("attributeDTO", attribute(dtoBO));
-        File doFile = new File(DoFilePath + upperCase + ".java");
+        sb.appendln(fileStr);
+
+        File doFile = new File(DoFilePath + upperCase + ApiOldFile);
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);
             return null;
@@ -43,32 +55,6 @@ public class DtoCode implements JavaCode {
         FileUtil.doFileStr(doFile, sb.toString());
         log.info("{} 执行完成", ApiOldFile);
         return sb.toString();
-    }
-
-    public String getset(DtoBO dtoBO) {
-        CodeStringBuilder stringBuilder = new CodeStringBuilder();
-        stringBuilder.addTab();
-        List<DtoAttrBO> attrList = dtoBO.getAttrList();
-        if (CollectionUtils.isEmpty(attrList)) {
-            return null;
-        }
-        for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
-                continue;
-            }
-            String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
-
-            stringBuilder.appendln("public 【】 get【】() {", dtoAttrBO.getTypeStr(), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
-            stringBuilder.appendln("    return 【】;", dtoAttrBO.getNameStr());
-            stringBuilder.appendln("}");
-            stringBuilder.newLine();
-
-            stringBuilder.appendln("public void set【】(【】 【】) {", StrUtil.oneUpperCase(dtoAttrBO.getNameStr()), dtoAttrBO.getTypeStr(), dtoAttrBO.getNameStr());
-            stringBuilder.appendln("    this.【】 = 【】;", dtoAttrBO.getNameStr(), dtoAttrBO.getNameStr());
-            stringBuilder.appendln("}");
-        }
-        return stringBuilder.toString();
     }
 
     //attributeDTO
@@ -80,15 +66,18 @@ public class DtoCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>") || isBase(dtoAttrBO.getNameStr())) {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
+//            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
                 stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
                         , StrUtil.getRemName(rem), dtoAttrBO.getNameStr(), StrUtil.getRemName(rem, true));
+            }
+            if ("LocalDateTime".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
+                stringBuilder.appendln("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
             }
             String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";
             stringBuilder.appendln(str);

@@ -131,7 +131,7 @@ public class ChuliDtoFile {
             if (pos3 != -1 && pos3 > leftPos) {
                 int endPos = codeStr.indexOf("\n", pos3);
                 if (endPos > pos3 + 3) {
-                    returnStr = codeStr.substring(pos3 + 2, endPos - 1);
+                    returnStr = codeStr.substring(pos3 + 2, endPos);
                 }
             }
         }

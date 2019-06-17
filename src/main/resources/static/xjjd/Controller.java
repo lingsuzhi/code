@@ -37,10 +37,6 @@ public class 【Uname】Controller extends BaseController {
 
     @RequestMapping(value = "/getPages", method = RequestMethod.GET)
     @ApiOperation(value = "分页查询", notes = "根据条件分页查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "当前页", dataType = "int"),
-            @ApiImplicitParam(name = "size", value = "页条数", dataType = "int")
-    })
     public Result<IPage<【Uname】VO>> page【Uname】(【Uname】QueryDTO dto) {
         return Result.success(【Lname】Service.page【Uname】(dto, getPage()));
     }

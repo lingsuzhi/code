@@ -29,10 +29,10 @@ public class QueryDtoCode implements JavaCode {
         sb.put("Uname", upperCase);
         sb.put("Lname", StrUtil.oneLoweCase(dtoBO.getName()));
         sb.put("describe", dtoBO.getDescribe());
+        sb.put("attributeDTO", attribute(dtoBO));
 
         sb.appendln(fileStr);
-        sb.put("attributeDTO", attribute(dtoBO));
-        File doFile = new File(DoFilePath + upperCase + ".java");
+        File doFile = new File(DoFilePath + upperCase + ApiOldFile);
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);
             return null;
@@ -58,7 +58,7 @@ public class QueryDtoCode implements JavaCode {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
+//            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
                 stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
