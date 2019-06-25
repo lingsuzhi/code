@@ -1,67 +1,72 @@
-package com.yl.lmdm.controller;
+package com.lsz.apply.base.controller;
 
-
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.yl.common.base.controller.BaseController;
-import com.yl.common.base.model.vo.Result;
-import com.yl.lmdm.service.I【Uname】Service;
-import com.yl.model.lmdm.dto.【Uname】DTO;
-import com.yl.model.lmdm.dto.【Uname】QueryDTO;
-import com.yl.model.lmdm.vo.【Uname】VO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
+import com.lsz.apply.base.service.【Uname】Service;
+import com.lsz.common.BasePage;
+import com.lsz.common.PagesParam;
+import com.lsz.common.ResponseInfo;
+import com.lsz.dto.【Uname】DTO;
+import com.lsz.pojo.【Uname】;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import java.util.Map;
 
 /**
- * <p>
  * 【describe】
- * </p>
- *
  * @author lingsuzhi
  * @since 【日期】
  */
-@Slf4j
-@RestController
-@RequestMapping("/【Lname】")
-@Api(value = "【describe】", tags = {"【describe】接口"})
-public class 【Uname】Controller extends BaseController {
+@RestController("【Lname】ControllerBase")
+@RequestMapping("/base/【Lname】")
+public class 【Uname】Controller {
 
     @Autowired
-    private I【Uname】Service 【Lname】Service;
+    private 【Uname】Service 【Lname】Service;
 
-    @RequestMapping(value = "/getPages", method = RequestMethod.GET)
-    @ApiOperation(value = "分页查询", notes = "根据条件分页查询")
-    public Result<IPage<【Uname】VO>> page【Uname】(【Uname】QueryDTO dto) {
-        return Result.success(【Lname】Service.page【Uname】(dto, getPage()));
+    /**
+     * 添加单个
+     */
+    @RequestMapping(value = "/add【Uname】", method = RequestMethod.POST)
+    public ResponseInfo<【Uname】> add【Uname】(@RequestBody 【Uname】 【Lname】) {
+        return ResponseInfo.success(【Lname】Service.add【Uname】(【Lname】));
     }
 
-    @GetMapping("/delete")
-    @ApiOperation(value = "删除【describe】", notes = "逻辑删除")
-    public Result<Boolean> removeById(@RequestParam("id") Integer id) {
-        return Result.success(【Lname】Service.removeById(id));
+    /**
+     * 删除
+     */
+    @RequestMapping(value = "/delete【Uname】", method = RequestMethod.POST)
+    public ResponseInfo<Map<String, Object>> del【Uname】(@RequestBody Map<String, Object> param) {
+
+        Map<String, Object> resultMap = 【Lname】Service.del【Uname】(param);
+        return ResponseInfo.success(resultMap);
     }
 
-    @PostMapping("/add")
-    @ApiOperation(value = "新增【describe】", notes = "新增【describe】")
-    public Result<Boolean> save(@Valid @RequestBody 【Uname】DTO area) {
-        return Result.success(【Lname】Service.save(area));
+    /**
+     * 修改
+     */
+    @RequestMapping(value = "/update【Uname】", method = RequestMethod.POST)
+    public ResponseInfo<【Uname】> upd【Uname】(@RequestBody 【Uname】 【Lname】) {
+        return ResponseInfo.success(【Lname】Service.upd【Uname】(【Lname】));
     }
 
-    @PostMapping("/update")
-    @ApiOperation(value = "修改【describe】", notes = "通过id修改指定【describe】")
-    public Result<Boolean> updateById(@RequestBody 【Uname】DTO area) {
-        return Result.success(【Lname】Service.updateById(area));
+    /**
+     * 查询单个
+     */
+    @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
+    public ResponseInfo<【Uname】DTO> get【Uname】(@RequestBody Map<String, Object> param) {
+        return ResponseInfo.success(【Lname】Service.get【Uname】(param));
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "查询【describe】", notes = "查询指定【describe】")
-    public Result<【Uname】VO> getById(@PathVariable("id") Integer id) {
-        return Result.success(【Lname】Service.getDetailById(id));
+    /**
+     * 查询列表
+     */
+    @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
+    public ResponseInfo<BasePage<【Uname】DTO>> get【Uname】List(@RequestBody PagesParam param) {
+
+        BasePage<【Uname】DTO> resultMap = 【Lname】Service.get【Uname】List(param);
+        return ResponseInfo.success(resultMap);
     }
 }

@@ -1,32 +1,28 @@
-package com.yl.lmdm.mapper;
+package com.lsz.apply.base.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yl.lmdm.entity.【Uname】;
-import com.yl.model.lmdm.dto.【Uname】QueryDTO;
-import com.yl.model.lmdm.vo.【Uname】VO;
+import com.lsz.pojo.【Uname】;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
-/**
- * <p>
- * 【describe】
- * </p>
- *
- * @author lingsuzhi
- * @since 【日期】
- */
+import java.util.List;
+import java.util.Map;
+
 @Mapper
-public interface 【Uname】Mapper extends BaseMapper<【Uname】> {
+@Component("【Lname】MapperBase")
+public interface 【Uname】Mapper {
 
-    /**
-     * 分页查询
-     */
-    IPage<【Uname】VO> selectByPageVO(Page<【Uname】VO> page, @Param("dto") 【Uname】QueryDTO dto);
+    Integer add【Uname】(【Uname】 【Lname】);
 
-    /**
-     * 查询明细
-     */
-    【Uname】VO getDetail(@Param("id") Integer id);
+    Integer del【Uname】(Map<String, Object> paramMap);
+
+    【Uname】 get【Uname】(Map<String, Object> paramMap);
+
+    Integer upd【Uname】(【Uname】 【Lname】);
+
+    List<【Uname】> get【Uname】List(Map<String, Object> paramMap);
+
+    Integer get【Uname】Count(Map<String, Object> paramMap);
 }
+
+
+

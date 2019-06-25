@@ -1,93 +1,98 @@
-package com.yl.lmdm.service.impl;
+package com.lsz.apply.base.service.impl;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yl.common.base.enums.ResultCodeEnum;
-import com.yl.common.base.exception.ServiceException;
-import com.yl.lmdm.entity.【Uname】;
-import com.yl.lmdm.mapper.【Uname】Mapper;
-import com.yl.lmdm.service.I【Uname】Service;
-import com.yl.model.lmdm.dto.【Uname】DTO;
-import com.yl.model.lmdm.dto.【Uname】QueryDTO;
-import com.yl.model.lmdm.enums.DeleteEnum;
-import com.yl.model.lmdm.enums.EnableEnum;
-import com.yl.model.lmdm.vo.【Uname】VO;
-import org.springframework.beans.BeanUtils;
+import com.github.pagehelper.PageInfo;
+import com.lsz.apply.base.mapper.【Uname】Mapper;
+import com.lsz.apply.base.service.【Uname】Service;
+import com.lsz.common.BasePage;
+import com.lsz.common.PagesParam;
+import com.lsz.dto.【Uname】DTO;
+import com.lsz.pojo.【Uname】;
+import com.lsz.util.BeanUtil;
+import com.lsz.util.CommonUtils;
+import com.lsz.util.TokenUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 【describe】
- *
  * @author lingsuzhi
  * @since 【日期】
  */
-@Service
-public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Uname】> implements I【Uname】Service {
+@Service("【Lname】ServiceBase")
+@Slf4j
+public class 【Uname】ServiceImpl implements 【Uname】Service {
 
     @Autowired
     private 【Uname】Mapper 【Lname】Mapper;
 
-
-    @Override
-    public IPage<【Uname】VO> page【Uname】(【Uname】QueryDTO dto, Page<【Uname】VO> page) {
-        return 【Lname】Mapper.selectByPageVO(new Page<>(page.getCurrent(), page.getSize()), dto);
+    //处理对象
+    private static 【Uname】DTO manage【Uname】(【Uname】 【Lname】) {
+        if (【Lname】 == null) return null;
+        return BeanUtil.copyBean(【Lname】, 【Uname】DTO.class);
     }
 
     @Override
-    public Boolean removeById(Integer id) {
-        【Uname】 area = this.getById(id);
-        if (area == null) {
-            return false;
+    @Transactional
+    public 【Uname】 add【Uname】(【Uname】 【Lname】) {
+        【Lname】.setCreateTime(new Date());
+        【Lname】.setUpdateTime(new Date());
+        【Lname】.setCreateBy(TokenUtil.getCurrentUserId());
+        【Lname】.setUpdateBy(【Lname】.getCreateBy());
+        【Lname】.setId(null);
+        Integer count = 【Lname】Mapper.add【Uname】(【Lname】);
+        log.info("add【Uname】 完成:{}", count);
+        return 【Lname】;
+    }
+
+    @Override
+    @Transactional
+    public Map<String, Object> del【Uname】(Map<String, Object> parameterMap) {
+        Integer count = 【Lname】Mapper.del【Uname】(CommonUtils.idList(parameterMap));
+        log.info("del【Uname】 完成:{} {}", count);
+        return CommonUtils.mapByMsg("删除完成！");
+    }
+
+    @Override
+    @Transactional
+    public 【Uname】 upd【Uname】(【Uname】 【Lname】) {
+
+        Long id = 【Lname】.getId();
+        【Lname】.setUpdateBy(TokenUtil.getCurrentUserId());
+        【Lname】.setUpdateTime(new Date());
+        Integer count = 【Lname】Mapper.upd【Uname】(【Lname】);
+        log.info("upd【Uname】 完成:{} {}", count, id);
+        return 【Lname】;
+    }
+
+    @Override
+    public BasePage<【Uname】DTO> get【Uname】List(PagesParam pageParam) {
+        PagesParam.startPage(pageParam);
+        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(pageParam.getQuery());
+        PageInfo<【Uname】> pageInfo = new PageInfo<>(list);
+        BasePage<【Uname】DTO> returnMap = new BasePage<>();
+        returnMap.setContent(new ArrayList<>());
+        if (list.size() > 0) {
+            //处理
+            for (【Uname】 objectMap : list) {
+                returnMap.getContent().add(manage【Uname】(objectMap));
+            }
+            returnMap.setTotal(pageInfo.getTotal());
+        } else {
+            returnMap.setTotal(0L);
         }
-        return this.removeById(area);
+
+        return returnMap;
     }
 
     @Override
-    public 【Uname】VO getDetailById(Integer id) {
-        return 【Lname】Mapper.getDetail(id);
-    }
-
-    @Override
-    public 【Uname】 getById(Integer id) {
-        return Optional.ofNullable(super.getById(id)).orElseThrow(() -> new ServiceException(ResultCodeEnum.DATA_NOT_FOUND));
-    }
-
-    @Override
-    public Boolean save(【Uname】DTO dto) {
-        【Uname】 【Lname】 = new 【Uname】();
-        BeanUtils.copyProperties(dto, 【Lname】);
-        【Lname】.setCreateTime(LocalDateTime.now())
-                .setUpdateTime(LocalDateTime.now())
-                .setIsDelete(DeleteEnum.VALID.getCode())
-                .setIsEnable(EnableEnum.NORMAL.getCode())
-                .setCreateBy(1)
-                .setUpdateBy(1)
-                .setCreateByName("")
-                .setUpdateByName("")
-                .setVersion("1.0.0")
-                .setSort(0)
-        ;
-        return this.save(【Lname】);
-    }
-
-    @Override
-    public Boolean updateById(【Uname】DTO dto) {
-        if (dto.getId() == null) {
-            throw new ServiceException(ResultCodeEnum.PARAMS_NOT_COMPLETE);
-        }
-        【Uname】 【Lname】 = new 【Uname】();
-        BeanUtils.copyProperties(dto, 【Lname】);
-        【Lname】.setUpdateTime(LocalDateTime.now())
-                .setUpdateBy(1)
-                .setUpdateByName("")
-                .setVersion("1.0.0")
-                .setSort(0)
-        ;
-        return this.updateById(【Lname】);
+    public 【Uname】DTO get【Uname】(Map<String, Object> parameterMap) {
+        return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
     }
 }

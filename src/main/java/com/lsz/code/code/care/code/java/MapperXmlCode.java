@@ -19,7 +19,7 @@ import java.util.List;
 public class MapperXmlCode implements JavaCode {
 
     public final static String ApiOldFile = "Mapper.xml";
-    public final static String DoFilePath = JavaCode.BaseXmlPath;
+    public final static String DoFilePath = JavaCode.BaseXmlPath + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

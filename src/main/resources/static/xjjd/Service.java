@@ -1,49 +1,28 @@
-package com.yl.lmdm.service;
+package com.lsz.apply.base.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.yl.lmdm.entity.【Uname】;
-import com.yl.model.lmdm.dto.【Uname】DTO;
-import com.yl.model.lmdm.dto.【Uname】QueryDTO;
-import com.yl.model.lmdm.vo.【Uname】VO;
+import com.lsz.common.BasePage;
+import com.lsz.common.PagesParam;
+import com.lsz.dto.【Uname】DTO;
+import com.lsz.pojo.【Uname】;
+
+import java.util.Map;
 
 /**
- * <p>
- * 【describe】 服务类
- * </p>
- *
+ * 【describe】
  * @author lingsuzhi
  * @since 【日期】
  */
-public interface I【Uname】Service extends IService<【Uname】> {
+public interface 【Uname】Service {
 
-    /**
-     * 查询列表并分页
-     *
-     * @param dto 查询条件
-     */
-    IPage<【Uname】VO> page【Uname】(【Uname】QueryDTO dto, Page<【Uname】VO> pageDTO);
+    【Uname】 add【Uname】(【Uname】 adminInfo);
 
-    /**
-     * 通过id删除
-     */
-    Boolean removeById(Integer id);
+    Map<String, Object> del【Uname】(Map<String, Object> parameterMap);
 
-    /**
-     * 详细信息
-     */
-    【Uname】VO getDetailById(Integer id);
+    【Uname】 upd【Uname】(【Uname】 adminInfo);
 
-    【Uname】 getById(Integer id);
+    BasePage<【Uname】DTO> get【Uname】List(PagesParam parameterMap);
 
-    /**
-     * 添加
-     */
-    Boolean save(【Uname】DTO dto);
-
-    /**
-     * 修改
-     */
-    Boolean updateById(【Uname】DTO dto);
+    【Uname】DTO get【Uname】(Map<String, Object> parameterMap);
 }
+
+
