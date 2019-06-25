@@ -21,16 +21,17 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DtoToCode {
-    public static final String ProjectName = "depot";
-    public static String OldFilePath = "D:\\home\\代码\\code\\src\\main\\resources\\static\\xjjd\\";
-    public static String BaseVuePath = "D:\\home\\代码\\code\\src\\main\\resources\\static\\fxjk\\vue";
-public static String vuePath = "D:\\code\\leasing_system_web\\src\\view\\base";
+    public static final String ProjectName = "jys";
+    public static String OldFilePath = "";
+    public static String BaseVuePath = "";
+/*public static String vuePath = "D:\\code\\leasing_system_web\\src\\view\\base";*/
 
     public static boolean isDelete = true;
 
     static {
         try {
-            OldFilePath = ResourceUtils.getFile("classpath:static/xjjd").getPath() + "\\";
+            OldFilePath = ResourceUtils.getFile("classpath:static/jys").getPath() + "\\";
+            BaseVuePath = ResourceUtils.getFile("classpath:static/jys/vue").getPath() + "\\";
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -41,7 +42,7 @@ public static String vuePath = "D:\\code\\leasing_system_web\\src\\view\\base";
     private List<JavaCode> javaCodeList;
 
     private static void vueDo(DtoBO dtoBO) {
-        String dirPath = vuePath + File.separator + dtoBO.getName().toLowerCase();
+        String dirPath = JavaCode.VuePath + File.separator + dtoBO.getName().toLowerCase();
         File dirFile = new File(dirPath);
         if (dirFile.exists()) {
             if (isDelete) {

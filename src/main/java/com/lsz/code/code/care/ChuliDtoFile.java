@@ -8,17 +8,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
 import java.io.File;
+import java.util.HashMap;
 
 @Slf4j
 public class ChuliDtoFile {
     /**
-     *
      * @param file java代码文件
      * @return
      */
-    public static DtoBO chuli (File file){
+    public static DtoBO chuli(File file) {
         DtoBO dtoBO = new DtoBO();
-        if(file == null || !file.exists()){
+        if (file == null || !file.exists()) {
             log.error("文件不存在啊，请检查");
             return null;
         }
@@ -28,7 +28,7 @@ public class ChuliDtoFile {
 
 
         int tableNamePos = fileStr.indexOf("@Table(");
-        if (tableNamePos != -1){
+        if (tableNamePos != -1) {
             String tableName = StrUtil.kuohaoStr(fileStr.substring(tableNamePos), "\"", "\"");
             dtoBO.setTableName(tableName);
         }
@@ -42,14 +42,14 @@ public class ChuliDtoFile {
         String keyVal = "private ";
 
 
-        final String packStr ="package ";
+        final String packStr = "package ";
         int packPos = fileStr.indexOf(packStr);
-        if(packPos != -1){
+        if (packPos != -1) {
             int fhPos = fileStr.indexOf(";", packPos);
-            if(fhPos != -1){
-                dtoBO.setPackageStr(fileStr.substring(packPos + packStr.length(),fhPos));
-                if (dtoBO.getPackageStr().endsWith(".po")){
-                    dtoBO.setPackageStr(dtoBO.getPackageStr().replace(".po",""));
+            if (fhPos != -1) {
+                dtoBO.setPackageStr(fileStr.substring(packPos + packStr.length(), fhPos));
+                if (dtoBO.getPackageStr().endsWith(".po")) {
+                    dtoBO.setPackageStr(dtoBO.getPackageStr().replace(".po", ""));
                 }
             }
         }
@@ -86,6 +86,7 @@ public class ChuliDtoFile {
                         dtoAttrBO.setTypeStr(typeStr);
                         dtoAttrBO.setNameStr(nameStr);
                         dtoAttrBO.setRemStr(remStr);
+                        manageSelectMap(dtoAttrBO);
                         dtoBO.getAttrList().add(dtoAttrBO);
                     }
                 }
@@ -102,9 +103,31 @@ public class ChuliDtoFile {
         }
         return dtoBO;
     }
+
+    private static void manageSelectMap(DtoAttrBO dtoAttrBO) {
+        String remStr = dtoAttrBO.getRemStr();
+        if (StringUtils.isEmpty(remStr)) {
+            return;
+        }
+        String selectStr = StrUtil.kuohaoStr(remStr, "【", "】");
+        if (StringUtils.isEmpty(selectStr)) {
+            return;
+        }
+        dtoAttrBO.setRemStr(remStr.replace("【" + selectStr + "】", ""));
+        String[] split = selectStr.split(",");
+        dtoAttrBO.setSelectMap(new HashMap<>());
+        for (String s : split) {
+            String[] split1 = s.split(":");
+            if (split1.length > 0) {
+                dtoAttrBO.getSelectMap().put(split1[0], split1[1]);
+            }
+        }
+    }
+
     private static int findStrLast(String str, int pos, String findStr) {
         return str.substring(0, pos).lastIndexOf(findStr);
     }
+
     private static String getRemStr(String codeStr, int leftPos, int rightPos) {
         int pos1 = findStrLast(codeStr, rightPos, "/*");
         int pos2 = findStrLast(codeStr, rightPos, "*/");

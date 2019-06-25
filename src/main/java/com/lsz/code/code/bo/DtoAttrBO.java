@@ -2,6 +2,8 @@ package com.lsz.code.code.bo;
 
 import lombok.Data;
 
+import java.util.Map;
+
 /**
  * Created by ex-lingsuzhi on 2018/10/22.
  */
@@ -12,4 +14,6 @@ public class DtoAttrBO {
     private String remStr;
     //是否必填  字符串 :true false
     private String parameRequired;
+
+    private Map<String,String> selectMap;
 }

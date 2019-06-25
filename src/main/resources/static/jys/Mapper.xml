@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lsz.jys.apply.base.mapper.【Uname】Mapper">
+    <sql id="select_column">
+        【select_column】
+    </sql>
+
+    <!--插入-->
+    <insert id="add【Uname】" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.lsz.jys.pojo.【Uname】">
+        INSERT INTO 【tableName】
+        (
+        【base_column】
+        )
+        VALUES
+        (
+        【value_column】
+        )
+    </insert>
+
+
+    <!--真删除-->
+    <delete id="del【Uname】" parameterType="java.util.Map">
+        DELETE FROM 【tableName】
+        WHERE
+        1=1
+        <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
+            ${id}
+        </foreach>
+    </delete>
+    <!--查询列表-->
+    <select id="get【Uname】List" parameterType="java.util.Map"
+            resultType="com.lsz.jys.pojo.【Uname】">
+        select
+        <include refid="select_column"/>
+        FROM 【tableName】 tar
+        WHERE 1=1
+
+        【selectWhere】
+
+    </select>
+    <!--汇总-->
+    <select id="get【Uname】Count" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        SELECT
+        IFNULL(COUNT(tar.id),0) total
+        FROM 【tableName】 tar
+        WHERE 1=1
+
+        【selectWhere】
+    </select>
+    <!--查询单个-->
+    <select id="get【Uname】" parameterType="java.util.Map"
+            resultType="com.lsz.jys.pojo.【Uname】">
+        select
+        <include refid="select_column"/>
+        from 【tableName】 tar
+        WHERE 1=1
+
+        【selectWhere】
+
+    </select>
+
+    <!--修改-->
+    <update id="upd【Uname】" parameterType="com.lsz.jys.pojo.【Uname】">
+        update 【tableName】
+        <set>
+            【updateSet】
+        </set>
+        where id=#{id}
+    </update>
+</mapper>
