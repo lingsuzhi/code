@@ -27,7 +27,7 @@ public class DtoCode implements JavaCode {
         if ("updateBy".equalsIgnoreCase(str)) return true;
         if ("createByName".equalsIgnoreCase(str)) return true;
         if ("updateByName".equalsIgnoreCase(str)) return true;
-        if ("createTime".equalsIgnoreCase(str)) return true;
+//        if ("createTime".equalsIgnoreCase(str)) return true;
         if ("updateTime".equalsIgnoreCase(str)) return true;
         if ("version".equalsIgnoreCase(str)) return true;
 
@@ -76,9 +76,9 @@ public class DtoCode implements JavaCode {
                 stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
                         , StrUtil.getRemName(rem), dtoAttrBO.getNameStr(), StrUtil.getRemName(rem, true));
             }
-            if ("LocalDateTime".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
-                stringBuilder.appendln("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
-            }
+//            if ("LocalDateTime".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
+//                stringBuilder.appendln("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+//            }
             String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";
             stringBuilder.appendln(str);
             stringBuilder.newLine();

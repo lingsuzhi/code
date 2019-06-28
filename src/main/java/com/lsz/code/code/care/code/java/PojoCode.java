@@ -19,7 +19,7 @@ import java.util.List;
 public class PojoCode implements JavaCode {
 
     public final static String ApiOldFile = "Pojo.java";
-    public final static String DoFilePath = JavaCode.BasePath + "\\entity\\";
+    public final static String DoFilePath = JavaCode.CommonPath + "\\pojo\\";
 
     @Override
     public String apply(DtoBO dtoBO) {

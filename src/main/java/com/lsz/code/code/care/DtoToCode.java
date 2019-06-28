@@ -24,7 +24,7 @@ public class DtoToCode {
     public static final String ProjectName = "depot";
     public static String OldFilePath = "";
     public static String BaseVuePath = "";
-    public static String vuePath = "D:\\code\\leasing_system_web\\src\\view\\base";
+    public static String vuePath = "D:\\xjjd\\xjjd_lease_web\\src\\view\\base";
 
     public static boolean isDelete = true;
 
@@ -42,7 +42,7 @@ public class DtoToCode {
     private List<JavaCode> javaCodeList;
 
     private static void vueDo(DtoBO dtoBO) {
-        String dirPath = vuePath + File.separator + dtoBO.getName().toLowerCase();
+        String dirPath = vuePath + File.separator + dtoBO.getName();
         File dirFile = new File(dirPath);
         if (dirFile.exists()) {
             if (isDelete) {

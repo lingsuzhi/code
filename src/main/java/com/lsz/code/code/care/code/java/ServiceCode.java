@@ -27,7 +27,7 @@ public class ServiceCode implements JavaCode {
         sb.put("describe", dtoBO.getDescribe());
         sb.appendln(fileStr);
 
-        File doFile = new File(DoFilePath + "I" + upperCase + ApiOldFile);
+        File doFile = new File(DoFilePath + upperCase + ApiOldFile);
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", ApiOldFile);
             return null;

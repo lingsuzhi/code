@@ -7,6 +7,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ClassName: 【Uname】Mapper
+ * Description: 【describe】
+ * Date: 【日期】
+ *
+ * @author: lingsuzhi
+ * @version: 1.0
+ * @since: JDK 1.8
+ * @see
+ */
 @Mapper
 @Component("【Lname】MapperBase")
 public interface 【Uname】Mapper {

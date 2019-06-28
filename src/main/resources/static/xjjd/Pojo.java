@@ -1,15 +1,20 @@
-package com.yl.lmdm.entity;
+package com.lsz.pojo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 import java.io.Serializable;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
- * 【describe】
- * @author lingsuzhi
- * @since 【日期】
+ * ClassName: 【Uname】
+ * Description: 【describe】
+ * Date: 【日期】
+ *
+ * @author: lingsuzhi
+ * @version: 1.0
+ * @since: JDK 1.8
+ * @see
  */
 @Data
 @Accessors(chain = true)

@@ -15,12 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * 【describe】
- * @author lingsuzhi
- * @since 【日期】
+ * ClassName: 【Uname】Controller
+ * Description: 【describe】
+ * Date: 【日期】
+ *
+ * @author: lingsuzhi
+ * @version: 1.0
+ * @since: JDK 1.8
+ * @see
  */
 @RestController("【Lname】ControllerBase")
-@RequestMapping("/base/【Lname】")
+@RequestMapping("/【Lname】Controller")
 public class 【Uname】Controller {
 
     @Autowired

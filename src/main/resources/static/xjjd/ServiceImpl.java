@@ -21,9 +21,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 【describe】
- * @author lingsuzhi
- * @since 【日期】
+ * ClassName: 【Uname】ServiceImpl
+ * Description: 【describe】
+ * Date: 【日期】
+ *
+ * @author: lingsuzhi
+ * @version: 1.0
+ * @since: JDK 1.8
+ * @see
  */
 @Service("【Lname】ServiceBase")
 @Slf4j

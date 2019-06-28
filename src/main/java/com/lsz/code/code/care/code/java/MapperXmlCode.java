@@ -116,14 +116,14 @@ public class MapperXmlCode implements JavaCode {
 //            }
             String lowDo = StrUtil.strLowDo(nameStr);
             if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())){
-                String str = "<if test=\"dto.【】 != null and dto.【】 != ''\">";
+                String str = "<if test=\"【】 != null and 【】 != ''\">";
                 stringBuilder.appendln(str, nameStr,nameStr);
             }else{
-                String str = "<if test=\"dto.【】 != null \">";
+                String str = "<if test=\"【】 != null \">";
                 stringBuilder.appendln(str, nameStr);
 
             }
-            stringBuilder.appendln("and 【】 = #{dto.【】}", lowDo, nameStr);
+            stringBuilder.appendln("【】 = #{【】},", lowDo, nameStr);
             stringBuilder.appendln("</if>");
         }
         return stringBuilder.toString();
@@ -193,11 +193,11 @@ public class MapperXmlCode implements JavaCode {
                 stringBuilder.appendNoTab(",");
             }
             String lowDo = StrUtil.strLowDo(nameStr);
-//            if (!lowDo.equals(nameStr)) {
-//                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
-//            } else {
-            stringBuilder.appendln("t.【】", lowDo);
-//            }
+            if (!lowDo.equals(nameStr)) {
+                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
+            } else {
+            stringBuilder.appendln("tar.【】", lowDo);
+            }
         }
         return stringBuilder.toString();
     }

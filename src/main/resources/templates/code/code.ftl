@@ -19,7 +19,7 @@
 <div>
     <div style="float:left"
     <ul id="list">
-        ${(code.fileList)!}
+    ${(code.fileList)!}
 
     </ul>
 </div>
@@ -71,11 +71,13 @@
         let cls = {
             attr: []
         };
+        let tableName = "";
         for (let item of arr) {
             if (item.startsWith("CREATE TABLE")) {
-                cls.name = findKuohao(item, "`");
-                if (cls.name.startsWith("t_")) {
-                    cls.name = cls.name.substring(2)
+                tableName = findKuohao(item, "`");
+                cls.name = tableName;
+                if (tableName.startsWith("t_")) {
+                    cls.name = tableName.substring(2)
                 }
             }
             if (item.startsWith("COMMENT")) {
@@ -91,8 +93,8 @@
                     attr.type = "Integer";
                 } else if (item.includes("DECIMAL")) {
                     attr.type = "BigDecimal";
-                } else if (item.includes("DATETIME") || item.includes("DATE") ||  item.includes("TIMESTAMP")) {
-                    attr.type = "LocalDateTime";
+                } else if (item.includes("DATETIME") || item.includes("DATE") || item.includes("TIMESTAMP")) {
+                    attr.type = "Date";
                 } else {
                     attr.type = "String"
                 }
@@ -101,8 +103,9 @@
 
         }
         let strArr = [];
-        // strArr.push("import java.util.Date;")
-        strArr.push("import java.time.LocalDateTime;")
+         strArr.push("import java.util.Date;")
+        // strArr.push("import java.time.LocalDateTime;")
+        strArr.push("import com.lsz.code.code.source.Table;")
 
         strArr.push("");
         if (cls.rem) {
@@ -110,9 +113,12 @@
             strArr.push(" * " + cls.rem);
             strArr.push(" */");
         }
+        strArr.push("@Table(name = \"" + tableName + "\")");
+
         strArr.push("public class " + cName(cls.name) + " {");
         strArr.push("");
         let i = 0;
+        let count = 0;
         for (let attr of cls.attr) {
             i++;
             if (!attr.rem) {
@@ -120,10 +126,10 @@
             }
             arr.rem = "    //" + attr.rem;
             if (attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
-                && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
-                if ( cls.attr.length > 10 && i > 1 && i < cls.attr.length - 9){
+                    && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
+                if ( i > 1 && i < cls.attr.length - 3 && count <4) {
                     arr.rem += " <param>"
-
+                    count++;
                 }
             }
             strArr.push(arr.rem)
@@ -137,20 +143,20 @@
 
 
         $.ajax({
-            url:"./sql2Java",    //请求的url地址
+            url: "./sql2Java",    //请求的url地址
             contentType: "application/json",
-            data:JSON.stringify({fileName: cName(cls.name) + ".java", javaCode:tmp}),    //参数值
-            type:"POST",   //请求方式
-            beforeSend:function(){
+            data: JSON.stringify({fileName: cName(cls.name) + ".java", javaCode: tmp}),    //参数值
+            type: "POST",   //请求方式
+            beforeSend: function () {
                 //请求前的处理
             },
-            success:function(req){
+            success: function (req) {
                 //请求成功时处理
             },
-            complete:function(){
+            complete: function () {
                 //请求完成的处理
             },
-            error:function(){
+            error: function () {
                 //请求出错处理
             }
         });

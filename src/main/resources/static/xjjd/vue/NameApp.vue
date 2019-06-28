@@ -109,7 +109,7 @@
             if (!res.data.success) {
               vm.$message({
                 showClose: true,
-                message: res.data.message,
+                message: res.data.msg,
                 type: 'error'
               });
               return

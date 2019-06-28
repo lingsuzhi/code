@@ -206,18 +206,17 @@ public class VueCode {
                 csb.appendln("<el-select v-model=\"row.【】\">", dtoAttrBO.getNameStr());
 
 
-
-                    for (String s1 : split) {
-                        csb.appendln("<el-option");
-                        if (s1.contains(":")) {
-                            String[] split1 = s1.split(":");
-                            csb.appendln(":label=\"'【】'\"", split1[1]);
-                            csb.appendln(":value=\"'【】'\">", split1[0]);
-                        } else {
-                            csb.appendln(":value=\"'【】'\">", s1);
-                        }
-                        csb.appendln("</el-option>");
+                for (String s1 : split) {
+                    csb.appendln("<el-option");
+                    if (s1.contains(":")) {
+                        String[] split1 = s1.split(":");
+                        csb.appendln(":label=\"'【】'\"", split1[1]);
+                        csb.appendln(":value=\"'【】'\">", split1[0]);
+                    } else {
+                        csb.appendln(":value=\"'【】'\">", s1);
                     }
+                    csb.appendln("</el-option>");
+                }
 
                 csb.appendln("</el-select>");
                 csb.appendln("</el-form-item>");
@@ -233,6 +232,10 @@ public class VueCode {
 
 
                 csb.appendln("</el-radio-group>");
+                csb.appendln("</el-form-item>");
+            } else if ("Date".equalsIgnoreCase(dtoAttrBO.getTypeStr()) || "LocalDateTime".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
+                csb.appendln("<el-form-item label=\"【】\">", remName);
+                csb.appendln("<el-date-picker v-model=\"row.【】\"   type=\"datetime\"       value-format=\"yyyy-MM-dd HH:mm:ss\" placeholder=\"选择时间\"/>", dtoAttrBO.getNameStr());
                 csb.appendln("</el-form-item>");
             } else if ("Boolean".endsWith(dtoAttrBO.getTypeStr())) {
                 csb.appendln("<el-form-item label=\"【】\">", remName);
