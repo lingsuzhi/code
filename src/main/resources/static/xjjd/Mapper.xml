@@ -19,18 +19,17 @@
     </insert>
 
 
-    <!--真删除-->
-    <delete id="del【Uname】" parameterType="java.util.Map">
+    <!--删除-->
+    <delete id="delete【Uname】" parameterType="java.util.Map">
         DELETE FROM 【tableName】
-        WHERE
-        1=1
+        WHERE 1=1
         <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
             ${id}
         </foreach>
     </delete>
+
     <!--查询列表-->
-    <select id="get【Uname】List" parameterType="java.util.Map"
-            resultType="com.lsz.pojo.【Uname】">
+    <select id="get【Uname】List" parameterType="java.util.Map" resultType="com.lsz.pojo.【Uname】">
         select
         <include refid="select_column"/>
         FROM 【tableName】 tar
@@ -45,18 +44,18 @@
             ]]>
         </if>
     </select>
+
     <!--汇总-->
     <select id="get【Uname】Count" parameterType="java.util.HashMap" resultType="java.lang.Integer">
         SELECT
         IFNULL(COUNT(tar.id),0) total
         FROM 【tableName】 tar
         WHERE 1=1
-
         【selectWhere】
     </select>
+
     <!--查询单个-->
-    <select id="get【Uname】" parameterType="java.util.Map"
-            resultType="com.lsz.pojo.【Uname】">
+    <select id="get【Uname】" parameterType="java.util.Map" resultType="com.lsz.pojo.【Uname】">
         select
         <include refid="select_column"/>
         from 【tableName】 tar
@@ -66,10 +65,10 @@
     </select>
 
     <!--修改-->
-    <update id="upd【Uname】" parameterType="com.lsz.pojo.【Uname】">
+    <update id="update【Uname】" parameterType="com.lsz.pojo.【Uname】">
         update 【tableName】
         <set>
-          【updateSet】
+            【updateSet】
         </set>
         where id=#{id}
     </update>

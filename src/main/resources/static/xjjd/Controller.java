@@ -43,9 +43,9 @@ public class 【Uname】Controller {
      * 删除
      */
     @RequestMapping(value = "/delete【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> del【Uname】(@RequestBody Map<String, Object> param) {
+    public ResponseInfo<Map<String, Object>> delete【Uname】(@RequestBody Map<String, Object> param) {
 
-        Map<String, Object> resultMap = 【Lname】Service.del【Uname】(param);
+        Map<String, Object> resultMap = 【Lname】Service.delete【Uname】(param);
         return ResponseInfo.success(resultMap);
     }
 
@@ -53,8 +53,8 @@ public class 【Uname】Controller {
      * 修改
      */
     @RequestMapping(value = "/update【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<【Uname】> upd【Uname】(@RequestBody 【Uname】 【Lname】) {
-        return ResponseInfo.success(【Lname】Service.upd【Uname】(【Lname】));
+    public ResponseInfo<【Uname】> update【Uname】(@RequestBody 【Uname】 【Lname】) {
+        return ResponseInfo.success(【Lname】Service.update【Uname】(【Lname】));
     }
 
     /**

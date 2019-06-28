@@ -21,16 +21,22 @@ import java.util.Map;
 @Component("【Lname】MapperBase")
 public interface 【Uname】Mapper {
 
+    //新增
     Integer add【Uname】(【Uname】 【Lname】);
 
-    Integer del【Uname】(Map<String, Object> paramMap);
+    //删除
+    Integer delete【Uname】(Map<String, Object> paramMap);
 
+    //查询
     【Uname】 get【Uname】(Map<String, Object> paramMap);
 
-    Integer upd【Uname】(【Uname】 【Lname】);
+    //修改
+    Integer update【Uname】(【Uname】 【Lname】);
 
+    //分页查询
     List<【Uname】> get【Uname】List(Map<String, Object> paramMap);
 
+    //汇总
     Integer get【Uname】Count(Map<String, Object> paramMap);
 }
 

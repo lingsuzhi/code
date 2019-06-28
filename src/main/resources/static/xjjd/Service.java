@@ -22,47 +22,47 @@ public interface 【Uname】Service {
     /**
      * 新增【describe】
      *
-     * @param 【Uname】 实体
+     * @param 【Lname】 实体
      * @return 【Uname】 实体
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】 add【Uname】(【Uname】 adminInfo);
+    【Uname】 add【Uname】(【Uname】 【Lname】);
 
     /**
      * 删除【describe】
      *
-     * @param Map id
+     * @param parameterMap ID
      * @return Map msg
      * @author lingsuzhi
      * @date: 【日期】
      */
-    Map<String, Object> del【Uname】(Map<String, Object> parameterMap);
+    Map<String, Object> delete【Uname】(Map<String, Object> parameterMap);
 
     /**
      * 修改【describe】
      *
-     * @param 【Uname】 实体
+     * @param 【Lname】 实体
      * @return 【Uname】 实体
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】 upd【Uname】(【Uname】 adminInfo);
+    【Uname】 update【Uname】(【Uname】 【Lname】);
 
     /**
      * 分页查询【describe】
      *
-     * @param PagesParam 查询条件
+     * @param pagesParam 查询条件
      * @return BasePage<【Uname】DTO> 分页对象
      * @author lingsuzhi
      * @date: 【日期】
      */
-    BasePage<【Uname】DTO> get【Uname】List(PagesParam parameterMap);
+    BasePage<【Uname】DTO> get【Uname】List(PagesParam pagesParam);
 
     /**
      * 查询【describe】
      *
-     * @param Map 查询条件
+     * @param parameterMap 查询条件
      * @return 【Uname】DTO 实体
      * @author lingsuzhi
      * @date: 【日期】

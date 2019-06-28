@@ -37,7 +37,11 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     @Autowired
     private 【Uname】Mapper 【Lname】Mapper;
 
-    //处理对象
+    /**
+     * 处理对象
+     * @param 【Lname】 【describe】
+     * @return 【Uname】DTO
+     */
     private static 【Uname】DTO manage【Uname】(【Uname】 【Lname】) {
         if (【Lname】 == null) return null;
         return BeanUtil.copyBean(【Lname】, 【Uname】DTO.class);
@@ -58,28 +62,28 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
 
     @Override
     @Transactional
-    public Map<String, Object> del【Uname】(Map<String, Object> parameterMap) {
-        Integer count = 【Lname】Mapper.del【Uname】(CommonUtils.idList(parameterMap));
-        log.info("del【Uname】 完成:{} {}", count);
+    public Map<String, Object> delete【Uname】(Map<String, Object> parameterMap) {
+        Integer count = 【Lname】Mapper.delete【Uname】(CommonUtils.idList(parameterMap));
+        log.info("delete【Uname】 完成，返回:{}", count);
         return CommonUtils.mapByMsg("删除完成！");
     }
 
     @Override
     @Transactional
-    public 【Uname】 upd【Uname】(【Uname】 【Lname】) {
+    public 【Uname】 update【Uname】(【Uname】 【Lname】) {
 
         Long id = 【Lname】.getId();
         【Lname】.setUpdateBy(TokenUtil.getCurrentUserId());
         【Lname】.setUpdateTime(new Date());
-        Integer count = 【Lname】Mapper.upd【Uname】(【Lname】);
-        log.info("upd【Uname】 完成:{} {}", count, id);
+        Integer count = 【Lname】Mapper.update【Uname】(【Lname】);
+        log.info("update【Uname】 完成:{} {}", count, id);
         return 【Lname】;
     }
 
     @Override
-    public BasePage<【Uname】DTO> get【Uname】List(PagesParam pageParam) {
-        PagesParam.startPage(pageParam);
-        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(pageParam.getQuery());
+    public BasePage<【Uname】DTO> get【Uname】List(PagesParam pagesParam) {
+        PagesParam.startPage(pagesParam);
+        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(pagesParam.getQuery());
         PageInfo<【Uname】> pageInfo = new PageInfo<>(list);
         BasePage<【Uname】DTO> returnMap = new BasePage<>();
         returnMap.setContent(new ArrayList<>());
