@@ -29,7 +29,7 @@ public class ServiceImplCode implements JavaCode {
         sb.put("Lname", StrUtil.oneLoweCase(dtoBO.getName()));
         sb.put("describe", dtoBO.getDescribe());
 
-        sb.put("addnotnull", addnotnull(dtoBO));
+        sb.put("notnull", addnotnull(dtoBO));
         sb.put("formatDo", formatDo(dtoBO));
 
         sb.put("defaultValue", defaultValue(dtoBO));
@@ -98,14 +98,16 @@ public class ServiceImplCode implements JavaCode {
         }
 
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (!dtoAttrBO.getRemStr().contains("<addnotnull>")) {
+            if (!dtoAttrBO.getRemStr().contains("<notnull>")) {
                 continue;
             }
             String rem = StrUtil.getRemName(dtoAttrBO.getRemStr());
-            stringBuilder.appendln("if (StringUtils.isEmpty(ValidateUtil.paramIsEmpty(\"【】\", parameterMap))) {", StrUtil.oneLoweCase(dtoAttrBO.getNameStr()));
 
-            stringBuilder.appendln("    throw new RuntimeException(\"新增操作失败,【】 不能为空！\");", rem);
+            stringBuilder.appendln("if (systemAdmin.get【】() == null) {",StrUtil.oneUpperCase( dtoAttrBO.getNameStr()));
+            stringBuilder.appendln("    throw new BusinessException(\"新增失败,【】 不能为空！\");", rem);
             stringBuilder.appendln("}");
+
+
         }
         return stringBuilder.toString();
     }

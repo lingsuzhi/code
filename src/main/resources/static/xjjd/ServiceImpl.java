@@ -9,6 +9,7 @@ import com.lsz.dto.【Uname】DTO;
 import com.lsz.pojo.【Uname】;
 import com.lsz.util.BeanUtil;
 import com.lsz.util.CommonUtils;
+import com.lsz.exception.BusinessException;
 import com.lsz.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class 【Uname】ServiceImpl implements 【Uname】Service {
     @Override
     @Transactional
     public 【Uname】 add【Uname】(【Uname】 【Lname】) {
+【notnull】
         【Lname】.setCreateTime(new Date());
         【Lname】.setUpdateTime(new Date());
         【Lname】.setCreateBy(TokenUtil.getCurrentUserId());

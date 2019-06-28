@@ -61,7 +61,7 @@ public class QueryDtoCode implements JavaCode {
 //            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
-                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
+                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",required = false)"
                         , StrUtil.getRemName(rem), dtoAttrBO.getNameStr(), StrUtil.getRemName(rem, true));
             }
             String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";

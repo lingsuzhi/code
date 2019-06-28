@@ -98,6 +98,11 @@
                 } else {
                     attr.type = "String"
                 }
+
+                if (attr.name != "id" && item.includes("NOT NULL")){
+                    attr.notnull = true;
+                }
+
                 cls.attr.push(attr);
             }
 
@@ -125,13 +130,17 @@
                 arr.rem = "";
             }
             arr.rem = "    //" + attr.rem;
-            if (attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
+            if (attr.name != "id" && attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
                     && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
-                if ( i > 1 && i < cls.attr.length - 3 && count <4) {
+                if ( i < cls.attr.length - 3 && count <4) {
                     arr.rem += " <param>"
                     count++;
                 }
+                if (attr.notnull){
+                    arr.rem += " <notnull>"
+                }
             }
+
             strArr.push(arr.rem)
             strArr.push("    private " + attr.type + " " + attr.name + ";");
         }
