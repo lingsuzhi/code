@@ -5,7 +5,7 @@ public class KeyStr {
         return "<param>";
     }
     public static  String getHide(){
-        return "<隐藏>";
+        return "<hide>";
     }
     public static String getHideEdit(){
         return "<隐藏编辑>";

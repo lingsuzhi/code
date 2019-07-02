@@ -73,8 +73,8 @@ public class DtoCode implements JavaCode {
 //            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
-                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
-                        , StrUtil.getRemName(rem), dtoAttrBO.getNameStr(), StrUtil.getRemName(rem, true));
+                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\")"
+                        , StrUtil.getRemName(rem), dtoAttrBO.getNameStr());
             }
 //            if ("LocalDateTime".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
 //                stringBuilder.appendln("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");

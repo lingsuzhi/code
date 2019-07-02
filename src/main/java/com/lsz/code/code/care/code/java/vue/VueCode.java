@@ -46,7 +46,7 @@ public class VueCode {
             String s = StrUtil.kuohaoStr(rem, "default[", "]");
             if (!StringUtils.isEmpty(s)) {
 
-                csb.appendln("    【】: '【】',", dtoAttrBO.getNameStr(), s);
+                csb.appendln("    【】: 【】,", dtoAttrBO.getNameStr(), s);
             }
         }
         return csb.toString();
@@ -108,7 +108,7 @@ public class VueCode {
                 appendSwitch(csb, dtoAttrBO.getNameStr(), remName, "启用", "禁用", "true");
             } else {
                 String radioStr = StrUtil.kuohaoStr(rem, "radio[", "]");
-                String selectStr = StrUtil.kuohaoStr(rem, "select[", "]");
+                String selectStr = StrUtil.kuohaoStr(rem, "{", "}");
 
                 if (!StringUtils.isEmpty(radioStr)) {
                     String[] split = radioStr.split(",");
@@ -197,7 +197,7 @@ public class VueCode {
             }
             String remName = StrUtil.getRemName(rem);
             csb.newLine();
-            String selectStr = StrUtil.kuohaoStr(rem, "select[", "]");
+            String selectStr = StrUtil.kuohaoStr(rem, "{", "}");
 
             String radioStr = StrUtil.kuohaoStr(rem, "radio[", "]");
             if (!StringUtils.isEmpty(selectStr)) {
@@ -211,9 +211,9 @@ public class VueCode {
                     if (s1.contains(":")) {
                         String[] split1 = s1.split(":");
                         csb.appendln(":label=\"'【】'\"", split1[1]);
-                        csb.appendln(":value=\"'【】'\">", split1[0]);
+                        csb.appendln(":value=\"【】\">", split1[0]);
                     } else {
-                        csb.appendln(":value=\"'【】'\">", s1);
+                        csb.appendln(":value=\"【】\">", s1);
                     }
                     csb.appendln("</el-option>");
                 }
@@ -248,7 +248,7 @@ public class VueCode {
                 csb.appendln("</el-form-item>");
             } else {
                 csb.appendln("<el-form-item label=\"【】\"", remName);
-                if (rem.contains("<required>")) {
+                if (rem.contains("<notnull>")) {
                     csb.appendln("prop=\"【】\"", dtoAttrBO.getNameStr());
                     csb.appendln(":rules=\"[{ required: true, message: '请输入', trigger: 'blur' }]\">");
                 } else {
@@ -303,7 +303,7 @@ public class VueCode {
             if (rem.contains(KeyStr.getParam())) {
                 String remName = StrUtil.getRemName(rem);
                 csb.newLine();
-                String selectStr = StrUtil.kuohaoStr(rem, "select[", "]");
+                String selectStr = StrUtil.kuohaoStr(rem, "{", "}");
                 if (StringUtils.isEmpty(selectStr)) {
                     selectStr = StrUtil.kuohaoStr(rem, "radio[", "]");
                 }
@@ -321,9 +321,9 @@ public class VueCode {
                         if (s1.contains(":")) {
                             String[] split1 = s1.split(":");
                             csb.appendln(":label=\"'【】'\"", split1[1]);
-                            csb.appendln(":value=\"'【】'\">", split1[0]);
+                            csb.appendln(":value=\"【】\">", split1[0]);
                         } else {
-                            csb.appendln(":value=\"'【】'\">", s1);
+                            csb.appendln(":value=\"【】\">", s1);
                         }
                         csb.appendln("</el-option>");
                     }

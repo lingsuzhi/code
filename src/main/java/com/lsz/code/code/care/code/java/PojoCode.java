@@ -97,7 +97,6 @@ public class PojoCode implements JavaCode {
         return stringBuilder.toString();
     }
 
-    //attribute空行NoId
     public String attribute2(DtoBO dtoBO) {
         CodeStringBuilder stringBuilder = new CodeStringBuilder();
         stringBuilder.addTab();
@@ -106,7 +105,7 @@ public class PojoCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equalsIgnoreCase(dtoAttrBO.getNameStr())) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();

@@ -7,7 +7,7 @@
       <el-main>
         <el-table :data="sheet.rows" highlight-current-row v-loading="sheet.loading" stripe="stripe" border="border"
                   @sort-change="sortChange" style="width: 100%;" max-height="690" :row-style="tableRowStyle">
-            <el-table-column prop="id" label="ID" width="80"   sortable="sortable" :show-overflow-tooltip="true" header-align="center"/>
+            <!--<el-table-column prop="id" label="系号" width="80"   sortable="sortable" :show-overflow-tooltip="true" header-align="center"/>-->
 【tableColumn】
 
           <el-table-column prop="createTime" label="时间" width="200" align="center" sortable="sortable"

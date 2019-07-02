@@ -8,7 +8,7 @@ import com.lsz.pojo.【Uname】;
 import java.util.Map;
 
 /**
- * ClassName: 【Uname】Service
+ * ClassName: I【Uname】Service
  * Description: 【describe】
  * Date: 【日期】
  *
@@ -17,7 +17,7 @@ import java.util.Map;
  * @since: JDK 1.8
  * @see
  */
-public interface 【Uname】Service {
+public interface I【Uname】Service {
 
     /**
      * 新增【describe】
@@ -37,7 +37,7 @@ public interface 【Uname】Service {
      * @author lingsuzhi
      * @date: 【日期】
      */
-    Map<String, Object> delete【Uname】(Map<String, Object> parameterMap);
+    Integer delete【Uname】(Map<String, Object> parameterMap);
 
     /**
      * 修改【describe】
@@ -47,7 +47,7 @@ public interface 【Uname】Service {
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】 update【Uname】(【Uname】 【Lname】);
+    Integer update【Uname】(【Uname】 【Lname】);
 
     /**
      * 分页查询【describe】

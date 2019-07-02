@@ -6,8 +6,7 @@
     </sql>
 
     <!--插入-->
-    <insert id="add【Uname】" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
-            parameterType="com.lsz.pojo.【Uname】">
+    <insert id="add【Uname】" parameterType="com.lsz.pojo.【Uname】">
         INSERT INTO 【tableName】
         (
         【base_column】
@@ -68,7 +67,7 @@
     <update id="update【Uname】" parameterType="com.lsz.pojo.【Uname】">
         update 【tableName】
         <set>
-            【updateSet】
+【updateSet】
         </set>
         where id=#{id}
     </update>

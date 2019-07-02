@@ -81,18 +81,19 @@ public class MapperXmlCode implements JavaCode {
     public String selectWhere(DtoBO dtoBO) {
         CodeStringBuilder stringBuilder = new CodeStringBuilder();
         stringBuilder.addTab();
+        stringBuilder.addTab();
         List<DtoAttrBO> attrList = dtoBO.getAttrList();
         if (CollectionUtils.isEmpty(attrList)) {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>") || dtoAttrBO.getRemStr().contains("<hide>")) {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
             stringBuilder.newLine();
             stringBuilder.appendln("<if test=\"null != 【】\">", dtoAttrBO.getNameStr());
-            stringBuilder.appendln("AND tar.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+            stringBuilder.appendln("    AND tar.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
             stringBuilder.appendln("</if>");
         }
         return stringBuilder.toString();
@@ -101,12 +102,14 @@ public class MapperXmlCode implements JavaCode {
     private String updateSet(DtoBO dtoBO) {
         CodeStringBuilder stringBuilder = new CodeStringBuilder();
         stringBuilder.addTab();
+        stringBuilder.addTab();
+        stringBuilder.addTab();
         List<DtoAttrBO> attrList = dtoBO.getAttrList();
         if (CollectionUtils.isEmpty(attrList)) {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equals(dtoAttrBO.getNameStr())
+            if (dtoAttrBO.getRemStr().contains("<hide>") || dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equals(dtoAttrBO.getNameStr())
                     || "createTime".equals(dtoAttrBO.getNameStr())) {
                 continue;
             }
@@ -123,7 +126,7 @@ public class MapperXmlCode implements JavaCode {
                 stringBuilder.appendln(str, nameStr);
 
             }
-            stringBuilder.appendln("【】 = #{【】},", lowDo, nameStr);
+            stringBuilder.appendln("    【】 = #{【】},", lowDo, nameStr);
             stringBuilder.appendln("</if>");
         }
         return stringBuilder.toString();

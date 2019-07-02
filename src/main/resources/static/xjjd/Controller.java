@@ -1,6 +1,6 @@
 package com.lsz.apply.base.controller;
 
-import com.lsz.apply.base.service.【Uname】Service;
+import com.lsz.apply.base.service.I【Uname】Service;
 import com.lsz.common.BasePage;
 import com.lsz.common.PagesParam;
 import com.lsz.common.ResponseInfo;
@@ -29,10 +29,10 @@ import java.util.Map;
 public class 【Uname】Controller {
 
     @Autowired
-    private 【Uname】Service 【Lname】Service;
+    private I【Uname】Service 【Lname】Service;
 
     /**
-     * 添加单个
+     * 添加
      */
     @RequestMapping(value = "/add【Uname】", method = RequestMethod.POST)
     public ResponseInfo<【Uname】> add【Uname】(@RequestBody 【Uname】 【Lname】) {
@@ -43,22 +43,20 @@ public class 【Uname】Controller {
      * 删除
      */
     @RequestMapping(value = "/delete【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<Map<String, Object>> delete【Uname】(@RequestBody Map<String, Object> param) {
-
-        Map<String, Object> resultMap = 【Lname】Service.delete【Uname】(param);
-        return ResponseInfo.success(resultMap);
+    public ResponseInfo<Integer> delete【Uname】(@RequestBody Map<String, Object> param) {
+        return ResponseInfo.success(【Lname】Service.delete【Uname】(param));
     }
 
     /**
      * 修改
      */
     @RequestMapping(value = "/update【Uname】", method = RequestMethod.POST)
-    public ResponseInfo<【Uname】> update【Uname】(@RequestBody 【Uname】 【Lname】) {
+    public ResponseInfo<Integer> update【Uname】(@RequestBody 【Uname】 【Lname】) {
         return ResponseInfo.success(【Lname】Service.update【Uname】(【Lname】));
     }
 
     /**
-     * 查询单个
+     * 查询
      */
     @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
     public ResponseInfo<【Uname】DTO> get【Uname】(@RequestBody Map<String, Object> param) {
@@ -66,11 +64,10 @@ public class 【Uname】Controller {
     }
 
     /**
-     * 查询列表
+     * 分页查询
      */
     @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
     public ResponseInfo<BasePage<【Uname】DTO>> get【Uname】List(@RequestBody PagesParam param) {
-
         BasePage<【Uname】DTO> resultMap = 【Lname】Service.get【Uname】List(param);
         return ResponseInfo.success(resultMap);
     }

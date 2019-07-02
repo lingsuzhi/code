@@ -99,8 +99,20 @@
                     attr.type = "String"
                 }
 
-                if (attr.name != "id" && item.includes("NOT NULL")){
+                if (attr.name != "id" && item.includes("NOT NULL")) {
                     attr.notnull = true;
+                }
+                if (item.includes("DEFAULT ") && !item.includes("DEFAULT NULL")) {
+                    let pos = item.indexOf("DEFAULT ");
+                    if (pos != -1) {
+                        let pos1 = item.indexOf("'", pos + 1);
+                        if (pos1 != -1) {
+                            let pos2 = item.indexOf("'", pos1 + 1);
+                            if (pos2 > pos1) {
+                                attr.defaultVal = item.substring(pos1 + 1, pos2);
+                            }
+                        }
+                    }
                 }
 
                 cls.attr.push(attr);
@@ -108,7 +120,7 @@
 
         }
         let strArr = [];
-         strArr.push("import java.util.Date;")
+        strArr.push("import java.util.Date;")
         // strArr.push("import java.time.LocalDateTime;")
         strArr.push("import com.lsz.code.code.source.Table;")
 
@@ -132,22 +144,27 @@
             arr.rem = "    //" + attr.rem;
             if (attr.name != "id" && attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
                     && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
-                if ( i < cls.attr.length - 3 && count <4) {
+                if (i < cls.attr.length - 3 && count < 4) {
                     arr.rem += " <param>"
                     count++;
                 }
-                if (attr.notnull){
+                if (attr.notnull) {
                     arr.rem += " <notnull>"
                 }
             }
-
+            if (attr.name == "isEnable") {
+                arr.rem += " <param>"
+            }
+            if (attr.defaultVal){
+                arr.rem += "default[" + attr.defaultVal +"]"
+            }
             strArr.push(arr.rem)
             strArr.push("    private " + attr.type + " " + attr.name + ";");
         }
         strArr.push("}");
 
         let tmp = strArr.join("\n");
-        copyToClipboard(tmp);
+        // copyToClipboard(tmp);
         console.log(tmp)
 
 

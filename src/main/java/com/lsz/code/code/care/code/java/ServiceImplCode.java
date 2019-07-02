@@ -18,7 +18,7 @@ import java.util.List;
 public class ServiceImplCode implements JavaCode {
 
     public final static String ApiOldFile = "ServiceImpl.java";
-    public final static String DoFilePath =  ServiceCode.DoFilePath +  "impl" + "\\";
+    public final static String DoFilePath = ServiceCode.DoFilePath + "impl" + "\\";
 
     @Override
     public String apply(DtoBO dtoBO) {
@@ -58,10 +58,13 @@ public class ServiceImplCode implements JavaCode {
         }
 
         for (DtoAttrBO dtoAttrBO : attrList) {
-            String key = "<def=";
+            String key = "default[";
             if (dtoAttrBO.getRemStr().contains(key)) {
-                String val = StrUtil.kuohaoStr(dtoAttrBO.getRemStr(), key, ">");
-                stringBuilder.appendln("parameterMap.putIfAbsent(\"【】\", 【】);", StrUtil.oneLoweCase(dtoAttrBO.getNameStr()), val);
+                String val = StrUtil.kuohaoStr(dtoAttrBO.getRemStr(), key, "]").replace("'", "\"");
+
+                stringBuilder.appendln("if (【】.get【】() == null) {", StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
+                stringBuilder.appendln("    【】.set【】(【】);", StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()), val);
+                stringBuilder.appendln("}");
             }
         }
         return stringBuilder.toString();
@@ -98,12 +101,12 @@ public class ServiceImplCode implements JavaCode {
         }
 
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (!dtoAttrBO.getRemStr().contains("<notnull>")) {
+            if (!dtoAttrBO.getRemStr().contains("<notnull>") || dtoAttrBO.getRemStr().contains("default[")) {
                 continue;
             }
             String rem = StrUtil.getRemName(dtoAttrBO.getRemStr());
 
-            stringBuilder.appendln("if (systemAdmin.get【】() == null) {",StrUtil.oneUpperCase( dtoAttrBO.getNameStr()));
+            stringBuilder.appendln("if (【】.get【】() == null) {", StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
             stringBuilder.appendln("    throw new BusinessException(\"新增失败,【】 不能为空！\");", rem);
             stringBuilder.appendln("}");
 
