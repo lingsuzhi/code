@@ -32,6 +32,7 @@ public class ServiceImplCode implements JavaCode {
         sb.put("notnull", addnotnull(dtoBO));
         sb.put("formatDo", formatDo(dtoBO));
 
+        sb.put("DatasUtil", datas(dtoBO));
         sb.put("defaultValue", defaultValue(dtoBO));
         sb.appendln(fileStr);
 
@@ -44,6 +45,33 @@ public class ServiceImplCode implements JavaCode {
         FileUtil.doFileStr(doFile, sb.toString());
         log.info("{} 执行完成", ApiOldFile);
         return sb.toString();
+    }
+
+    private String datas(DtoBO dtoBO) {
+        CodeStringBuilder stringBuilder = new CodeStringBuilder();
+        stringBuilder.addTab();
+        stringBuilder.addTab();
+        List<DtoAttrBO> attrList = dtoBO.getAttrList();
+        if (CollectionUtils.isEmpty(attrList)) {
+            return null;
+        }
+
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            String key = ":{";
+            String remStr = dtoAttrBO.getRemStr();
+            int pos = remStr.indexOf(key);
+            if (pos != -1) {
+                int i = remStr.lastIndexOf(" ",pos);
+                if (i != -1) {
+                    String s = remStr.substring(i + 1, pos);
+                    stringBuilder.appendln("【】DTO.set【】Name(DatasUtil.get(\"【】\",【】DTO.get【】()));"
+                            , StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()), s,
+                            StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
+
+                }
+            }
+        }
+        return stringBuilder.toString();
     }
 
     private String defaultValue(DtoBO dtoBO) {

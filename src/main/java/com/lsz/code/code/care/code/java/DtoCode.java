@@ -83,6 +83,26 @@ public class DtoCode implements JavaCode {
             stringBuilder.appendln(str);
             stringBuilder.newLine();
         }
+
+
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            String key = ":{";
+            String remStr = dtoAttrBO.getRemStr();
+            int pos = remStr.indexOf(key);
+            if (pos != -1) {
+                int i = remStr.lastIndexOf(" ", pos);
+                if (i != -1) {
+                    String s = remStr.substring(i + 1, pos);
+                    if (!StringUtils.isEmpty(remStr)) {
+                        stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\")"
+                                , StrUtil.getRemName(remStr) + " " + s, dtoAttrBO.getNameStr());
+                    }
+                    String str = "private " + "String" + " " + dtoAttrBO.getNameStr() + "Name;";
+                    stringBuilder.appendln(str);
+                    stringBuilder.newLine();
+                }
+            }
+        }
         return stringBuilder.toString();
     }
 }

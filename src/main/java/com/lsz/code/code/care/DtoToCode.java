@@ -4,6 +4,7 @@ import com.lsz.code.code.bo.DtoBO;
 import com.lsz.code.code.care.code.SqlCode;
 import com.lsz.code.code.care.code.java.JavaCode;
 import com.lsz.code.code.care.code.java.vue.VueCode;
+import com.lsz.code.code.common.CodeStringBuilder;
 import com.lsz.code.code.common.StrUtil;
 import com.lsz.code.code.utils.FileUtil;
 import com.lsz.code.code.utils.FileUtils;
@@ -61,13 +62,30 @@ public class DtoToCode {
         if (files == null || files.length == 0) {
             return;
         }
+        String clsName = StrUtil.oneUpperCase(dtoBO.getName());
         for (File file : files) {
             String fileStr = FileUtil.readFileStr(file);
 
             String newFileStr = new VueCode(dtoBO, fileStr).apply();
-            String fileName = file.getName().replace("Name", StrUtil.oneUpperCase(dtoBO.getName()));
+            String fileName = file.getName().replace("Name", clsName);
             File newFile = new File(dirFile.getPath() + File.separator + fileName);
             FileUtil.doFileStr(newFile, newFileStr);
+        }
+        if (!isDelete) {
+            File jsFile = new File(JavaCode.vueRouterPath);
+            if (jsFile.exists()) {
+                String fileStr = FileUtil.readFileStr(jsFile);
+                CodeStringBuilder sb = new CodeStringBuilder();
+                sb.newLine();
+                sb.newLine();
+                sb.appendln("import 【】App from '@/view/base/【】/【】App'", clsName, clsName, clsName);
+                sb.appendln("baseRouter.children.push({");
+                sb.appendln("        path: '/system/【】',",clsName);
+                sb.appendln("        component: 【】App,",clsName);
+                sb.appendln("        name: '【】'",dtoBO.getDescribe());
+                sb.appendln("})");
+                FileUtil.doFileStr(jsFile,fileStr + sb.toString());
+            }
         }
     }
 

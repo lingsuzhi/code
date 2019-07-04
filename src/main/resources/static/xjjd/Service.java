@@ -68,6 +68,26 @@ public interface I【Uname】Service {
      * @date: 【日期】
      */
     【Uname】DTO get【Uname】(Map<String, Object> parameterMap);
+
+    /**
+     * 查询单个
+     *
+     * @param id ID
+     * @return 【Uname】 实体
+     * @author lingsuzhi
+     * @date: 【日期】
+     */
+    【Uname】 findById(String id);
+
+    /**
+     * 转换为DTO
+     *
+     * @param 【Lname】 实体
+     * @return 【Uname】DTO DTO实体
+     * @author lingsuzhi
+     * @date: 【日期】
+     */
+    【Uname】DTO manage【Uname】(【Uname】 【Lname】);
 }
 
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class 【Uname】Controller {
     /**
      * 添加
      */
-    @RequestMapping(value = "/add【Uname】", method = RequestMethod.POST)
+    @PostMapping(value = "/add【Uname】")
     public ResponseInfo<【Uname】> add【Uname】(@RequestBody 【Uname】 【Lname】) {
         return ResponseInfo.success(【Lname】Service.add【Uname】(【Lname】));
     }
@@ -42,7 +43,7 @@ public class 【Uname】Controller {
     /**
      * 删除
      */
-    @RequestMapping(value = "/delete【Uname】", method = RequestMethod.POST)
+    @PostMapping(value = "/delete【Uname】")
     public ResponseInfo<Integer> delete【Uname】(@RequestBody Map<String, Object> param) {
         return ResponseInfo.success(【Lname】Service.delete【Uname】(param));
     }
@@ -50,7 +51,7 @@ public class 【Uname】Controller {
     /**
      * 修改
      */
-    @RequestMapping(value = "/update【Uname】", method = RequestMethod.POST)
+    @PostMapping(value = "/update【Uname】")
     public ResponseInfo<Integer> update【Uname】(@RequestBody 【Uname】 【Lname】) {
         return ResponseInfo.success(【Lname】Service.update【Uname】(【Lname】));
     }
@@ -58,7 +59,7 @@ public class 【Uname】Controller {
     /**
      * 查询
      */
-    @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
+    @PostMapping(value = "/get【Uname】")
     public ResponseInfo<【Uname】DTO> get【Uname】(@RequestBody Map<String, Object> param) {
         return ResponseInfo.success(【Lname】Service.get【Uname】(param));
     }
@@ -66,7 +67,7 @@ public class 【Uname】Controller {
     /**
      * 分页查询
      */
-    @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
+    @PostMapping(value = "/get【Uname】List")
     public ResponseInfo<BasePage<【Uname】DTO>> get【Uname】List(@RequestBody PagesParam param) {
         BasePage<【Uname】DTO> resultMap = 【Lname】Service.get【Uname】List(param);
         return ResponseInfo.success(resultMap);

@@ -24,7 +24,7 @@ public class FxjkApi {
 
     @GetMapping("/fileDo")
     @ResponseBody
-    public Map<String, String> fileDo(@RequestParam String fileName, Boolean killold) {
+    public synchronized Map<String, String> fileDo(@RequestParam String fileName, Boolean killold) {
 
         Map map = fxjkService.fileDo(fileName, killold);
         return map;

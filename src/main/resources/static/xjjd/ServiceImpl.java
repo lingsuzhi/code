@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.lsz.apply.datas.DatasUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,11 +45,12 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
      * @param 【Lname】 【describe】
      * @return 【Uname】DTO
      */
-    private 【Uname】DTO manage【Uname】(【Uname】 【Lname】) {
+    @Override
+    public 【Uname】DTO manage【Uname】(【Uname】 【Lname】) {
         if (【Lname】 == null) return null;
         【Uname】DTO 【Lname】DTO = BeanUtil.copyBean(【Lname】, 【Uname】DTO.class);
         //处理DTO
-
+【DatasUtil】
         return 【Lname】DTO;
     }
 
@@ -112,5 +114,10 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     @Override
     public 【Uname】DTO get【Uname】(Map<String, Object> parameterMap) {
         return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
+    }
+
+    @Override
+    public 【Uname】 findById(String id) {
+        return 【Lname】Mapper.get【Uname】(CommonUtils.toMap(id));
     }
 }
