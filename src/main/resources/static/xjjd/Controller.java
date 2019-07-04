@@ -43,7 +43,7 @@ public class 【Uname】Controller extends BaseController {
 
     @GetMapping("/delete")
     @ApiOperation(value = "删除【describe】", notes = "逻辑删除")
-    public Result<Boolean> removeById(@RequestParam("id") Integer id) {
+    public Result<Boolean> removeById(@RequestParam Integer id) {
         return Result.success(【Lname】Service.removeById(id));
     }
 
@@ -59,9 +59,9 @@ public class 【Uname】Controller extends BaseController {
         return Result.success(【Lname】Service.updateById(area));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get")
     @ApiOperation(value = "查询【describe】", notes = "查询指定【describe】")
-    public Result<【Uname】VO> getById(@PathVariable("id") Integer id) {
+    public Result<【Uname】VO> getById(@RequestParam Integer id) {
         return Result.success(【Lname】Service.getDetailById(id));
     }
 }

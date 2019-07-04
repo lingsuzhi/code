@@ -4,7 +4,8 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.yl.lmdm.entity.【Uname】">
-        【resultMap】
+        <id column="id" property="id" />
+【resultMap】
     </resultMap>
 
     <resultMap id="【Uname】PageVO" type="com.yl.model.lmdm.vo.【Uname】VO" extends="BaseResultMap">
@@ -21,8 +22,8 @@
         d2.`name` country_name,
         <include refid="columns"></include>
         FROM
-        【tableName】 t
-        LEFT JOIN sys_country d2 ON d2.id = t.country_id
+        【tableName】 tar
+        LEFT JOIN sys_country d2 ON d2.id = tar.country_id
     </sql>
 
     <select id="selectByPageVO" resultMap="【Uname】PageVO">
@@ -43,7 +44,7 @@
         <include refid="listDetail"></include>
         <where>
             <if test="id != null">
-                AND t.id = #{id}
+                AND tar.id = #{id}
             </if>
             <if test="id == null">
                 AND 1 = 2

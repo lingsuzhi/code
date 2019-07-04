@@ -16,6 +16,8 @@ import com.yl.model.lmdm.vo.【Uname】VO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -27,6 +29,7 @@ import java.util.Optional;
  * @since 【日期】
  */
 @Service
+@Slf4j
 public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Uname】> implements I【Uname】Service {
 
     @Autowired
@@ -39,11 +42,14 @@ public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Un
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean removeById(Integer id) {
         【Uname】 area = this.getById(id);
         if (area == null) {
             return false;
         }
+        log.info("【Uname】#### 删除【describe】 {}", area);
+
         return this.removeById(area);
     }
 
@@ -58,6 +64,7 @@ public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Un
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean save(【Uname】DTO dto) {
         【Uname】 【Lname】 = new 【Uname】();
         BeanUtils.copyProperties(dto, 【Lname】);
@@ -76,6 +83,7 @@ public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Un
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean updateById(【Uname】DTO dto) {
         if (dto.getId() == null) {
             throw new ServiceException(ResultCodeEnum.PARAMS_NOT_COMPLETE);
