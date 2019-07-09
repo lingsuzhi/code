@@ -47,7 +47,9 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
      */
     @Override
     public 【Uname】DTO manage【Uname】(【Uname】 【Lname】) {
-        if (【Lname】 == null) return null;
+        if (【Lname】 == null) {
+            return null;
+        }
         【Uname】DTO 【Lname】DTO = BeanUtil.copyBean(【Lname】, 【Uname】DTO.class);
         //处理DTO
 【DatasUtil】
@@ -55,7 +57,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public 【Uname】 add【Uname】(【Uname】 【Lname】) {
 【defaultValue】
 【notnull】
@@ -68,17 +70,27 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         log.info("add【Uname】 完成:{}", count);
         return 【Lname】;
     }
-
+	
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Integer delete【Uname】(Map<String, Object> parameterMap) {
-        Integer count = 【Lname】Mapper.delete【Uname】(CommonUtils.idList(parameterMap));
+        Map<String, Object> map = CommonUtils.idList(parameterMap);
+        if (map == null) {
+            【Uname】DTO 【Lname】 = this.get【Uname】(parameterMap);
+            if (【Lname】 != null) {
+                map = CommonUtils.toMap(【Lname】.getId());
+            }
+        }
+        if (map == null) {
+            throw new BusinessException("4404", "删除失败，数据不存在");
+        }
+        Integer count = 【Lname】Mapper.delete【Uname】(CommonUtils.idList(map));
         log.info("delete【Uname】 完成，返回:{}", count);
         return count;
     }
-
+	
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Integer update【Uname】(【Uname】 【Lname】) {
         if (【Lname】.getId() == null) {
             throw new BusinessException("修改失败,ID不能为空！");

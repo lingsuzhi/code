@@ -92,8 +92,20 @@ public class MapperXmlCode implements JavaCode {
             }
             String rem = dtoAttrBO.getRemStr();
             stringBuilder.newLine();
-            stringBuilder.appendln("<if test=\"null != 【】\">", dtoAttrBO.getNameStr());
-            stringBuilder.appendln("    AND tar.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+            String nameStr = dtoAttrBO.getNameStr();
+            if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())){
+                String str = "<if test=\"【】 != null and 【】 != ''\">";
+                stringBuilder.appendln(str, nameStr,nameStr);
+            }else{
+                String str = "<if test=\"【】 != null \">";
+                stringBuilder.appendln(str, nameStr);
+
+            }
+            if ("name".equals(nameStr)){
+                stringBuilder.appendln("    AND tar.【】 LIKE concat(concat('%',#{【】}),'%')", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+            }else {
+                stringBuilder.appendln("    AND tar.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+            }
             stringBuilder.appendln("</if>");
         }
         return stringBuilder.toString();
@@ -109,7 +121,8 @@ public class MapperXmlCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<hide>") || dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equals(dtoAttrBO.getNameStr())
+//            dtoAttrBO.getRemStr().contains("<hide>") ||
+            if ( dtoAttrBO.getRemStr().contains("<隐藏>") || "id".equals(dtoAttrBO.getNameStr())
                     || "createTime".equals(dtoAttrBO.getNameStr())) {
                 continue;
             }
@@ -118,7 +131,7 @@ public class MapperXmlCode implements JavaCode {
 //                stringBuilder.appendNoTab(",");
 //            }
             String lowDo = StrUtil.strLowDo(nameStr);
-            if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())){
+            if ("String---".equalsIgnoreCase(dtoAttrBO.getTypeStr())){
                 String str = "<if test=\"【】 != null and 【】 != ''\">";
                 stringBuilder.appendln(str, nameStr,nameStr);
             }else{

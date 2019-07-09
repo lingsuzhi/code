@@ -80,7 +80,7 @@ public class DtoToCode {
                 sb.newLine();
                 sb.appendln("import 【】App from '@/view/base/【】/【】App'", clsName, clsName, clsName);
                 sb.appendln("baseRouter.children.push({");
-                sb.appendln("        path: '/system/【】',",clsName);
+                sb.appendln("        path: '/base/【】',",clsName);
                 sb.appendln("        component: 【】App,",clsName);
                 sb.appendln("        name: '【】'",dtoBO.getDescribe());
                 sb.appendln("})");
