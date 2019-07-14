@@ -35,9 +35,6 @@ public interface 【Uname】Mapper {
 
     //分页查询
     List<【Uname】> get【Uname】List(Map<String, Object> paramMap);
-
-    //汇总
-    Integer get【Uname】Count(Map<String, Object> paramMap);
 }
 
 

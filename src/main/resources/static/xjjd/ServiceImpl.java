@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.lsz.apply.datas.DatasUtil;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,13 +79,13 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         if (map == null) {
             【Uname】DTO 【Lname】 = this.get【Uname】(parameterMap);
             if (【Lname】 != null) {
-                map = CommonUtils.toMap(【Lname】.getId());
+                map = CommonUtils.idList(CommonUtils.toMap(【Lname】.getId()));
             }
         }
         if (map == null) {
             throw new BusinessException("4404", "删除失败，数据不存在");
         }
-        Integer count = 【Lname】Mapper.delete【Uname】(CommonUtils.idList(map));
+        Integer count = 【Lname】Mapper.delete【Uname】(map);
         log.info("delete【Uname】 完成，返回:{}", count);
         return count;
     }
@@ -127,7 +128,18 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     public 【Uname】DTO get【Uname】(Map<String, Object> parameterMap) {
         return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
     }
-
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Integer updateList(List<【Uname】> param) {
+        if (CollectionUtils.isEmpty(param)) {
+            return 0;
+        }
+        int count = 0;
+        for (【Uname】 item : param) {
+            count += this.update【Uname】(item);
+        }
+        return count;
+    }
     @Override
     public 【Uname】 findById(String id) {
         return 【Lname】Mapper.get【Uname】(CommonUtils.toMap(id));

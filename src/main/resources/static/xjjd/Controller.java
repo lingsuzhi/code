@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -60,6 +61,15 @@ public class 【Uname】Controller {
     @PostMapping(value = "/update【Uname】")
     public ResponseInfo<Integer> update【Uname】(@RequestBody 【Uname】 【Lname】) {
         return ResponseInfo.success(【Lname】Service.update【Uname】(【Lname】));
+    }
+
+    /**
+     * 批量修改
+     */
+    @ApiOperation(value = "批量修改【describe】", notes = "批量修改", httpMethod = "POST")
+    @PostMapping(value = "/updateList")
+    public ResponseInfo<Integer> updateList(@RequestBody List<【Uname】> param) {
+        return ResponseInfo.success(【Lname】Service.updateList(param));
     }
 
     /**

@@ -5,6 +5,7 @@ import com.lsz.common.PagesParam;
 import com.lsz.dto.【Uname】DTO;
 import com.lsz.pojo.【Uname】;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -88,6 +89,16 @@ public interface I【Uname】Service {
      * @date: 【日期】
      */
     【Uname】DTO manage【Uname】(【Uname】 【Lname】);
+
+    /**
+     * 批量修改
+     *
+     * @param param 实体列表
+     * @return Integer 数量
+     * @author lingsuzhi
+     * @date: 【日期】
+     */
+    Integer updateList(List<【Uname】> param);
 }
 
 
