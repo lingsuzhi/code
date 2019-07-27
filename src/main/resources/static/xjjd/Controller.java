@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @RestController("【Lname】ControllerBase")
 @RequestMapping("/【Lname】Controller")
-@Api(value = "【describe】", tags = { "【describe】Api" })
+@Api(value = "【describe】", tags = {"【describe】Api"})
 public class 【Uname】Controller {
 
     @Autowired
