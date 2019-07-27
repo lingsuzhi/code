@@ -2,14 +2,13 @@
   <section>
     <el-container>
       <el-header>
-        <【Lname】Search :search="search" :filters="filters" :add="add"/>
+        <【Lname】Search :search="search" :filters="filters" :add="add" :killSelection="killSelection"/>
       </el-header>
       <el-main>
         <el-table :data="sheet.rows" highlight-current-row v-loading="sheet.loading" stripe="stripe" border="border"
                   @sort-change="sortChange" style="width: 100%;" max-height="690" :row-style="tableRowStyle">
-            <!--<el-table-column prop="id" label="系号" width="80"   sortable="sortable" :show-overflow-tooltip="true" header-align="center"/>-->
+            <el-table-column type="selection" width="55"/>
 【tableColumn】
-
           <el-table-column prop="createTime" label="时间" width="200" align="center" sortable="sortable"
                            :show-overflow-tooltip="true">
             <template slot-scope="scope">
@@ -25,8 +24,8 @@
               <el-button size="small" type="text">更多<i class="el-icon-arrow-down el-icon--right"></i></el-button>
           </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item :command="{'method':'show【Uname】Info','args':scope.row}">编辑</el-dropdown-item>
-                  <el-dropdown-item :command="{'method':'kill【Uname】Info','args':scope.row}">删除</el-dropdown-item>
+                  <el-dropdown-item :command="{'method':'show【Uname】','args':scope.row}">编辑</el-dropdown-item>
+                  <el-dropdown-item :command="{'method':'kill【Uname】','args':scope.row.id}">删除</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </template>
@@ -98,7 +97,17 @@
           return 'color: ' + row.color;
         }
       },
-      kill【Uname】Info: function (row) {
+        killSelection: function () {
+            let rows = this.$refs.multipleTable.store.states.selection;
+            if (rows && rows.length > 0) {
+                let arr = [];
+                for (let row of rows) {
+                    arr.push(row.id);
+                }
+                this.kill【Uname】(arr.join(","));
+            }
+        },
+      kill【Uname】: function (row) {
         let vm = this;
         vm.$confirm('是否确认提交?', '提示', {
           confirmButtonText: '确定',
@@ -124,7 +133,7 @@
 
         })
       },
-      show【Uname】Info: function (row) {
+      show【Uname】: function (row) {
         this.$refs.【Lname】Edit.show(row);
       },
       add: function () {

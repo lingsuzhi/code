@@ -28,7 +28,7 @@ public class DtoCode implements JavaCode {
         if ("createByName".equalsIgnoreCase(str)) return true;
         if ("updateByName".equalsIgnoreCase(str)) return true;
 //        if ("createTime".equalsIgnoreCase(str)) return true;
-        if ("updateTime".equalsIgnoreCase(str)) return true;
+//        if ("updateTime".equalsIgnoreCase(str)) return true;
         if ("version".equalsIgnoreCase(str)) return true;
 
         if ("sort".equalsIgnoreCase(str)) return true;
