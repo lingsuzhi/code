@@ -107,14 +107,14 @@
                 this.kill【Uname】(arr.join(","));
             }
         },
-      kill【Uname】: function (row) {
+      kill【Uname】: function (id) {
         let vm = this;
         vm.$confirm('是否确认提交?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          vm.$http.post('/【Lname】Controller/delete【Uname】' , {id:row.id}).then(res => {
+          vm.$http.post('/【Lname】Controller/delete【Uname】' , {id:id}).then(res => {
             if (!res.data.success) {
               vm.$message({
                 showClose: true,
