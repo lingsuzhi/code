@@ -99,6 +99,16 @@ public interface I【Uname】Service {
      * @date: 【日期】
      */
     Integer updateList(List<【Uname】> param);
+
+    /**
+     * 批量添加
+     *
+     * @param param 实体列表
+     * @return Integer 数量
+     * @author lingsuzhi
+     * @date: 【日期】
+     */
+    Integer addList(List<【Uname】> param);
 }
 
 

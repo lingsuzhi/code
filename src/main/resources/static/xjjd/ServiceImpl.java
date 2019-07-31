@@ -128,6 +128,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     public 【Uname】DTO get【Uname】(Map<String, Object> parameterMap) {
         return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
     }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer updateList(List<【Uname】> param) {
@@ -140,6 +141,21 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         }
         return count;
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Integer addList(List<【Uname】> param) {
+        if (CollectionUtils.isEmpty(param)) {
+            return 0;
+        }
+        int count = 0;
+        for (【Uname】 item : param) {
+            this.add【Uname】(item);
+            count++;
+        }
+        return count;
+    }
+
     @Override
     public 【Uname】 findById(String id) {
         return 【Lname】Mapper.get【Uname】(CommonUtils.toMap(id));

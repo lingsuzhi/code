@@ -38,6 +38,8 @@ public class 【Uname】Controller {
 
     /**
      * 添加
+     * @author lingsuzhi
+     * @date: 【日期】
      */
     @ApiOperation(value = "添加【describe】", notes = "添加", httpMethod = "POST")
     @PostMapping(value = "/add【Uname】")
@@ -46,7 +48,20 @@ public class 【Uname】Controller {
     }
 
     /**
+    * 批量修改
+     * @author lingsuzhi
+     * @date: 【日期】
+     */
+    @ApiOperation(value = "批量添加【describe】", notes = "批量添加", httpMethod = "POST")
+    @PostMapping(value = "/addList")
+    public ResponseInfo<Integer> addList(@RequestBody List<【Uname】> param) {
+        return ResponseInfo.success(【Lname】Service.addList(param));
+    }
+
+    /**
      * 删除
+     * @author lingsuzhi
+     * @date: 【日期】
      */
     @ApiOperation(value = "删除【describe】", notes = "删除", httpMethod = "POST")
     @PostMapping(value = "/delete【Uname】")
@@ -56,6 +71,8 @@ public class 【Uname】Controller {
 
     /**
      * 修改
+     * @author lingsuzhi
+     * @date: 【日期】
      */
     @ApiOperation(value = "修改【describe】", notes = "修改", httpMethod = "POST")
     @PostMapping(value = "/update【Uname】")
@@ -65,6 +82,8 @@ public class 【Uname】Controller {
 
     /**
      * 批量修改
+     * @author lingsuzhi
+     * @date: 【日期】
      */
     @ApiOperation(value = "批量修改【describe】", notes = "批量修改", httpMethod = "POST")
     @PostMapping(value = "/updateList")
@@ -74,6 +93,8 @@ public class 【Uname】Controller {
 
     /**
      * 查询
+     * @author lingsuzhi
+     * @date: 【日期】
      */
     @ApiOperation(value = "查询【describe】", notes = "查询", httpMethod = "POST")
     @PostMapping(value = "/get【Uname】")
@@ -83,6 +104,8 @@ public class 【Uname】Controller {
 
     /**
      * 分页查询
+     * @author lingsuzhi
+     * @date: 【日期】
      */
     @ApiOperation(value = "分页查询【describe】", notes = "分页条件查询", httpMethod = "POST")
     @PostMapping(value = "/get【Uname】List")
