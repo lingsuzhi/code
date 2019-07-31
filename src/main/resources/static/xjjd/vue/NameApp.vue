@@ -5,7 +5,7 @@
         <【Lname】Search :search="search" :filters="filters" :add="add" :killSelection="killSelection"/>
       </el-header>
       <el-main>
-        <el-table :data="sheet.rows" highlight-current-row v-loading="sheet.loading" stripe="stripe" border="border"
+        <el-table :data="sheet.rows" highlight-current-row v-loading="sheet.loading" stripe="stripe" border="border"    ref="multipleTable"
                   @sort-change="sortChange" style="width: 100%;" max-height="690" :row-style="tableRowStyle">
             <el-table-column type="selection" width="55"/>
 【tableColumn】
