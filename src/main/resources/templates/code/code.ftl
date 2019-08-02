@@ -144,7 +144,7 @@
             arr.rem = "    //" + attr.rem;
             if (attr.name != "id" && attr.name != "createTime" && attr.name != "createId" && attr.name != "updateId" && attr.name != "updateTime"
                     && attr.name != "updateUser" && attr.name != "createUser" && attr.name != "isDelete") {
-                if (i < cls.attr.length - 3 && count < 3) {
+                if (i < cls.attr.length - 3 && count < 3 && !attr.name.endsWith("Id")) {
                     arr.rem += " <param>"
                     count++;
                 }
