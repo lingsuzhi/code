@@ -63,7 +63,7 @@
           if (valid) {
             this.onSubmit();
           } else {
-            console.log('error submit!!');
+            console.log('valid error submit!!');
             return false;
           }
         });

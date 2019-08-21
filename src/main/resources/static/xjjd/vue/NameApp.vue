@@ -5,15 +5,15 @@
         <【Lname】Search :search="search" :filters="filters" :add="add" :killSelection="killSelection"/>
       </el-header>
       <el-main>
-        <el-table :data="sheet.rows" highlight-current-row v-loading="sheet.loading" stripe="stripe" border="border"    ref="multipleTable"
-                  @sort-change="sortChange" style="width: 100%;" max-height="690" :row-style="tableRowStyle">
+        <el-table :data="sheet.rows" highlight-current-row v-loading="sheet.loading" stripe="stripe" border="border"  ref="multipleTable"
+                  @sort-change="sortChange" style="width: 100%;" max-height="690">
             <el-table-column type="selection" width="55"/>
 【tableColumn】
           <el-table-column prop="createTime" label="时间" width="200" align="center" sortable="sortable"
                            :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <el-icon name="time"></el-icon>
-              <span style="margin-left: 10px">{{ formatDate(scope.row.createTime) }}</span>
+              <span style="margin-left: 10px">{{ $formatDate(scope.row.createTime) }}</span>
             </template>
           </el-table-column>
 
@@ -68,7 +68,14 @@
     }
     this.sheet.loading = true
     this.$http.post('/【Lname】Controller/get【Uname】List', param).then(res => {
-
+        if (!res.data.success) {
+            vm.$message({
+                showClose: true,
+                message: res.data.msg,
+                type: 'error'
+            });
+            return
+        }
       let response = res.data.data;
 
       this.sheet.total = response.total
@@ -92,12 +99,7 @@
       handleCommand: function (param) {
         this[param.method](param.args)
       },
-      tableRowStyle({row, rowIndex}) {
-        if (row.color){
-          return 'color: ' + row.color;
-        }
-      },
-        killSelection: function () {
+      killSelection: function () {
             let rows = this.$refs.multipleTable.store.states.selection;
             if (rows && rows.length > 0) {
                 let arr = [];
@@ -139,15 +141,6 @@
       add: function () {
         this.$refs.【Lname】Edit.showAdd();
       },
-      formatDate: function (d, format) {
-        if(!d){
-          return "";
-        }
-        if (!format) {
-          format = 'YYYY-MM-DD HH:mm:ss';
-        }
-        return this.$moment(d).format(format)
-      },
       getList,
       sortChange: function (d) {
         this.sheet.sort = d && d.prop
@@ -158,7 +151,7 @@
     mounted: function () {
       this.search()
     },
-    name: "【Uname】"
+    name: "【Uname】App"
   }
 </script>
 
