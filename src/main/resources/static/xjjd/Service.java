@@ -4,6 +4,7 @@ import com.lsz.common.BasePage;
 import com.lsz.common.PagesParam;
 import com.lsz.dto.【Uname】DTO;
 import com.lsz.pojo.【Uname】;
+import com.lsz.vo.【Uname】VO;
 
 import java.util.List;
 import java.util.Map;
@@ -23,12 +24,12 @@ public interface I【Uname】Service {
     /**
      * 新增【describe】
      *
-     * @param 【Lname】 实体
-     * @return 【Uname】 实体
+     * @param 【Lname】DTO 实体
+     * @return String 返回ID
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】 add【Uname】(【Uname】 【Lname】);
+    String add【Uname】(【Uname】DTO 【Lname】DTO);
 
     /**
      * 删除【describe】
@@ -43,12 +44,12 @@ public interface I【Uname】Service {
     /**
      * 修改【describe】
      *
-     * @param 【Lname】 实体
+     * @param 【Lname】DTO 实体
      * @return 【Uname】 实体
      * @author lingsuzhi
      * @date: 【日期】
      */
-    Integer update【Uname】(【Uname】 【Lname】);
+    Integer update【Uname】(【Uname】DTO 【Lname】DTO);
 
     /**
      * 分页查询【describe】
@@ -58,7 +59,7 @@ public interface I【Uname】Service {
      * @author lingsuzhi
      * @date: 【日期】
      */
-    BasePage<【Uname】DTO> get【Uname】List(PagesParam pagesParam);
+    BasePage<【Uname】VO> get【Uname】List(PagesParam pagesParam);
 
     /**
      * 查询【describe】
@@ -68,7 +69,7 @@ public interface I【Uname】Service {
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】DTO get【Uname】(Map<String, Object> parameterMap);
+    【Uname】VO get【Uname】(Map<String, Object> parameterMap);
 
     /**
      * 查询单个
@@ -81,34 +82,25 @@ public interface I【Uname】Service {
     【Uname】 findById(String id);
 
     /**
-     * 转换为DTO
+     * 转换为VO
      *
      * @param 【Lname】 实体
-     * @return 【Uname】DTO DTO实体
+     * @return 【Uname】VO VO实体
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】DTO manage【Uname】(【Uname】 【Lname】);
+    【Uname】VO manage【Uname】(【Uname】 【Lname】);
 
     /**
      * 批量修改
      *
-     * @param param 实体列表
+     * @param paramList 实体列表
      * @return Integer 数量
      * @author lingsuzhi
      * @date: 【日期】
      */
-    Integer updateList(List<【Uname】> param);
+    Integer updateList(List<【Uname】DTO> paramList);
 
-    /**
-     * 批量添加
-     *
-     * @param param 实体列表
-     * @return Integer 数量
-     * @author lingsuzhi
-     * @date: 【日期】
-     */
-    Integer addList(List<【Uname】> param);
 }
 
 

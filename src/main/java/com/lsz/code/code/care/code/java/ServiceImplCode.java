@@ -64,7 +64,7 @@ public class ServiceImplCode implements JavaCode {
                 int i = remStr.lastIndexOf(" ",pos);
                 if (i != -1) {
                     String s = remStr.substring(i + 1, pos);
-                    stringBuilder.appendln("【】DTO.set【】Name(DatasUtil.get(\"【】\",【】DTO.get【】()));"
+                    stringBuilder.appendln("【】VO.set【】Name(DatasUtil.get(\"【】\",【】VO.get【】()));"
                             , StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()), s,
                             StrUtil.oneLoweCase(dtoBO.getName()), StrUtil.oneUpperCase(dtoAttrBO.getNameStr()));
 

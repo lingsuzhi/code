@@ -6,13 +6,12 @@ import com.lsz.apply.base.service.I【Uname】Service;
 import com.lsz.common.BasePage;
 import com.lsz.common.PagesParam;
 import com.lsz.dto.【Uname】DTO;
+import com.lsz.vo.【Uname】VO;
 import com.lsz.pojo.【Uname】;
-import com.lsz.util.BeanUtil;
-import com.lsz.util.CommonUtils;
+import com.lsz.util.*;
 import com.lsz.exception.BusinessException;
-import com.lsz.util.TokenUtil;
-import com.lsz.util.UuidMd5;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,22 +43,23 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     /**
      * 处理对象
      * @param 【Lname】 【describe】
-     * @return 【Uname】DTO
+     * @return 【Uname】VO
      */
     @Override
-    public 【Uname】DTO manage【Uname】(【Uname】 【Lname】) {
+    public 【Uname】VO manage【Uname】(【Uname】 【Lname】) {
         if (【Lname】 == null) {
             return null;
         }
-        【Uname】DTO 【Lname】DTO = BeanUtil.copyBean(【Lname】, 【Uname】DTO.class);
-        //处理DTO
+        【Uname】VO 【Lname】VO = BeanUtil.copyBean(【Lname】, 【Uname】VO.class);
+        //处理VO
 【DatasUtil】
-        return 【Lname】DTO;
+        return 【Lname】VO;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public 【Uname】 add【Uname】(【Uname】 【Lname】) {
+    public String add【Uname】(【Uname】DTO 【Lname】DTO) {
+        【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
 【defaultValue】
 【notnull】
         【Lname】.setCreateTime(new Date());
@@ -69,17 +69,29 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         【Lname】.setId(UuidMd5.uuidWith22Bit());
         Integer count = 【Lname】Mapper.add【Uname】(【Lname】);
         log.info("add【Uname】 完成:{}", count);
-        return 【Lname】;
+        if (count == 1) {
+            manage【Uname】(【Lname】DTO);
+        }
+        return 【Lname】.getId();
     }
-	
+
+    private void manage【Uname】(【Uname】DTO 【Lname】DTO) {
+        String id = 【Lname】DTO.getId();
+        if (!StringUtils.isEmpty(id)) {
+            return;
+        }
+        //增删改操作
+
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer delete【Uname】(Map<String, Object> parameterMap) {
         Map<String, Object> map = CommonUtils.idList(parameterMap);
         if (map == null) {
-            【Uname】DTO 【Lname】 = this.get【Uname】(parameterMap);
-            if (【Lname】 != null) {
-                map = CommonUtils.idList(CommonUtils.toMap(【Lname】.getId()));
+            【Uname】VO 【Lname】VO = this.get【Uname】(parameterMap);
+            if (【Lname】VO != null) {
+                map = CommonUtils.idList(CommonUtils.toMap(【Lname】VO.getId()));
             }
         }
         if (map == null) {
@@ -87,29 +99,36 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         }
         Integer count = 【Lname】Mapper.delete【Uname】(map);
         log.info("delete【Uname】 完成，返回:{}", count);
+        if (count == 1) {
+            manage【Uname】(new 【Uname】DTO().setId(ValidateUtil.paramIsEmpty("id", parameterMap)));
+        }
         return count;
     }
 	
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer update【Uname】(【Uname】 【Lname】) {
-        if (【Lname】.getId() == null) {
+    public Integer update【Uname】(【Uname】DTO 【Lname】DTO) {
+        if (【Lname】DTO.getId() == null) {
             throw new BusinessException("修改失败,ID不能为空！");
         }
+        【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
 
         【Lname】.setUpdateBy(TokenUtil.getCurrentUserId());
         【Lname】.setUpdateTime(new Date());
         Integer count = 【Lname】Mapper.update【Uname】(【Lname】);
         log.info("update【Uname】 完成:{} ID:{}", count, 【Lname】.getId());
+        if (count == 1) {
+            manage【Uname】(【Lname】DTO);
+        }
         return count;
     }
 
     @Override
-    public BasePage<【Uname】DTO> get【Uname】List(PagesParam pagesParam) {
+    public BasePage<【Uname】VO> get【Uname】List(PagesParam pagesParam) {
         PagesParam.startPage(pagesParam);
         List<【Uname】> list = 【Lname】Mapper.get【Uname】List(pagesParam.getQuery());
         PageInfo<【Uname】> pageInfo = new PageInfo<>(list);
-        BasePage<【Uname】DTO> returnMap = new BasePage<>();
+        BasePage<【Uname】VO> returnMap = new BasePage<>();
         returnMap.setContent(new ArrayList<>());
         if (list.size() > 0) {
             //处理
@@ -125,33 +144,19 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     }
 
     @Override
-    public 【Uname】DTO get【Uname】(Map<String, Object> parameterMap) {
+    public 【Uname】VO get【Uname】(Map<String, Object> parameterMap) {
         return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer updateList(List<【Uname】> param) {
+    public Integer updateList(List<【Uname】DTO> param) {
         if (CollectionUtils.isEmpty(param)) {
             return 0;
         }
         int count = 0;
-        for (【Uname】 item : param) {
+        for (【Uname】DTO item : param) {
             count += this.update【Uname】(item);
-        }
-        return count;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Integer addList(List<【Uname】> param) {
-        if (CollectionUtils.isEmpty(param)) {
-            return 0;
-        }
-        int count = 0;
-        for (【Uname】 item : param) {
-            this.add【Uname】(item);
-            count++;
         }
         return count;
     }

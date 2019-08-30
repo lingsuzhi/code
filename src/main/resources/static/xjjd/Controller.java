@@ -5,11 +5,10 @@ import com.lsz.common.BasePage;
 import com.lsz.common.PagesParam;
 import com.lsz.common.ResponseInfo;
 import com.lsz.dto.【Uname】DTO;
-import com.lsz.pojo.【Uname】;
+import com.lsz.vo.【Uname】VO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import io.swagger.annotations.Api;
@@ -30,7 +29,7 @@ import java.util.Map;
  */
 @RestController("【Lname】ControllerBase")
 @RequestMapping("/【Lname】Controller")
-@Api(value = "【describe】", tags = {"【describe】Api"})
+@Api(value = "【describe】", tags = {"【describe】管理"})
 public class 【Uname】Controller {
 
     @Autowired
@@ -40,22 +39,12 @@ public class 【Uname】Controller {
      * 添加
      * @author lingsuzhi
      * @date: 【日期】
+     * @return 成功 返回ID
      */
     @ApiOperation(value = "添加【describe】", notes = "添加", httpMethod = "POST")
     @PostMapping(value = "/add【Uname】")
-    public ResponseInfo<【Uname】> add【Uname】(@RequestBody 【Uname】 【Lname】) {
-        return ResponseInfo.success(【Lname】Service.add【Uname】(【Lname】));
-    }
-
-    /**
-    * 批量修改
-     * @author lingsuzhi
-     * @date: 【日期】
-     */
-    @ApiOperation(value = "批量添加【describe】", notes = "批量添加", httpMethod = "POST")
-    @PostMapping(value = "/addList")
-    public ResponseInfo<Integer> addList(@RequestBody List<【Uname】> param) {
-        return ResponseInfo.success(【Lname】Service.addList(param));
+    public ResponseInfo<String> add【Uname】(@RequestBody 【Uname】DTO 【Lname】DTO) {
+        return ResponseInfo.success(【Lname】Service.add【Uname】(【Lname】DTO));
     }
 
     /**
@@ -76,8 +65,8 @@ public class 【Uname】Controller {
      */
     @ApiOperation(value = "修改【describe】", notes = "修改", httpMethod = "POST")
     @PostMapping(value = "/update【Uname】")
-    public ResponseInfo<Integer> update【Uname】(@RequestBody 【Uname】 【Lname】) {
-        return ResponseInfo.success(【Lname】Service.update【Uname】(【Lname】));
+    public ResponseInfo<Integer> update【Uname】(@RequestBody 【Uname】DTO 【Lname】DTO) {
+        return ResponseInfo.success(【Lname】Service.update【Uname】(【Lname】DTO));
     }
 
     /**
@@ -86,9 +75,9 @@ public class 【Uname】Controller {
      * @date: 【日期】
      */
     @ApiOperation(value = "批量修改【describe】", notes = "批量修改", httpMethod = "POST")
-    @PostMapping(value = "/updateList")
-    public ResponseInfo<Integer> updateList(@RequestBody List<【Uname】> param) {
-        return ResponseInfo.success(【Lname】Service.updateList(param));
+    @PostMapping(value = "/update【Uname】List")
+    public ResponseInfo<Integer> update【Uname】List(@RequestBody List<【Uname】DTO> paramList) {
+        return ResponseInfo.success(【Lname】Service.updateList(paramList));
     }
 
     /**
@@ -98,7 +87,7 @@ public class 【Uname】Controller {
      */
     @ApiOperation(value = "查询【describe】", notes = "查询", httpMethod = "POST")
     @PostMapping(value = "/get【Uname】")
-    public ResponseInfo<【Uname】DTO> get【Uname】(@RequestBody Map<String, Object> param) {
+    public ResponseInfo<【Uname】VO> get【Uname】(@RequestBody Map<String, Object> param) {
         return ResponseInfo.success(【Lname】Service.get【Uname】(param));
     }
 
@@ -109,8 +98,7 @@ public class 【Uname】Controller {
      */
     @ApiOperation(value = "分页查询【describe】", notes = "分页条件查询", httpMethod = "POST")
     @PostMapping(value = "/get【Uname】List")
-    public ResponseInfo<BasePage<【Uname】DTO>> get【Uname】List(@RequestBody PagesParam param) {
-        BasePage<【Uname】DTO> resultMap = 【Lname】Service.get【Uname】List(param);
-        return ResponseInfo.success(resultMap);
+    public ResponseInfo<BasePage<【Uname】VO>> get【Uname】List(@RequestBody PagesParam param) {
+        return ResponseInfo.success(【Lname】Service.get【Uname】List(param));
     }
 }

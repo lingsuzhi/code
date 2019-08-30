@@ -14,12 +14,26 @@ import org.springframework.util.StringUtils;
 import java.io.File;
 import java.util.List;
 
-//@Component
+@Component
 @Slf4j
 public class VoCode implements JavaCode {
 
     public final static String ApiOldFile = "VO.java";
     public final static String DoFilePath = JavaCode.CommonPath + "\\vo\\";
+
+    public static boolean isBase(String str) {
+        if ("isDelete".equalsIgnoreCase(str)) return true;
+//        if ("createBy".equalsIgnoreCase(str)) return true;
+        if ("updateBy".equalsIgnoreCase(str)) return true;
+        if ("createByName".equalsIgnoreCase(str)) return true;
+        if ("updateByName".equalsIgnoreCase(str)) return true;
+//        if ("createTime".equalsIgnoreCase(str)) return true;
+//        if ("updateTime".equalsIgnoreCase(str)) return true;
+        if ("version".equalsIgnoreCase(str)) return true;
+
+        if ("sort".equalsIgnoreCase(str)) return true;
+        return false;
+    }
 
     @Override
     public String apply(DtoBO dtoBO) {
@@ -29,9 +43,7 @@ public class VoCode implements JavaCode {
         sb.put("Uname", upperCase);
         sb.put("Lname", StrUtil.oneLoweCase(dtoBO.getName()));
         sb.put("describe", dtoBO.getDescribe());
-
-        sb.put("attribute", attribute(dtoBO));
-        sb.put("attributeDTO", attribute(dtoBO));
+        sb.put("attributeVO", attribute(dtoBO));
         sb.appendln(fileStr);
 
         File doFile = new File(DoFilePath + upperCase + ApiOldFile);
@@ -45,7 +57,7 @@ public class VoCode implements JavaCode {
         return sb.toString();
     }
 
-    //attributeDTO
+    //attributeVO
     public String attribute(DtoBO dtoBO) {
         CodeStringBuilder stringBuilder = new CodeStringBuilder();
         stringBuilder.addTab();
@@ -54,27 +66,42 @@ public class VoCode implements JavaCode {
             return null;
         }
         for (DtoAttrBO dtoAttrBO : attrList) {
-            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>") || isBase(dtoAttrBO.getNameStr())) {
                 continue;
             }
-
-            if ("countryId".equalsIgnoreCase(dtoAttrBO.getNameStr())) {
-                //所属国家
-
-                stringBuilder.appendln("@ApiModelProperty(value = \"所属国家名称\")");
-                stringBuilder.appendln("private String countryDesc;");
-            }
-
             String rem = dtoAttrBO.getRemStr();
 //            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
-                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\",notes=\"【】\",required = false)"
-                        , StrUtil.getRemName(rem), dtoAttrBO.getNameStr(), StrUtil.getRemName(rem, true));
+                stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\")"
+                        , StrUtil.getRemName(rem), dtoAttrBO.getNameStr());
             }
+//            if ("LocalDateTime".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
+//                stringBuilder.appendln("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+//            }
             String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";
             stringBuilder.appendln(str);
             stringBuilder.newLine();
+        }
+
+
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            String key = ":{";
+            String remStr = dtoAttrBO.getRemStr();
+            int pos = remStr.indexOf(key);
+            if (pos != -1) {
+                int i = remStr.lastIndexOf(" ", pos);
+                if (i != -1) {
+                    String s = remStr.substring(i + 1, pos);
+                    if (!StringUtils.isEmpty(remStr)) {
+                        stringBuilder.appendln("@ApiModelProperty(value=\"【】\",name=\"【】\")"
+                                , StrUtil.getRemName(remStr) + " " + s, dtoAttrBO.getNameStr());
+                    }
+                    String str = "private " + "String" + " " + dtoAttrBO.getNameStr() + "Name;";
+                    stringBuilder.appendln(str);
+                    stringBuilder.newLine();
+                }
+            }
         }
         return stringBuilder.toString();
     }
