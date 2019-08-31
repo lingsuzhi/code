@@ -78,7 +78,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
 
     private void manage【Uname】(【Uname】DTO 【Lname】DTO) {
         String id = 【Lname】DTO.getId();
-        if (!StringUtils.isEmpty(id)) {
+        if (StringUtils.isEmpty(id)) {
             return;
         }
         //增删改操作
