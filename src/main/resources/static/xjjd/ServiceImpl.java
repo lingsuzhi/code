@@ -70,6 +70,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         Integer count = 【Lname】Mapper.add【Uname】(【Lname】);
         log.info("add【Uname】 完成:{}", count);
         if (count == 1) {
+            【Lname】DTO.setId(【Lname】.getId());
             manage【Uname】(【Lname】DTO);
         }
         return 【Lname】.getId();
