@@ -59,6 +59,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String add【Uname】(【Uname】DTO 【Lname】DTO) {
+        【Lname】DTO.setId(UuidMd5.uuidWith22Bit());
         【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
 【defaultValue】
 【notnull】
@@ -66,11 +67,9 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         【Lname】.setUpdateTime(new Date());
         【Lname】.setCreateBy(TokenUtil.getCurrentUserId());
         【Lname】.setUpdateBy(【Lname】.getCreateBy());
-        【Lname】.setId(UuidMd5.uuidWith22Bit());
         Integer count = 【Lname】Mapper.add【Uname】(【Lname】);
         log.info("add【Uname】 完成:{}", count);
         if (count == 1) {
-            【Lname】DTO.setId(【Lname】.getId());
             manage【Uname】(【Lname】DTO);
         }
         return 【Lname】.getId();

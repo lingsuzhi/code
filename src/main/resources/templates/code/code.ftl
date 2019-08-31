@@ -156,10 +156,10 @@
                 arr.rem += " <param>"
             }
             if (attr.defaultVal){
-                arr.rem += "default[" + attr.defaultVal +"]"
+                arr.rem += " default[" + attr.defaultVal +"]"
             }
             strArr.push(arr.rem)
-            strArr.push("    private " + attr.type + " " + attr.name + ";");
+            strArr.push("    private " + $formatDateattr.type + " " + attr.name + ";");
         }
         strArr.push("}");
 

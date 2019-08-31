@@ -99,7 +99,7 @@ public class VueCode {
                 if (rem.contains("<日期>")) {
                     tmpStr2 = ",'YYYY-MM-DD'";
                 }
-                csb.appendln("<span style=\"margin-left: 10px\">{{ formatDate(scope.row.【】【】) }}</span>", dtoAttrBO.getNameStr(), tmpStr2);
+                csb.appendln("<span style=\"margin-left: 10px\">{{ $formatDate(scope.row.【】【】) }}</span>", dtoAttrBO.getNameStr(), tmpStr2);
                 csb.appendln("</template>");
                 csb.appendln("</el-table-column>");
             } else if (rem.contains("<rowcolor>")) {
