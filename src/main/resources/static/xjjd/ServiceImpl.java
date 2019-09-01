@@ -88,13 +88,13 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     @Transactional(rollbackFor = Exception.class)
     public Integer delete【Uname】(Map<String, Object> parameterMap) {
         Map<String, Object> map = CommonUtils.idList(parameterMap);
-        if (map == null) {
+        if (CollectionUtils.isEmpty(map)) {
             【Uname】VO 【Lname】VO = this.get【Uname】(parameterMap);
             if (【Lname】VO != null) {
                 map = CommonUtils.idList(CommonUtils.toMap(【Lname】VO.getId()));
             }
         }
-        if (map == null) {
+        if (CollectionUtils.isEmpty(map)) {
             throw new BusinessException("4404", "删除失败，数据不存在");
         }
         Integer count = 【Lname】Mapper.delete【Uname】(map);
