@@ -159,7 +159,7 @@
                 arr.rem += " default[" + attr.defaultVal +"]"
             }
             strArr.push(arr.rem)
-            strArr.push("    private " + $formatDateattr.type + " " + attr.name + ";");
+            strArr.push("    private " + attr.type + " " + attr.name + ";");
         }
         strArr.push("}");
 
