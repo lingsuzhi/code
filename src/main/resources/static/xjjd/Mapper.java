@@ -54,6 +54,14 @@ public interface 【Uname】Mapper {
     Integer update【Uname】(【Uname】 【Lname】);
 
     /**
+     * 批量修改
+     *
+     * @param paramMap 包含idsList
+     * @return 修改数量
+     */
+    Integer updateByIds(Map<String, Object> paramMap);
+
+    /**
      * 分页查询
      *
      * @param paramMap 查询条件

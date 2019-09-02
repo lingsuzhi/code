@@ -87,24 +87,14 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer delete【Uname】(Map<String, Object> parameterMap) {
-        Map<String, Object> map = CommonUtils.idList(parameterMap);
-        if (CollectionUtils.isEmpty(map)) {
-            【Uname】VO 【Lname】VO = this.get【Uname】(parameterMap);
-            if (【Lname】VO != null) {
-                map = CommonUtils.idList(CommonUtils.toMap(【Lname】VO.getId()));
-            }
-        }
-        if (CollectionUtils.isEmpty(map)) {
-            throw new BusinessException("4404", "删除失败，数据不存在");
-        }
-        Integer count = 【Lname】Mapper.delete【Uname】(map);
+        Integer count = 【Lname】Mapper.delete【Uname】(CommonUtils.idListEx(parameterMap));
         log.info("delete【Uname】 完成，返回:{}", count);
         if (count == 1) {
             manage【Uname】(new 【Uname】DTO().setId(ValidateUtil.paramIsEmpty("id", parameterMap)));
         }
         return count;
     }
-	
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer update【Uname】(【Uname】DTO 【Lname】DTO) {
@@ -164,5 +154,12 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
     @Override
     public 【Uname】 findById(String id) {
         return 【Lname】Mapper.get【Uname】(CommonUtils.toMap(id));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public Integer enable(Map<String, Object> parameterMap) {
+        Integer count = resourceInfoMapper.updateByIds(CommonUtils.idListEx(parameterMap, "is_enable", "1"));
+        log.info("updateByIds 完成，返回:{}", count);
+        return count;
     }
 }

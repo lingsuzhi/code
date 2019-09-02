@@ -22,8 +22,8 @@
     <delete id="delete【Uname】" parameterType="java.util.Map">
         DELETE FROM 【tableName】
         <where>
-            <foreach collection="idList" item="id" open="AND id IN(" separator="," close=")">
-                ${id}
+            <foreach collection="idsList" item="item" open="AND id IN(" separator="," close=")">
+                #{item}
             </foreach>
         </where>
     </delete>
@@ -36,6 +36,12 @@
 
         <where>
           【selectWhere】
+
+            <if test="idsList != null">
+                <foreach collection="idsList" item="id" open="AND tar.id IN(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
         </where>
         <if test="null != startTime">
             <![CDATA[
@@ -63,4 +69,16 @@
         </set>
         where id=#{id}
     </update>
+
+    <delete id="updateByIds" parameterType="java.util.Map">
+        update 【tableName】
+        <set>
+            ${key} = #{val}
+        </set>
+        <where>
+            <foreach collection="idsList" item="id" open="AND id IN(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
 </mapper>
