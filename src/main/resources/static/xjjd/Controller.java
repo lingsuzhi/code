@@ -101,4 +101,16 @@ public class 【Uname】Controller {
     public ResponseInfo<BasePage<【Uname】VO>> get【Uname】List(@RequestBody PagesParam param) {
         return ResponseInfo.success(【Lname】Service.get【Uname】List(param));
     }
+
+    /**
+    * 启用禁用
+    * @author lingsuzhi
+    * @date: 【日期】
+    */
+    @ApiOperation(value = "启用禁用【describe】", notes = "启用禁用", httpMethod = "POST")
+    @PostMapping(value = "/enable【Uname】")
+    public ResponseInfo<Integer> enable【Uname】(@RequestBody Map<String,Object> param) {
+        return ResponseInfo.success(【Lname】Service.enable(param));
+    }
+
 }

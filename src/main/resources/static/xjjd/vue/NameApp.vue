@@ -111,7 +111,7 @@
         },
       kill【Uname】: function (id) {
         let vm = this;
-        vm.$confirm('是否确认提交?', '提示', {
+        vm.$confirm('是否确认删除?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

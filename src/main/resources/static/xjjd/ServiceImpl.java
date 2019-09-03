@@ -156,9 +156,10 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         return 【Lname】Mapper.get【Uname】(CommonUtils.toMap(id));
     }
 
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer enable(Map<String, Object> parameterMap) {
-        Integer count = resourceInfoMapper.updateByIds(CommonUtils.idListEx(parameterMap, "is_enable", "1"));
+        Integer count = 【Lname】Mapper.updateByIds(CommonUtils.idListEx(parameterMap, "is_enable", ValidateUtil.validateParamContainKey("value", parameterMap)));
         log.info("updateByIds 完成，返回:{}", count);
         return count;
     }

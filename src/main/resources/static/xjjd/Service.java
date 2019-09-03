@@ -101,6 +101,16 @@ public interface I【Uname】Service {
      */
     Integer updateList(List<【Uname】DTO> paramList);
 
+    /**
+     * 启用禁用
+     *
+     * @param parameterMap 保护value
+     * @return Integer 数量
+     * @author lingsuzhi
+     * @date: 【日期】
+     */
+    Integer enable(Map<String, Object> parameterMap);
+
 }
 
 
