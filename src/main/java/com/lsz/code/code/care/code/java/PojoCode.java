@@ -109,7 +109,7 @@ public class PojoCode implements JavaCode {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
+//            stringBuilder.newLine();
 
             if (!StringUtils.isEmpty(rem)) {
 //                stringBuilder.appendln("//" + StrUtil.getRemName(rem));

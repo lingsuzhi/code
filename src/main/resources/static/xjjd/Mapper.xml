@@ -42,13 +42,14 @@
                     #{id}
                 </foreach>
             </if>
+            <if test="null != startTime">
+                <![CDATA[
+                    AND tar.create_time >= #{startTime}
+                    AND tar.create_time < #{endTime}
+                ]]>
+            </if>
         </where>
-        <if test="null != startTime">
-            <![CDATA[
-            AND tar.create_time >= #{startTime}
-            AND tar.create_time < #{endTime}
-            ]]>
-        </if>
+
     </select>
 
     <!--查询单个-->
