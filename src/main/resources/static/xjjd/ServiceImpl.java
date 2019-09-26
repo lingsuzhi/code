@@ -46,7 +46,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
      * @return 【Uname】VO
      */
     @Override
-    public 【Uname】VO manage【Uname】(【Uname】 【Lname】) {
+    public 【Uname】VO manage【Uname】(【Uname】 【Lname】, Map<String, Object> parameterMap) {
         if (【Lname】 == null) {
             return null;
         }
@@ -123,7 +123,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
         if (list.size() > 0) {
             //处理
             for (【Uname】 objectMap : list) {
-                returnMap.getContent().add(manage【Uname】(objectMap));
+                returnMap.getContent().add(manage【Uname】(objectMap, pagesParam.getQuery()));
             }
             returnMap.setTotal(pageInfo.getTotal());
         } else {
@@ -135,7 +135,7 @@ public class 【Uname】ServiceImpl implements I【Uname】Service {
 
     @Override
     public 【Uname】VO get【Uname】(Map<String, Object> parameterMap) {
-        return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap));
+        return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap), parameterMap);
     }
 
     @Override

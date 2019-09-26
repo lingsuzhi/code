@@ -89,7 +89,7 @@ public interface I【Uname】Service {
      * @author lingsuzhi
      * @date: 【日期】
      */
-    【Uname】VO manage【Uname】(【Uname】 【Lname】);
+    【Uname】VO manage【Uname】(【Uname】 【Lname】, Map<String, Object> parameterMap);
 
     /**
      * 批量修改

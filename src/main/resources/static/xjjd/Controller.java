@@ -1,6 +1,7 @@
 package com.lsz.apply.base.controller;
 
 import com.lsz.apply.base.service.I【Uname】Service;
+import com.lsz.common.BaseController;
 import com.lsz.common.BasePage;
 import com.lsz.common.PagesParam;
 import com.lsz.common.ResponseInfo;
@@ -30,7 +31,7 @@ import java.util.Map;
 @RestController("【Lname】ControllerBase")
 @RequestMapping("/【Lname】Controller")
 @Api(value = "【describe】", tags = {"【describe】管理"})
-public class 【Uname】Controller {
+public class 【Uname】Controller extends BaseController{
 
     @Autowired
     private I【Uname】Service 【Lname】Service;
