@@ -14,7 +14,7 @@
 <body>
 
 <p><input type="checkbox" name="killold" id="killold"/>删除旧文件
-    <input type="button" value="Json处理" id="jsonManage">&nbsp;<input type="button" value="sql转Java" id="sqlToJava"></p>
+    <input type="button" value="sql转Java" id="sqlToJava"></p>
 
 <div>
     <div style="float:left"
@@ -32,6 +32,57 @@
 
 <script>
 
+    $("#sqlTxt").keyup(function (e) {
+        if (!e.ctrlKey || e.key != 'v') {
+            return
+        }
+        var txt = $("#sqlTxt").val();
+        if (!txt) return;
+        txt = txt.trim();
+        let tmpStr = "";
+        if (txt.startsWith("{")) {
+            let arr = txt.split("\n");
+
+            for (let item of arr) {
+                item = item.replace("- ", "");
+                let index = item.indexOf("//");
+                if (index != -1) {
+                    item = item.substring(0, index);
+                }
+                tmpStr += item + "\n";
+            }
+        } else if (txt.startsWith("\"")) {
+            let arr = txt.split("\n");
+
+            for (let item of arr) {
+
+                item = item.replace("- ", "");
+                let tmpItem = '';
+                let index = item.indexOf(":");
+                if (index != -1) {
+                    tmpItem = item.substring(0, index).trim();
+
+                    if (tmpItem.length < 32) {
+                        tmpItem += "                                                         ".substring(0, 32 - tmpItem.length)
+                    }
+                }
+                if (tmpStr.length > 0) {
+                    tmpStr += ","
+                }
+                let indexEnd = item.indexOf("//");
+                tmpItem += item.substring(indexEnd).trim();
+
+                tmpStr += tmpItem + "\n";
+            }
+
+            tmpStr = "Map<String, Object> resultMap = LszUtil.copyMap(pojo,\n" + tmpStr + "\n ); \n             return resultMap;";
+        } else {
+            return
+        }
+
+        copyToClipboard(tmpStr);
+        console.log(tmpStr)
+    })
     $("#list li").click(function () {
         var fileName = $(this).text();
         if (fileName) {
@@ -46,22 +97,6 @@
         }
     });
 
-    $("#jsonManage").click(function () {
-        var txt = $("#sqlTxt").val();
-        if (!txt) return;
-        let arr = txt.split("\n");
-        let tmpStr = "";
-        for (let item of arr) {
-            item = item.replace("- ", "");
-            let index = item.indexOf("//");
-            if (index != -1) {
-                item = item.substring(0, index);
-            }
-            tmpStr += item + "\n";
-        }
-        copyToClipboard(tmpStr);
-        console.log(tmpStr)
-    })
     $("#sqlToJava").click(function () {
         var txt = $("#sqlTxt").val();
         if (!txt) return;
@@ -155,8 +190,8 @@
             if (attr.name == "isEnable") {
                 arr.rem += " <param>"
             }
-            if (attr.defaultVal){
-                arr.rem += " default[" + attr.defaultVal +"]"
+            if (attr.defaultVal) {
+                arr.rem += " default[" + attr.defaultVal + "]"
             }
             strArr.push(arr.rem)
             strArr.push("    private " + attr.type + " " + attr.name + ";");
