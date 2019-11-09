@@ -4,7 +4,7 @@ package com.jjkj.gw.main.controllers【点包名】;
 import com.jjkj.gw.main.common.util.ResultUtil;
 import com.jjkj.gw.main.common.util.ResultVO;
 import com.jjkj.gw.main.common.util.ValidateUtil;
-import com.jjkj.business.services【点包名】.I【Uname】Service;
+import com.jjkj.gw.main.services【点包名】.I【Uname】Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class 【Uname】Controller {
 
     @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
     public ResultVO get【Uname】List(@RequestBody Map<String, Object> paramMap) {
-        return ResultUtil.success(【Lname】ServiceImpl.get【Uname】List(paramMap));
+        return ResultUtil.getSuccessResult(【Lname】ServiceImpl.get【Uname】PagingList(paramMap));
     }
 
 }
