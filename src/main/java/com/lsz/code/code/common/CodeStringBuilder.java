@@ -1,7 +1,5 @@
 package com.lsz.code.code.common;
 
-import freemarker.template.utility.DateUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,6 +22,10 @@ public class CodeStringBuilder {
 
     public void put(String key, String val) {
         map.put("【" + key + "】", val);
+    }
+
+    public String get(String key) {
+        return map.get("【" + key + "】");
     }
 
     public CodeStringBuilder append(String s) {

@@ -212,6 +212,8 @@
                 //请求前的处理
             },
             success: function (req) {
+
+                window.location.reload()
                 //请求成功时处理
             },
             complete: function () {
