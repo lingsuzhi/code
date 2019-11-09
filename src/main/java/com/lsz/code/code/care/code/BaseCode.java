@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 public class BaseCode {
 
-    public final static String DoFilePath = JavaCode.BaseXmlPath + "\\";
+    public final static String DoFilePath = JavaCode.BaseXmlPath + File.separator;
     public static CodeStringBuilder sb = null;
 
     public String apply(DtoBO dtoBO) {
@@ -47,12 +47,39 @@ public class BaseCode {
         return sb.toString();
     }
 
+    private String manageFileStr(File file) {
+        String fileStr = FileUtil.readFileStr(file);
+        String key1 = "路径";
+        int pos = fileStr.indexOf(key1);
+        if (pos > -1) {
+            int posEnd = fileStr.indexOf("\r\n", pos);
+            if (posEnd > -1) {
+                sb.putKey(key1, StrUtil.zhongkuohaoStr(fileStr, key1));
+
+                fileStr = fileStr.substring(0, pos) + fileStr.substring(posEnd + 2);
+            }
+        }
+
+
+        String tableName = sb.get("tableName");
+        String[] split = tableName.split("_");
+        if (split.length > 1) {
+            sb.putKey("包名", split[1]);
+            sb.put("点包名", "." + split[1]);
+        }
+        return fileStr;
+    }
+
     private String apply(File file) {
         sb.clean();
-        String fileStr = FileUtil.readFileStr(file);
-        sb.appendln(fileStr);
+        String fileStr = manageFileStr(file);
 
-        File doFile = new File(DoFilePath + sb.get("Uname") + file.getName());
+        sb.appendln(fileStr);
+        String filePath = getFilePath();
+        if (fileStr.contains("public interface I")) {
+            filePath += "I";
+        }
+        File doFile = new File(filePath + sb.get("Uname") + file.getName());
         if (doFile.exists() && !DtoToCode.isDelete) {
             log.info("{} 已经存在", file.getName());
             return null;
@@ -63,6 +90,26 @@ public class BaseCode {
         FileUtil.doFileStr(doFile, sb.toString());
         log.info("{} 执行完成", file.getName());
         return "成功";
+    }
+
+    private String getFilePath() {
+        String str = sb.getKey("路径");
+        if (StringUtils.isEmpty(str)) {
+            str = JavaCode.BaseXmlPath;
+        }
+        str = str + File.separator;
+
+        String baoming = sb.getKey("包名");
+        if (!StringUtils.isEmpty(baoming)) {
+            str = str + baoming;
+
+            File tmpFile = new File(str);
+            if (!tmpFile.exists()) {
+                tmpFile.mkdir();
+            }
+            str = str + File.separator;
+        }
+        return str;
     }
 
     private String base_column(DtoBO dtoBO) {

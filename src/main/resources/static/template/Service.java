@@ -1,116 +1,55 @@
-package com.lsz.apply.base.service;
+路径【D:\fy\sfj\sfj\sfj-provider-gw-50007\src\main\java\com\jjkj\gw\main\services】
+package com.jjkj.gw.main.services【点包名】;
 
-import com.lsz.common.BasePage;
-import com.lsz.common.PagesParam;
-import com.lsz.dto.【Uname】DTO;
-import com.lsz.pojo.【Uname】;
-import com.lsz.vo.【Uname】VO;
-
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 
 /**
- * ClassName: I【Uname】Service
- * Description: 【describe】
- * Date: 【日期】
- *
- * @author: lingsuzhi
- * @version: 1.0
- * @since: JDK 1.8
- * @see
+ * 【describe】  Service服务接口定义
+ * @Author:  lingsuzhi
+ * @Date:    【日期】
+ * @Version: V1.0
  */
-public interface I【Uname】Service {
+public interface I【Uname】Service{
 
     /**
-     * 新增【describe】
-     *
-     * @param 【Lname】DTO 实体
-     * @return String 返回ID
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：查询数据列表
      */
-    String add【Uname】(【Uname】DTO 【Lname】DTO);
+    List<Map<String, Object>> get【Uname】List(Map<String, Object> paramMap);
 
     /**
-     * 删除【describe】
-     *
-     * @param parameterMap ID
-     * @return Map msg
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：分页查询数据列表
      */
-    Integer delete【Uname】(Map<String, Object> parameterMap);
+    Map<String, Object> get【Uname】PagingList(Map<String, Object> paramMap);
 
     /**
-     * 修改【describe】
-     *
-     * @param 【Lname】DTO 实体
-     * @return 【Uname】 实体
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：查询单条数据
      */
-    Integer update【Uname】(【Uname】DTO 【Lname】DTO);
+    Map<String, Object> get【Uname】(Map<String, Object> paramMap);
 
     /**
-     * 分页查询【describe】
-     *
-     * @param pagesParam 查询条件
-     * @return BasePage<【Uname】DTO> 分页对象
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：保存数据
      */
-    BasePage<【Uname】VO> get【Uname】List(PagesParam pagesParam);
+    int save【Uname】Record(Map<String, Object> paramMap);
 
     /**
-     * 查询【describe】
-     *
-     * @param parameterMap 查询条件
-     * @return 【Uname】DTO 实体
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：修改数据
      */
-    【Uname】VO get【Uname】(Map<String, Object> parameterMap);
+    int update【Uname】Record(Map<String, Object> paramMap);
 
     /**
-     * 查询单个
-     *
-     * @param id ID
-     * @return 【Uname】 实体
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：逻辑删除数据
      */
-    【Uname】 findById(String id);
+    int delete【Uname】Record(Map<String, Object> paramMap);
 
     /**
-     * 转换为VO
-     *
-     * @param 【Lname】 实体
-     * @return 【Uname】VO VO实体
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：物理删除数据
      */
-    【Uname】VO manage【Uname】(【Uname】 【Lname】, Map<String, Object> parameterMap);
+    int remove【Uname】Record(Map<String, Object> paramMap);
 
     /**
-     * 批量修改
-     *
-     * @param paramList 实体列表
-     * @return Integer 数量
-     * @author lingsuzhi
-     * @date: 【日期】
+     * 基础功能：批量保存数据
      */
-    Integer updateList(List<【Uname】DTO> paramList);
-
-    /**
-     * 启用禁用
-     *
-     * @param parameterMap 保护value
-     * @return Integer 数量
-     * @author lingsuzhi
-     * @date: 【日期】
-     */
-    Integer enable(Map<String, Object> parameterMap);
+    int saveBatchRecord(Map<String, Object> paramMap);
 
 }
-
-

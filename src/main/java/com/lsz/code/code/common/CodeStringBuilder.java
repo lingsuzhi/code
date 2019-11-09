@@ -10,6 +10,7 @@ public class CodeStringBuilder {
     private String leftStr = "";
 
     private Map<String, String> map = new HashMap<>();
+    private Map<String, String> mapKey = new HashMap<>();
 
     public CodeStringBuilder() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -18,6 +19,7 @@ public class CodeStringBuilder {
 
     public void clean() {
         sb = new StringBuilder();
+        mapKey.clear();
     }
 
     public void put(String key, String val) {
@@ -26,6 +28,14 @@ public class CodeStringBuilder {
 
     public String get(String key) {
         return map.get("【" + key + "】");
+    }
+
+    public void putKey(String key, String val) {
+        mapKey.put(key, val);
+    }
+
+    public String getKey(String key) {
+        return mapKey.get(key);
     }
 
     public CodeStringBuilder append(String s) {

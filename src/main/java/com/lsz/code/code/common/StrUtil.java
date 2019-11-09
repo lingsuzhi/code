@@ -33,6 +33,10 @@ public class StrUtil {
 
     }
 
+    public static String zhongkuohaoStr(String str, String key) {
+        return kuohaoStr(str, key + "【", "】");
+    }
+
     public static String getRemName(String str, boolean isEnd) {
         str = str.replace(":", " ").replace("：", " ");
         int i = str.indexOf(" ");
@@ -40,7 +44,7 @@ public class StrUtil {
             return str;
         }
         if (isEnd) {
-            if (i>=str.length()){
+            if (i >= str.length()) {
                 return "";
             }
             return str.substring(i + 1);
