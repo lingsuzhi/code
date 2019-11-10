@@ -12,13 +12,12 @@ import java.io.File;
 @Slf4j
 public class ChuliDtoFile {
     /**
-     *
      * @param file java代码文件
      * @return
      */
-    public static DtoBO chuli (File file){
+    public static DtoBO chuli(File file) {
         DtoBO dtoBO = new DtoBO();
-        if(file == null || !file.exists()){
+        if (file == null || !file.exists()) {
             log.error("文件不存在啊，请检查");
             return null;
         }
@@ -28,7 +27,7 @@ public class ChuliDtoFile {
 
 
         int tableNamePos = fileStr.indexOf("@Table(");
-        if (tableNamePos != -1){
+        if (tableNamePos != -1) {
             String tableName = StrUtil.kuohaoStr(fileStr.substring(tableNamePos), "\"", "\"");
             dtoBO.setTableName(tableName);
         }
@@ -42,14 +41,14 @@ public class ChuliDtoFile {
         String keyVal = "private ";
 
 
-        final String packStr ="package ";
+        final String packStr = "package ";
         int packPos = fileStr.indexOf(packStr);
-        if(packPos != -1){
+        if (packPos != -1) {
             int fhPos = fileStr.indexOf(";", packPos);
-            if(fhPos != -1){
-                dtoBO.setPackageStr(fileStr.substring(packPos + packStr.length(),fhPos));
-                if (dtoBO.getPackageStr().endsWith(".po")){
-                    dtoBO.setPackageStr(dtoBO.getPackageStr().replace(".po",""));
+            if (fhPos != -1) {
+                dtoBO.setPackageStr(fileStr.substring(packPos + packStr.length(), fhPos));
+                if (dtoBO.getPackageStr().endsWith(".po")) {
+                    dtoBO.setPackageStr(dtoBO.getPackageStr().replace(".po", ""));
                 }
             }
         }
@@ -99,12 +98,23 @@ public class ChuliDtoFile {
             dtoBO.setProjectName(DtoToCode.ProjectName);
 
             dtoBO.setDescribe(getRemStr(fileStr, 0, classPos));
+            if (!StringUtils.isEmpty(dtoBO.getDescribe())) {
+                if (dtoBO.getDescribe().endsWith("\r\n")) {
+                    dtoBO.setDescribe(dtoBO.getDescribe().substring(0, dtoBO.getDescribe().length() - 2));
+                }
+
+                if (dtoBO.getDescribe().endsWith("\\r\\n")) {
+                    dtoBO.setDescribe(dtoBO.getDescribe().substring(0, dtoBO.getDescribe().length() - 4));
+                }
+            }
         }
         return dtoBO;
     }
+
     private static int findStrLast(String str, int pos, String findStr) {
         return str.substring(0, pos).lastIndexOf(findStr);
     }
+
     private static String getRemStr(String codeStr, int leftPos, int rightPos) {
         int pos1 = findStrLast(codeStr, rightPos, "/*");
         int pos2 = findStrLast(codeStr, rightPos, "*/");
