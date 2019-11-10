@@ -1,85 +1,126 @@
+路径【D:\fy\sfj\sfj\sfj-provider-gw-50007\src\main\resources\mappers】
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lsz.apply.base.mapper.【Uname】Mapper">
-    <sql id="select_column">
-【select_column】
+<mapper namespace="com.jjkj.gw.main.mappers【点包名】.【Uname】Mapper">
+
+    <!-- 基础字段查询结果返回 -->
+    <resultMap id="BaseResultMap" type="java.util.LinkedHashMap">
+    </resultMap>
+
+    <!-- 扩展字段查询结果返回 -->
+    <resultMap id="ExtendResultMap" type="java.util.LinkedHashMap">
+    </resultMap>
+
+    <!-- 表的基础字段  -->
+    <sql id="Base_Column_List">
+        【select_column】
     </sql>
 
-    <!--插入-->
-    <insert id="add【Uname】" parameterType="com.lsz.pojo.【Uname】">
-        INSERT INTO 【tableName】
+    <!-- 表的扩展字段 -->
+    <sql id="Extend_Column_List">
+    </sql>
+
+    <!-- 外连接表 -->
+    <sql id="Left_Join_Table">
+    </sql>
+
+    <!-- 按条件查询单条记录(基础查询)  -->
+    <select id="selectOne" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        From 【tableName】 as ta
+        <!-- 删除标识 1:未删除；0：已删除 -->
+        Where ta.is_history = 1
+        And ta.id = #{id}
+    </select>
+
+    <!-- 按条件查询单条记录(扩展查询)  -->
+    <select id="selectOneExtend" parameterType="java.util.HashMap" resultMap="ExtendResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        <include refid="Extend_Column_List"/>
+        From 【tableName】 as ta
+        <include refid="Left_Join_Table"/>
+        <!-- 删除标识 1:未删除；0：已删除 -->
+        Where ta.is_history = 1
+        And ta.id = #{id}
+    </select>
+
+    <!-- 按条件查询列表(基础查询)  -->
+    <select id="selectList" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        From 【tableName】 ta
+        <where>
+            【selectWhere】
+
+            <if test="null != startTime">
+                <![CDATA[
+            AND ta.create_time >= #{startTime}
+            AND ta.create_time < #{endTime}
+            ]]>
+            </if>
+        </where>
+        Order by ta.create_time DESC
+    </select>
+
+    <!-- 按条件查询列表(扩展查询)  -->
+    <select id="selectExtendList" parameterType="java.util.HashMap" resultMap="ExtendResultMap">
+        Select
+        <include refid="Base_Column_List"/>
+        <include refid="Extend_Column_List"/>
+        From 【tableName】 ta
+        <include refid="Left_Join_Table"/>
+        <where>
+            【selectWhere】
+            <if test="null != startTime">
+                <![CDATA[
+            AND ta.create_time >= #{startTime}
+            AND ta.create_time < #{endTime}
+            ]]>
+            </if>
+        </where>
+        Order by ta.create_time DESC
+    </select>
+
+    <!-- 添加单条数据  -->
+    <insert id="insertRecord" parameterType="java.util.HashMap">
+        Insert into 【tableName】
         (
         【base_column】
         )
-        VALUES
+        Values
         (
         【value_column】
         )
     </insert>
 
+    <!-- 修改数据  -->
+    <update id="updateRecord" parameterType="java.util.HashMap">
+        Update 【tableName】
+        <set>
+            【updateSet】
 
-    <!--删除-->
-    <delete id="delete【Uname】" parameterType="java.util.Map">
-        DELETE FROM 【tableName】
-        <where>
-            <foreach collection="idsList" item="item" open="AND id IN(" separator="," close=")">
-                #{item}
-            </foreach>
-        </where>
-    </delete>
+        </set>
+        Where id = #{id}
+    </update>
 
-    <!--查询列表-->
-    <select id="get【Uname】List" parameterType="java.util.Map" resultType="com.lsz.pojo.【Uname】">
-        select
-        <include refid="select_column"/>
-        FROM 【tableName】 tar
-
-        <where>
-          【selectWhere】
-
-            <if test="idsList != null">
-                <foreach collection="idsList" item="id" open="AND tar.id IN(" separator="," close=")">
-                    #{id}
-                </foreach>
-            </if>
-            <if test="null != startTime">
-                <![CDATA[
-                    AND tar.create_time >= #{startTime}
-                    AND tar.create_time < #{endTime}
-                ]]>
-            </if>
-        </where>
-
-    </select>
-
-    <!--查询单个-->
-    <select id="get【Uname】" parameterType="java.util.Map" resultType="com.lsz.pojo.【Uname】">
-        select
-        <include refid="select_column"/>
-        from 【tableName】 tar
+    <!-- 物理删除  -->
+    <delete id="deletePhysics" parameterType="java.util.HashMap">
+        Delete from 【tableName】
         <where>
             【selectWhere】
         </where>
-    </select>
+    </delete>
 
-    <!--修改-->
-    <update id="update【Uname】" parameterType="com.lsz.pojo.【Uname】">
-        update 【tableName】
-        <set>
-【updateSet】
-        </set>
-        where id=#{id}
+    <!-- 逻辑删除  -->
+    <update id="deleteLogic" parameterType="java.util.HashMap">
+        Update 【tableName】
+        Set is_history = 0
+        <where>
+            【selectWhere】
+        </where>
     </update>
 
-    <delete id="updateByIds" parameterType="java.util.Map">
-        update 【tableName】
-        <set>
-            ${key} = #{val}
-        </set>
-        <where>
-            <foreach collection="idsList" item="id" open="AND id IN(" separator="," close=")">
-                #{id}
-            </foreach>
-        </where>
-    </delete>
+
 </mapper>

@@ -1,166 +1,167 @@
-package com.lsz.apply.base.service.impl;
+路径【D:\fy\sfj\sfj\sfj-provider-gw-50007\src\main\java\com\jjkj\gw\main\services】
+package com.jjkj.gw.main.services【点包名】.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lsz.apply.base.mapper.【Uname】Mapper;
-import com.lsz.apply.base.service.I【Uname】Service;
-import com.lsz.common.BasePage;
-import com.lsz.common.PagesParam;
-import com.lsz.dto.【Uname】DTO;
-import com.lsz.vo.【Uname】VO;
-import com.lsz.pojo.【Uname】;
-import com.lsz.util.*;
-import com.lsz.exception.BusinessException;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import com.jjkj.gw.main.common.util.*;
+import com.jjkj.gw.main.mappers【点包名】.【Uname】Mapper;
+import com.jjkj.gw.main.mappers【点包名】.【Uname】Mapper;
+import com.jjkj.gw.main.base.BaseService;
+import com.jjkj.gw.main.services【点包名】.I【Uname】Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.lsz.apply.datas.DatasUtil;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * ClassName: 【Uname】ServiceImpl
- * Description: 【describe】
- * Date: 【日期】
+ * 【describe】业务功能服务实现类
  *
- * @author: lingsuzhi
- * @version: 1.0
- * @since: JDK 1.8
- * @see
+ * @Author:  lingsuzhi
+ * @Date:    【日期】
+ * @Version: V1.0
  */
-@Service("【Lname】ServiceBase")
-@Slf4j
-public class 【Uname】ServiceImpl implements I【Uname】Service {
+@Service
+public class 【Uname】ServiceImpl extends BaseService implements I【Uname】Service {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private 【Uname】Mapper 【Lname】Mapper;
 
     /**
-     * 处理对象
-     * @param 【Lname】 【describe】
-     * @return 【Uname】VO
+     * 基础功能：不分页查询数据集合
+     *
+     * @param paramMap
+     * @return
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
      */
     @Override
-    public 【Uname】VO manage【Uname】(【Uname】 【Lname】, Map<String, Object> parameterMap) {
-        if (【Lname】 == null) {
-            return null;
-        }
-        【Uname】VO 【Lname】VO = BeanUtil.copyBean(【Lname】, 【Uname】VO.class);
-        //处理VO
-【DatasUtil】
-        return 【Lname】VO;
+    public List<Map<String, Object>> get【Uname】List(Map<String, Object> paramMap) {
+        logger.info("[【describe】]不分页查询数据!!!");
+        List<Map<String, Object>> dataList = 【Lname】Mapper.selectExtendList(paramMap);
+        return dataList;
     }
 
+
+    /**
+     * 基础功能：分页查询数据集合
+     *
+     * @param paramMap
+     * @return
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
+     */
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public String add【Uname】(【Uname】DTO 【Lname】DTO) {
-        【Lname】DTO.setId(UuidMd5.uuidWith22Bit());
-        【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
-【defaultValue】
-【notnull】
-        【Lname】.setCreateTime(new Date());
-        【Lname】.setUpdateTime(new Date());
-        【Lname】.setCreateBy(TokenUtil.getCurrentUserId());
-        【Lname】.setUpdateBy(【Lname】.getCreateBy());
-        Integer count = 【Lname】Mapper.add【Uname】(【Lname】);
-        log.info("add【Uname】 完成:{}", count);
-        if (count == 1) {
-            manage【Uname】(【Lname】DTO);
+    public Map<String, Object> get【Uname】PagingList(Map<String, Object> paramMap) {
+        logger.info("[【describe】]分页查询数据!!!");
+        if (!paramMap.containsKey("pageNum")) {
+            paramMap.put("pageNum", "1");
         }
-        return 【Lname】.getId();
+
+        if (!paramMap.containsKey("pageSize")) {
+            //默认查询10条
+            paramMap.put("pageSize", "10");
+        }
+
+        //设置分页参数
+
+        //当前页
+        Integer pNum = Integer.parseInt(paramMap.get("pageNum").toString());
+        //每页显示多少条数据
+        Integer pSize = Integer.parseInt(paramMap.get("pageSize").toString());
+        PageHelper.startPage(pNum, pSize);
+        PageInfo<Map<String, Object>> pageInfo = new PageInfo(【Lname】Mapper.selectExtendList(paramMap));
+        return PageInfoUtil.getResultMap(pageInfo);
     }
 
-    private void manage【Uname】(【Uname】DTO 【Lname】DTO) {
-        String id = 【Lname】DTO.getId();
-        if (StringUtils.isEmpty(id)) {
-            return;
-        }
-        //增删改操作
-
-    }
-
+    /**
+     * 基础功能：查询单条数据
+     *
+     * @param paramMap
+     * @return
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
+     */
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Integer delete【Uname】(Map<String, Object> parameterMap) {
-        Integer count = 【Lname】Mapper.delete【Uname】(CommonUtils.idListEx(parameterMap));
-        log.info("delete【Uname】 完成，返回:{}", count);
-        if (count == 1) {
-            manage【Uname】(new 【Uname】DTO().setId(ValidateUtil.paramIsEmpty("id", parameterMap)));
-        }
-        return count;
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Integer update【Uname】(【Uname】DTO 【Lname】DTO) {
-        if (【Lname】DTO.getId() == null) {
-            throw new BusinessException("修改失败,ID不能为空！");
-        }
-        【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
-
-        【Lname】.setUpdateBy(TokenUtil.getCurrentUserId());
-        【Lname】.setUpdateTime(new Date());
-        Integer count = 【Lname】Mapper.update【Uname】(【Lname】);
-        log.info("update【Uname】 完成:{} ID:{}", count, 【Lname】.getId());
-        if (count == 1) {
-            manage【Uname】(【Lname】DTO);
-        }
-        return count;
-    }
-
-    @Override
-    public BasePage<【Uname】VO> get【Uname】List(PagesParam pagesParam) {
-        PagesParam.startPage(pagesParam);
-        List<【Uname】> list = 【Lname】Mapper.get【Uname】List(pagesParam.getQuery());
-        PageInfo<【Uname】> pageInfo = new PageInfo<>(list);
-        BasePage<【Uname】VO> returnMap = new BasePage<>();
-        returnMap.setContent(new ArrayList<>());
-        if (list.size() > 0) {
-            //处理
-            for (【Uname】 objectMap : list) {
-                returnMap.getContent().add(manage【Uname】(objectMap, pagesParam.getQuery()));
-            }
-            returnMap.setTotal(pageInfo.getTotal());
+    public Map<String, Object> get【Uname】(Map<String, Object> paramMap) {
+        Map<String, Object> resultMap = 【Lname】Mapper.selectOneExtend(paramMap);
+        if (resultMap != null) {
+            return resultMap;
         } else {
-            returnMap.setTotal(0L);
+            logger.info("[【describe】]查询结果为空!!!");
+            return new HashMap<>();
         }
-
-        return returnMap;
     }
 
+    /**
+     * 基础功能：保存(添加)数据
+     *
+     * @param paramMap
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
+     */
     @Override
-    public 【Uname】VO get【Uname】(Map<String, Object> parameterMap) {
-        return manage【Uname】(【Lname】Mapper.get【Uname】(parameterMap), parameterMap);
+    public int save【Uname】Record(Map<String, Object> paramMap) {
+        //设置主键ID
+        String newId = UUIDUtil.getUUID();
+        paramMap.put("id", newId);
+        //设置必要用户参数
+        this.setBaseParam(paramMap);
+        logger.info("[【describe】]保存数据，newId=" + newId);
+        return 【Lname】Mapper.insertRecord(paramMap);
     }
 
+    /**
+     * 基础功能：修改数据
+     *
+     * @param paramMap
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
+     */
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Integer updateList(List<【Uname】DTO> param) {
-        if (CollectionUtils.isEmpty(param)) {
-            return 0;
-        }
-        int count = 0;
-        for (【Uname】DTO item : param) {
-            count += this.update【Uname】(item);
-        }
-        return count;
+    public int update【Uname】Record(Map<String, Object> paramMap) {
+        //设置必要用户参数
+        this.setBaseParam(paramMap);
+        logger.info("[【describe】]修改数据，参数=" + paramMap);
+        return 【Lname】Mapper.updateRecord(paramMap);
     }
 
+    /**
+     * 基础功能：逻辑删除数据
+     *
+     * @param paramMap
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
+     */
     @Override
-    public 【Uname】 findById(String id) {
-        return 【Lname】Mapper.get【Uname】(CommonUtils.toMap(id));
+    public int delete【Uname】Record(Map<String, Object> paramMap) {
+        logger.info("[【describe】]删除数据，参数=" + paramMap);
+        return 【Lname】Mapper.deleteLogic(paramMap);
     }
 
+    /**
+     * 基础功能：物理删除数据
+     *
+     * @param paramMap
+     * @Author: lingsuzhi
+     * @Date: 2019-09-05
+     * @Version: V1.0
+     */
     @Override
-    @Transactional(rollbackFor = Exception.class)
-    public Integer enable(Map<String, Object> parameterMap) {
-        Integer count = 【Lname】Mapper.updateByIds(CommonUtils.idListEx(parameterMap, "is_enable", ValidateUtil.validateParamContainKey("value", parameterMap)));
-        log.info("updateByIds 完成，返回:{}", count);
-        return count;
+    public int remove【Uname】Record(Map<String, Object> paramMap) {
+        logger.info("[【describe】]物理删除数据，参数=" + paramMap);
+        return 【Lname】Mapper.deletePhysics(paramMap);
     }
+
 }

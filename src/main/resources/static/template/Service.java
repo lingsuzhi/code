@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.List;
 
 /**
- * 【describe】  Service服务接口定义
+ * 【describe】Service服务接口定义
  * @Author:  lingsuzhi
  * @Date:    【日期】
  * @Version: V1.0
@@ -46,10 +46,5 @@ public interface I【Uname】Service{
      * 基础功能：物理删除数据
      */
     int remove【Uname】Record(Map<String, Object> paramMap);
-
-    /**
-     * 基础功能：批量保存数据
-     */
-    int saveBatchRecord(Map<String, Object> paramMap);
 
 }

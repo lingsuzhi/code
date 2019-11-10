@@ -36,6 +36,8 @@ public class BaseCode {
         sb.put("base_column", base_column(dtoBO));
         sb.put("updateSet", updateSet(dtoBO));
         sb.put("value_column", value_column(dtoBO));
+
+
         sb.put("selectWhere", selectWhere(dtoBO));
 
         File dir = new File(DtoToCode.OldFilePath);
@@ -78,6 +80,14 @@ public class BaseCode {
         String filePath = getFilePath();
         if (fileStr.contains("public interface I")) {
             filePath += "I";
+        } else if (fileStr.contains(".impl;")) {
+            filePath += "impl" + File.separator;
+
+
+            File tmpFile = new File(filePath);
+            if (!tmpFile.exists()) {
+                tmpFile.mkdir();
+            }
         }
         File doFile = new File(filePath + sb.get("Uname") + file.getName());
         if (doFile.exists() && !DtoToCode.isDelete) {
@@ -159,9 +169,9 @@ public class BaseCode {
 
             }
             if ("name".equals(nameStr)) {
-                stringBuilder.appendln("    AND tar.【】 LIKE concat(concat('%',#{【】}),'%')", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+                stringBuilder.appendln("    AND ta.【】 LIKE concat(concat('%',#{【】}),'%')", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
             } else {
-                stringBuilder.appendln("    AND tar.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+                stringBuilder.appendln("    AND ta.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
             }
             stringBuilder.appendln("</if>");
         }
@@ -242,7 +252,7 @@ public class BaseCode {
             }
             String lowDo = StrUtil.strLowDo(nameStr);
 //            if (!lowDo.equals(nameStr)) {
-//                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
+//                stringBuilder.appendln("ta.【】 as 【】", lowDo, nameStr);
 //            } else {
             stringBuilder.appendln("<id column=\"【】\" property=\"【】\"/>", lowDo, nameStr);
 //            }
@@ -267,9 +277,9 @@ public class BaseCode {
             }
             String lowDo = StrUtil.strLowDo(nameStr);
             if (!lowDo.equals(nameStr)) {
-                stringBuilder.appendln("tar.【】 as 【】", lowDo, nameStr);
+                stringBuilder.appendln("ta.【】 as 【】", lowDo, nameStr);
             } else {
-                stringBuilder.appendln("tar.【】", lowDo);
+                stringBuilder.appendln("ta.【】", lowDo);
             }
         }
         return stringBuilder.toString();

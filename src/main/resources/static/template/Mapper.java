@@ -1,6 +1,6 @@
-package com.lsz.apply.base.mapper;
+路径【D:\fy\sfj\sfj\sfj-provider-gw-50007\src\main\java\com\jjkj\gw\main\mappers】
+package com.jjkj.gw.main.mappers【点包名】;
 
-import com.lsz.pojo.【Uname】;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -8,67 +8,54 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ClassName: 【Uname】Mapper
- * Description: 【describe】
- * Date: 【日期】
- *
- * @author: lingsuzhi
- * @version: 1.0
- * @since: JDK 1.8
- * @see
+ * 【describe】 mapper功能定义类
+ * @Author:  lingsuzhi
+ * @Date:    【日期】
+ * @Version: V1.0
  */
 @Mapper
-@Component("【Lname】MapperBase")
-public interface 【Uname】Mapper {
+@Component(value = "【Lname】Mapper")
+public interface 【Uname】Mapper{
 
     /**
-     * 新增
-     *
-     * @param 【Lname】 对象
-     * @return 新增数量
+     * 基础功能：查询单条记录(基础查询)
      */
-    Integer add【Uname】(【Uname】 【Lname】);
+    Map<String, Object> selectOne(Map<String, Object> paramMap);
 
     /**
-     * 删除
-     *
-     * @param paramMap ids
-     * @return 删除数量
+     * 基础功能：查询单条记录(扩展查询)
      */
-    Integer delete【Uname】(Map<String, Object> paramMap);
+    Map<String, Object> selectOneExtend(Map<String, Object> paramMap);
 
     /**
-     * 查询
-     *
-     * @param paramMap 查询条件
-     * @return 对象
+     * 基础功能：查询数据列表(基础查询)
      */
-    【Uname】 get【Uname】(Map<String, Object> paramMap);
+    List<Map<String, Object>> selectList(Map<String, Object> paramMap);
 
     /**
-     * 修改
-     *
-     * @param 【Lname】 对象
-     * @return 修改数量
+     * 基础功能：查询数据列表(扩展查询)
      */
-    Integer update【Uname】(【Uname】 【Lname】);
+    List<Map<String, Object>> selectExtendList(Map<String, Object> paramMap);
 
     /**
-     * 批量修改
-     *
-     * @param paramMap 包含idsList
-     * @return 修改数量
+     * 基础功能：添加记录
      */
-    Integer updateByIds(Map<String, Object> paramMap);
+    int insertRecord(Map<String, Object> paramMap);
+
 
     /**
-     * 分页查询
-     *
-     * @param paramMap 查询条件
-     * @return 查询列表
+     * 基础功能：修改记录
      */
-    List<【Uname】> get【Uname】List(Map<String, Object> paramMap);
+    int updateRecord(Map<String, Object> paramMap);
+
+    /**
+     * 基础功能：物理删除
+     */
+    int deletePhysics(Map<String, Object> paramMap);
+
+    /**
+     * 基础功能：逻辑删除
+     */
+    int deleteLogic(Map<String, Object> paramMap);
+
 }
-
-
-
