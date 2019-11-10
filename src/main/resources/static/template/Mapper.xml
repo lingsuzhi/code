@@ -109,14 +109,14 @@
     <delete id="deletePhysics" parameterType="java.util.HashMap">
         Delete from 【tableName】
         <where>
-            【selectWhere】
+            id = #{id}
         </where>
     </delete>
 
     <!-- 逻辑删除  -->
     <update id="deleteLogic" parameterType="java.util.HashMap">
-        Update 【tableName】
-        Set is_history = 1
+        Update 【tableName】 ta
+        Set ta.is_history = 1
         <where>
             【selectWhere】
         </where>
