@@ -29,8 +29,8 @@
         Select
         <include refid="Base_Column_List"/>
         From 【tableName】 as ta
-        <!-- 删除标识 1:未删除；0：已删除 -->
-        Where ta.is_history = 1
+        <!-- 删除标识 0:未删除；1：已删除 -->
+        Where ta.is_history = 0
         And ta.id = #{id}
     </select>
 
@@ -41,8 +41,8 @@
         <include refid="Extend_Column_List"/>
         From 【tableName】 as ta
         <include refid="Left_Join_Table"/>
-        <!-- 删除标识 1:未删除；0：已删除 -->
-        Where ta.is_history = 1
+        <!-- 删除标识 0:未删除；1：已删除 -->
+        Where ta.is_history = 0
         And ta.id = #{id}
     </select>
 
@@ -116,7 +116,7 @@
     <!-- 逻辑删除  -->
     <update id="deleteLogic" parameterType="java.util.HashMap">
         Update 【tableName】
-        Set is_history = 0
+        Set is_history = 1
         <where>
             【selectWhere】
         </where>

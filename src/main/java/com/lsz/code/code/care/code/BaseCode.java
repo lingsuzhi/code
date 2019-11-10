@@ -227,7 +227,14 @@ public class BaseCode {
             if (stringBuilder.toString().length() > 0) {
                 stringBuilder.appendNoTab(",");
             }
-
+            if ("isHistory".equals(nameStr) || "isDelete".equals(nameStr)) {
+                stringBuilder.appendNoTab("0");
+                continue;
+            }
+            if ("delFlag".equals(nameStr)) {
+                stringBuilder.appendNoTab("1");
+                continue;
+            }
             stringBuilder.appendNoTab("#{" + nameStr + "}");
 
         }
