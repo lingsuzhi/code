@@ -42,8 +42,10 @@
         From 【tableName】 as ta
         <include refid="Left_Join_Table"/>
         <!-- 删除标识 0:未删除；1：已删除 -->
-        Where ta.is_history = 0
-        And ta.id = #{id}
+        <where>
+        AND ta.is_history = 0
+        【selectWhere】
+        </where>
     </select>
 
     <!-- 按条件查询列表(基础查询)  -->
@@ -52,6 +54,7 @@
         <include refid="Base_Column_List"/>
         From 【tableName】 ta
         <where>
+            AND ta.is_history = 0
             【selectWhere】
 
             <if test="null != startTime">
@@ -72,6 +75,7 @@
         From 【tableName】 ta
         <include refid="Left_Join_Table"/>
         <where>
+            AND ta.is_history = 0
             【selectWhere】
             <if test="null != startTime">
                 <![CDATA[

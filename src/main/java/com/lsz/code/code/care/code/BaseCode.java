@@ -157,6 +157,11 @@ public class BaseCode {
             if (dtoAttrBO.getRemStr().contains("<隐藏>") || dtoAttrBO.getRemStr().contains("<hide>")) {
                 continue;
             }
+            String nameStr = dtoAttrBO.getNameStr();
+            if (dtoAttrBO.getNameStr().equals("isHistory") || dtoAttrBO.getNameStr().equals("delFlag") || "isDelete".equals(nameStr)) {
+                continue;
+            }
+
             String rem = dtoAttrBO.getRemStr();
             if (!StringUtils.isEmpty(rem)) {
                 rem = rem.replace(" <param>", "").trim();
@@ -164,7 +169,6 @@ public class BaseCode {
                     stringBuilder.appendln("        <!-- 【】 -->", rem);
                 }
             }
-            String nameStr = dtoAttrBO.getNameStr();
             if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
                 String str = "<if test=\"【】 != null and 【】 != ''\">";
                 stringBuilder.appendln(str, nameStr, nameStr);

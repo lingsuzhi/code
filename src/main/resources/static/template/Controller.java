@@ -31,14 +31,14 @@ public class 【Uname】Controller {
 
     //【describe】Service
     @Autowired
-    private I【Uname】Service 【Lname】ServiceImpl;
+    private I【Uname】Service 【Lname】Service;
 
     /**
     * 基础功能：查询数据列表
     */
     @RequestMapping(value = "/get【Uname】List", method = RequestMethod.POST)
     public ResultVO<List<Map<String, Object>>> get【Uname】List(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.get【Uname】List(paramMap));
+        return  ResultUtil.success(【Lname】Service.get【Uname】List(paramMap));
     }
 
     /**
@@ -46,7 +46,7 @@ public class 【Uname】Controller {
     */
     @RequestMapping(value = "/get【Uname】PagingList", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> get【Uname】PagingList(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.get【Uname】PagingList(paramMap));
+        return  ResultUtil.success(【Lname】Service.get【Uname】PagingList(paramMap));
     }
 
     /**
@@ -54,7 +54,7 @@ public class 【Uname】Controller {
     */
     @RequestMapping(value = "/get【Uname】", method = RequestMethod.POST)
     public ResultVO<Map<String, Object>> get【Uname】(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.get【Uname】(paramMap));
+        return  ResultUtil.success(【Lname】Service.get【Uname】(paramMap));
     }
 
     /**
@@ -62,7 +62,7 @@ public class 【Uname】Controller {
     */
     @RequestMapping(value = "/save【Uname】Record", method = RequestMethod.POST)
     public ResultVO save【Uname】Record(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.save【Uname】Record(paramMap));
+        return  ResultUtil.success(【Lname】Service.save【Uname】Record(paramMap));
     }
 
     /**
@@ -70,7 +70,7 @@ public class 【Uname】Controller {
     */
     @RequestMapping(value = "/update【Uname】Record", method = RequestMethod.POST)
     public ResultVO update【Uname】Record(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.update【Uname】Record(paramMap));
+        return  ResultUtil.success(【Lname】Service.update【Uname】Record(paramMap));
     }
 
     /**
@@ -78,7 +78,7 @@ public class 【Uname】Controller {
     */
     @RequestMapping(value = "/delete【Uname】Record", method = RequestMethod.POST)
     public ResultVO delete【Uname】Record(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.delete【Uname】Record(paramMap));
+        return  ResultUtil.success(【Lname】Service.delete【Uname】Record(paramMap));
     }
 
     /**
@@ -86,6 +86,6 @@ public class 【Uname】Controller {
     */
     @RequestMapping(value = "/remove【Uname】Record", method = RequestMethod.POST)
     public ResultVO remove【Uname】Record(@RequestBody Map<String, Object> paramMap){
-        return  ResultUtil.success(【Lname】ServiceImpl.remove【Uname】Record(paramMap));
+        return  ResultUtil.success(【Lname】Service.remove【Uname】Record(paramMap));
     }
 }
