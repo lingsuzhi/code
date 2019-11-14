@@ -13,7 +13,7 @@
 
     <!-- 表的基础字段  -->
     <sql id="Base_Column_List">
-        【select_column】
+【select_column】
     </sql>
 
     <!-- 表的扩展字段 -->
@@ -99,7 +99,7 @@
     <update id="updateRecord" parameterType="java.util.HashMap">
         Update 【tableName】
         <set>
-            【updateSet】
+【updateSet】
 
         </set>
         Where id = #{id}

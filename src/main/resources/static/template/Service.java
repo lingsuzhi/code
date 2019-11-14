@@ -30,21 +30,21 @@ public interface I【Uname】Service{
     /**
      * 基础功能：保存数据
      */
-    int save【Uname】Record(Map<String, Object> paramMap);
+    Integer save【Uname】Record(Map<String, Object> paramMap);
 
     /**
      * 基础功能：修改数据
      */
-    int update【Uname】Record(Map<String, Object> paramMap);
+    Integer update【Uname】Record(Map<String, Object> paramMap);
 
     /**
      * 基础功能：逻辑删除数据
      */
-    int delete【Uname】Record(Map<String, Object> paramMap);
+    Integer delete【Uname】Record(Map<String, Object> paramMap);
 
     /**
      * 基础功能：物理删除数据
      */
-    int remove【Uname】Record(Map<String, Object> paramMap);
+    Integer remove【Uname】Record(Map<String, Object> paramMap);
 
 }

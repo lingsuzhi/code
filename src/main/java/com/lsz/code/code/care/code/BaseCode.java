@@ -158,7 +158,12 @@ public class BaseCode {
                 continue;
             }
             String rem = dtoAttrBO.getRemStr();
-            stringBuilder.newLine();
+            if (!StringUtils.isEmpty(rem)) {
+                rem = rem.replace(" <param>", "").trim();
+                if (!StringUtils.isEmpty(rem)) {
+                    stringBuilder.appendln("        <!-- 【】 -->", rem);
+                }
+            }
             String nameStr = dtoAttrBO.getNameStr();
             if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
                 String str = "<if test=\"【】 != null and 【】 != ''\">";
@@ -279,10 +284,18 @@ public class BaseCode {
                 continue;
             }
             String nameStr = dtoAttrBO.getNameStr();
+            String rem = dtoAttrBO.getRemStr();
+            if (!StringUtils.isEmpty(rem)) {
+                rem = rem.replace(" <param>", "").trim();
+                if (!StringUtils.isEmpty(rem)) {
+                    stringBuilder.appendln("        <!-- 【】 -->", rem);
+                }
+            }
             if (stringBuilder.toString().length() > 0) {
-                stringBuilder.appendNoTab(",");
+                stringBuilder.appendNoTab("        ,");
             }
             String lowDo = StrUtil.strLowDo(nameStr);
+
             if (!lowDo.equals(nameStr)) {
                 stringBuilder.appendln("ta.【】 as 【】", lowDo, nameStr);
             } else {

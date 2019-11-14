@@ -110,7 +110,7 @@ public class 【Uname】ServiceImpl extends BaseService implements I【Uname】S
      * @Version: V1.0
      */
     @Override
-    public int save【Uname】Record(Map<String, Object> paramMap) {
+    public Integer save【Uname】Record(Map<String, Object> paramMap) {
         //设置主键ID
         String newId = UUIDUtil.getUUID();
         paramMap.put("id", newId);
@@ -129,7 +129,7 @@ public class 【Uname】ServiceImpl extends BaseService implements I【Uname】S
      * @Version: V1.0
      */
     @Override
-    public int update【Uname】Record(Map<String, Object> paramMap) {
+    public Integer update【Uname】Record(Map<String, Object> paramMap) {
         //设置必要用户参数
         this.setBaseParam(paramMap);
         logger.info("[【describe】]修改数据，参数=" + paramMap);
@@ -145,7 +145,7 @@ public class 【Uname】ServiceImpl extends BaseService implements I【Uname】S
      * @Version: V1.0
      */
     @Override
-    public int delete【Uname】Record(Map<String, Object> paramMap) {
+    public Integer delete【Uname】Record(Map<String, Object> paramMap) {
         logger.info("[【describe】]删除数据，参数=" + paramMap);
         return 【Lname】Mapper.deleteLogic(paramMap);
     }
@@ -159,7 +159,7 @@ public class 【Uname】ServiceImpl extends BaseService implements I【Uname】S
      * @Version: V1.0
      */
     @Override
-    public int remove【Uname】Record(Map<String, Object> paramMap) {
+    public Integer remove【Uname】Record(Map<String, Object> paramMap) {
         logger.info("[【describe】]物理删除数据，参数=" + paramMap);
         return 【Lname】Mapper.deletePhysics(paramMap);
     }
