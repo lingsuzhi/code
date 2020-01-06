@@ -1,29 +1,29 @@
 路径【D:\home\depot\depot-model\src\main\java\com\lsz\model\po】
-package com.lsz.po;
+package com.lsz.model.po【点包名】;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
 import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.util.Date;
 
 /**
- * ClassName: 【Uname】
- * Description: 【describe】
- * Date: 【日期】
- *
- * @author: lingsuzhi
- * @version: 1.0
- * @since: JDK 1.8
- * @see
+ * 【describe】 PO
+ * @Author:  lingsuzhi
+ * @Date:    【日期】
+ * @Version: V1.0
  */
 @Data
 @Accessors(chain = true)
-public class 【Uname】PO  implements Serializable {
+public class 【Uname】 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-【attribute空行NoId】
+    @TableId(value = "id",type = IdType.INPUT)
+    private String id;
 
+【attribute空行NoId】
 
 }

@@ -3,8 +3,8 @@ package com.lsz.apply.base.mapper【点包名】;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lsz.pojo.【Uname】;
-import com.lsz.vo.【Uname】VO;
+import com.lsz.model.po【点包名】.【Uname】;
+import com.lsz.model.vo【点包名】.【Uname】VO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

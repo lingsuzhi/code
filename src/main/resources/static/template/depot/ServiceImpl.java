@@ -1,19 +1,19 @@
-路径【D:\home\depot\depot-apply\src\main\java\com\lsz\apply\base\service\impl】
+路径【D:\home\depot\depot-apply\src\main\java\com\lsz\apply\base\service】
 package com.lsz.apply.base.service【点包名】.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lsz.apply.base.mapper.【Uname】Mapper;
-import com.lsz.apply.base.service.I【Uname】Service;
-import com.lsz.common.PagesParam;
-import com.lsz.dto.【Uname】DTO;
-import com.lsz.exception.BusinessException;
-import com.lsz.pojo.【Uname】;
-import com.lsz.util.BeanUtil;
-import com.lsz.util.CommonUtils;
-import com.lsz.util.TokenUtil;
-import com.lsz.util.UuidMd5;
-import com.lsz.vo.【Uname】VO;
+import com.lsz.model.dto【点包名】.【Uname】DTO;
+import com.lsz.model.po【点包名】.【Uname】;
+import com.lsz.model.vo【点包名】.【Uname】VO;
+import com.lsz.apply.base.mapper【点包名】.【Uname】Mapper;
+import com.lsz.apply.base.service【点包名】.I【Uname】Service;
+import com.lsz.core.common.PagesParam;
+import com.lsz.core.exception.BusinessException;
+import com.lsz.core.util.BeanUtil;
+import com.lsz.core.util.CommonUtils;
+import com.lsz.core.util.TokenUtil;
+import com.lsz.core.util.UuidMd5;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +35,7 @@ public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Un
     @Override
     public Page<【Uname】VO> page【Uname】(PagesParam pagesParam) {
         Page<【Uname】VO> 【Lname】VOPage = baseMapper.page【Uname】(pagesParam.getPage(), pagesParam.getQuery());
-
+        log.info("分页查询【describe】 总数:{}", systemUsersVOPage.getTotal());
         return 【Lname】VOPage;
     }
 
@@ -45,7 +45,7 @@ public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Un
         【Lname】DTO.setId(UuidMd5.uuidWith22Bit());
         【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
 
-        【Lname】.setCreateBy(TokenUtil.getCurrentUserId())
+        【Lname】.setCreateBy(TokenUtil.getUserId())
                 .setUpdateBy(【Lname】.getCreateBy())
                 .setCreateTime(new Date())
                 .setUpdateTime(【Lname】.getCreateTime());
@@ -62,7 +62,7 @@ public class 【Uname】ServiceImpl extends ServiceImpl<【Uname】Mapper, 【Un
         }
         【Uname】 【Lname】 = BeanUtil.copyBean(【Lname】DTO, 【Uname】.class);
 
-        【Lname】.setUpdateBy(TokenUtil.getCurrentUserId());
+        【Lname】.setUpdateBy(TokenUtil.getUserId());
         【Lname】.setUpdateTime(new Date());
         int result = baseMapper.updateById(【Lname】);
         log.info("修改用户信息完成 返回:{} ID:{}", result, 【Lname】.getId());

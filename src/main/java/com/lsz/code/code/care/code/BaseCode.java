@@ -39,6 +39,8 @@ public class BaseCode {
 
 
         sb.put("selectWhere", selectWhere(dtoBO));
+        sb.put("attribute", attribute(dtoBO, false));
+        sb.put("attribute空行NoId", attribute(dtoBO, true));
 
         File dir = new File(DtoToCode.OldFilePath);
         File[] files = dir.listFiles();
@@ -89,16 +91,20 @@ public class BaseCode {
                 tmpFile.mkdir();
             }
         }
-        File doFile = new File(filePath + sb.get("Uname") + file.getName());
+        String fileName = file.getName();
+        if (fileName.equals("PO.java")){
+            fileName = fileName.replace("PO","");
+        }
+        File doFile = new File(filePath + sb.get("Uname") + fileName);
         if (doFile.exists() && !DtoToCode.isDelete) {
-            log.info("{} 已经存在", file.getName());
+            log.info("{} 已经存在", fileName);
             return null;
         }
         if (doFile.exists()) {
             doFile.delete();
         }
         FileUtil.doFileStr(doFile, sb.toString());
-        log.info("{} 执行完成", file.getName());
+        log.info("{} 执行完成", fileName);
         return "成功";
     }
 
@@ -170,17 +176,17 @@ public class BaseCode {
                 }
             }
             if ("String".equalsIgnoreCase(dtoAttrBO.getTypeStr())) {
-                String str = "<if test=\"【】 != null and 【】 != ''\">";
+                String str = "<if test=\"dto.【】 != null and dto.【】 != ''\">";
                 stringBuilder.appendln(str, nameStr, nameStr);
             } else {
-                String str = "<if test=\"【】 != null \">";
+                String str = "<if test=\"dto.【】 != null \">";
                 stringBuilder.appendln(str, nameStr);
 
             }
             if ("name".equals(nameStr)) {
-                stringBuilder.appendln("    AND ta.【】 LIKE concat(concat('%',#{【】}),'%')", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+                stringBuilder.appendln("    AND ta.【】 LIKE concat(concat('%',#{dto.【】}),'%')", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
             } else {
-                stringBuilder.appendln("    AND ta.【】 = #{【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
+                stringBuilder.appendln("    AND ta.【】 = #{dto.【】}", StrUtil.strLowDo(dtoAttrBO.getNameStr()), dtoAttrBO.getNameStr());
             }
             stringBuilder.appendln("</if>");
         }
@@ -305,6 +311,36 @@ public class BaseCode {
             } else {
                 stringBuilder.appendln("ta.【】", lowDo);
             }
+        }
+        return stringBuilder.toString();
+    }
+
+    public String attribute(DtoBO dtoBO, boolean noId) {
+        CodeStringBuilder stringBuilder = new CodeStringBuilder();
+        stringBuilder.addTab();
+        List<DtoAttrBO> attrList = dtoBO.getAttrList();
+        if (CollectionUtils.isEmpty(attrList)) {
+            return null;
+        }
+        for (DtoAttrBO dtoAttrBO : attrList) {
+            if (dtoAttrBO.getRemStr().contains("<隐藏>")) {
+                continue;
+            }
+            if (noId && dtoAttrBO.getNameStr().equalsIgnoreCase("id")) {
+                continue;
+            }
+            String rem = dtoAttrBO.getRemStr();
+//            stringBuilder.newLine();
+
+            if (!StringUtils.isEmpty(rem)) {
+//                stringBuilder.appendln("//" + StrUtil.getRemName(rem));
+                stringBuilder.appendln("/**");
+                stringBuilder.appendln(" * " + StrUtil.getRemName(rem));
+                stringBuilder.appendln(" */");
+            }
+            String str = "private " + dtoAttrBO.getTypeStr() + " " + dtoAttrBO.getNameStr() + ";";
+            stringBuilder.appendln(str);
+            stringBuilder.newLine();
         }
         return stringBuilder.toString();
     }

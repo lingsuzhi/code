@@ -3,11 +3,11 @@ package com.lsz.apply.base.controller【点包名】;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lsz.apply.base.service【点包名】.I【Uname】Service;
-import com.lsz.common.BaseController;
-import com.lsz.common.PagesParam;
-import com.lsz.common.ResponseInfo;
-import com.lsz.dto【点包名】.【Uname】DTO;
-import com.lsz.vo【点包名】.【Uname】VO;
+import com.lsz.core.common.BaseController;
+import com.lsz.core.common.PagesParam;
+import com.lsz.core.common.ResponseInfo;
+import com.lsz.model.dto【点包名】.【Uname】DTO;
+import com.lsz.model.vo【点包名】.【Uname】VO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
