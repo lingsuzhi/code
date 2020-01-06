@@ -8,7 +8,7 @@ import com.lsz.model.po【点包名】.【Uname】;
 import com.lsz.model.vo【点包名】.【Uname】VO;
 import com.lsz.apply.base.mapper【点包名】.【Uname】Mapper;
 import com.lsz.apply.base.service【点包名】.I【Uname】Service;
-import com.lsz.core.common.PagesParam;
+import com.lsz.model.common.PagesParam;
 import com.lsz.core.exception.BusinessException;
 import com.lsz.core.util.BeanUtil;
 import com.lsz.core.util.CommonUtils;

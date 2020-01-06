@@ -3,7 +3,7 @@ package com.lsz.apply.base.service【点包名】;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lsz.core.common.PagesParam;
+import com.lsz.model.common.PagesParam;
 import com.lsz.model.dto【点包名】.【Uname】DTO;
 import com.lsz.model.po【点包名】.【Uname】;
 import com.lsz.model.vo【点包名】.【Uname】VO;
