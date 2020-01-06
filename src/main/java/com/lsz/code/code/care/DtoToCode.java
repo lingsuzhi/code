@@ -27,7 +27,7 @@ public class DtoToCode {
 
     static {
         try {
-            OldFilePath = ResourceUtils.getFile("classpath:static/template").getPath() + "\\";
+            OldFilePath = ResourceUtils.getFile("classpath:static/template/" + ProjectName).getPath() + "\\";
             BaseVuePath = OldFilePath + "vue\\";
         } catch (FileNotFoundException e) {
             e.printStackTrace();
