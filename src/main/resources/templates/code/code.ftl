@@ -51,6 +51,30 @@
                 }
                 tmpStr += item + "\n";
             }
+        } else if (txt.startsWith("\"token")) {
+            let arr = txt.split("\n");
+
+            for (let item of arr) {
+
+                item = item.replace("- ", "");
+                let tmpItem = '';
+                let index = item.indexOf(":");
+                if (index != -1) {
+                    tmpItem = item.substring(0, index).trim();
+                    tmpItem = "ValidateUtil.validateParamContainKey(" + tmpItem + ", paramMap);"
+
+                }
+                if (tmpStr.length > 0) {
+                    tmpStr += "        "
+                }
+                let indexEnd = item.indexOf("//");
+                tmpItem += item.substring(indexEnd).trim();
+                if (!tmpItem.includes("必有字段")) {
+                    tmpItem = "//" + tmpItem
+                }
+                tmpStr += tmpItem + "\n";
+
+            }
         } else if (txt.startsWith("\"")) {
             let arr = txt.split("\n");
 
